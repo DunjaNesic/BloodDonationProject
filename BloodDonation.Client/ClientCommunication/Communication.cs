@@ -17,7 +17,24 @@ namespace BloodDonation.Client.ClientCommunication
         private Socket _socket;       
         private static Communication _instance;
         private ClientController _clientController;
-        public static Communication Instance { get { if (_instance == null) _instance = new Communication(); return _instance; } }
+        private static readonly object lockobj = new object();
+        public static Communication Instance
+        {
+            get
+            {
+                if (_instance == null)
+                {
+                    lock (lockobj)
+                    {
+                        if (_instance == null)
+                        {
+                            _instance = new Communication();
+                        }
+                    }
+                }
+                return _instance;
+            }
+        }
         public bool Connect()
         {
             try
@@ -39,6 +56,22 @@ namespace BloodDonation.Client.ClientCommunication
             _socket = null;
             _clientController.Close();
         }
+
+        internal TransfusionCenterCoordinator LoginCoord(string coordinatorCode, string password)
+        {
+            _clientController.Send(new Request() { 
+                Operation = Operation.Login,
+                Argument = new TransfusionCenterCoordinator() { 
+                CoordinatorCode = coordinatorCode,
+                Password = password
+                }
+            });
+            Response resp = _clientController.Receive();
+            if (resp.IsSuccessful == false) return null;
+            return resp.ParseResponse<TransfusionCenterCoordinator>();
+        }
+
+
 
         //metode ce izgledati ovako
         //public Donor Dunja(Request req) {

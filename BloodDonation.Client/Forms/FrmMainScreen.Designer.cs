@@ -1,4 +1,6 @@
-﻿namespace BloodDonation.Client.Forms
+﻿using System.Windows.Forms;
+
+namespace BloodDonation.Client.Forms
 {
     partial class FrmMainScreen
     {
@@ -119,5 +121,7 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripDonors;
         private System.Windows.Forms.ToolStripMenuItem toolStripActions;
         private System.Windows.Forms.Label lblCoordinator;
+
+        public Label LblCoordinator { get => lblCoordinator; set => lblCoordinator = value; }
     }
 }

@@ -11,7 +11,7 @@ namespace BloodDonation.Common.Communication
     {
         public Operation Operation { get; set; }
         public object Result { get; set; }
-        public bool IsSuccessful { get; set; }
+        public bool IsSuccessful { get; set; } = true;
         public string TextMessage { get; set; }
         public string ErrorMessage { get; set; }
         public Exception Exception { get; set; }

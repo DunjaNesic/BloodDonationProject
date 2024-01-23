@@ -24,11 +24,11 @@ namespace BloodDonation.SystemOperations
             {
                 //genericRepository.BeginTransaction();
                 ExecuteConcreteOperation(entity);
-                genericRepository.Commit();
+                //genericRepository.Commit();
             }
             catch (Exception ex)
             {
-                genericRepository.Rollback();
+                //genericRepository.Rollback();
                 Debug.WriteLine(">>>" + ex.Message);
                 throw;
                 //mogla bih i ovde jedan throw new SystemOperationException

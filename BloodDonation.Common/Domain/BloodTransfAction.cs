@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace BloodDonation.Common.Domain
 {
     [Serializable]
-    public class Action : IEntity
+    public class BloodTransfAction : IEntity
     {
         public int ActionID { get; set; }
         public string ActionName { get; set; }

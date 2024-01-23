@@ -61,6 +61,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BloodDonation.Common\BloodDonation.Common.csproj">
+      <Project>{E76D3154-85CD-430A-A5A3-8BE4E4428C37}</Project>
+      <Name>BloodDonation.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BloodDonation.Repository\BloodDonation.Repository.csproj">
       <Project>{c1c336e0-5b64-45d2-b423-c280baba9048}</Project>
       <Name>BloodDonation.Repository</Name>

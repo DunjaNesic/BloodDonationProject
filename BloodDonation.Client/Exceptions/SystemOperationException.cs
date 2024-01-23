@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BloodDonation.Server
+namespace BloodDonation.Client.Exceptions
 {
-    public class Controller
+    public class SystemOperationException
     {
     }
 }

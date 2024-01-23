@@ -50,6 +50,8 @@
     <Compile Include="ClientCommunication\Communication.cs" />
     <Compile Include="ClientCommunication\CommunicationUtil.cs" />
     <Compile Include="ClientCommunication\ClientController.cs" />
+    <Compile Include="Exceptions\ServerCommunicationException.cs" />
+    <Compile Include="Exceptions\SystemOperationException.cs" />
     <Compile Include="FormMode.cs" />
     <Compile Include="Forms\FrmLogin.cs">
       <SubType>Form</SubType>

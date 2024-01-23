@@ -44,6 +44,7 @@
             this.btnStartServer.TabIndex = 0;
             this.btnStartServer.Text = "POKRENI SERVER";
             this.btnStartServer.UseVisualStyleBackColor = true;
+            this.btnStartServer.Click += new System.EventHandler(this.btnStartServer_Click);
             // 
             // btnStopServer
             // 
@@ -54,9 +55,11 @@
             this.btnStopServer.TabIndex = 1;
             this.btnStopServer.Text = "ZAUSTAVI SERVER";
             this.btnStopServer.UseVisualStyleBackColor = true;
+            this.btnStopServer.Click += new System.EventHandler(this.btnStopServer_Click);
             // 
             // dgvCoordinators
             // 
+            this.dgvCoordinators.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvCoordinators.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvCoordinators.Location = new System.Drawing.Point(38, 210);
             this.dgvCoordinators.Name = "dgvCoordinators";

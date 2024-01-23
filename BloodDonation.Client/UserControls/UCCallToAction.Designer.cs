@@ -30,13 +30,6 @@
         {
             this.lblHeader = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.ActionName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Date = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Time = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Place = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Location = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Volunteers = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Donors = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cmbActions = new System.Windows.Forms.ComboBox();
             this.lblAction = new System.Windows.Forms.Label();
             this.lblVolunteers = new System.Windows.Forms.Label();
@@ -44,6 +37,13 @@
             this.btnCallToAction = new System.Windows.Forms.Button();
             this.checkedListBoxVolunteers = new System.Windows.Forms.CheckedListBox();
             this.checkedListBoxDonors = new System.Windows.Forms.CheckedListBox();
+            this.ActionName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Date = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Time = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Place = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ExactLocation = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Volunteers = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Donors = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -68,7 +68,7 @@
             this.Date,
             this.Time,
             this.Place,
-            this.Location,
+            this.ExactLocation,
             this.Volunteers,
             this.Donors});
             this.dataGridView1.Location = new System.Drawing.Point(51, 96);
@@ -78,55 +78,6 @@
             this.dataGridView1.RowTemplate.Height = 28;
             this.dataGridView1.Size = new System.Drawing.Size(927, 150);
             this.dataGridView1.TabIndex = 5;
-            // 
-            // ActionName
-            // 
-            this.ActionName.HeaderText = "Naziv akcije";
-            this.ActionName.MinimumWidth = 8;
-            this.ActionName.Name = "ActionName";
-            this.ActionName.ReadOnly = true;
-            // 
-            // Date
-            // 
-            this.Date.HeaderText = "Datum";
-            this.Date.MinimumWidth = 8;
-            this.Date.Name = "Date";
-            this.Date.ReadOnly = true;
-            // 
-            // Time
-            // 
-            this.Time.HeaderText = "Satnica";
-            this.Time.MinimumWidth = 8;
-            this.Time.Name = "Time";
-            this.Time.ReadOnly = true;
-            // 
-            // Place
-            // 
-            this.Place.HeaderText = "Mesto";
-            this.Place.MinimumWidth = 8;
-            this.Place.Name = "Place";
-            this.Place.ReadOnly = true;
-            // 
-            // Location
-            // 
-            this.Location.HeaderText = "Tačna lokacija";
-            this.Location.MinimumWidth = 8;
-            this.Location.Name = "Location";
-            this.Location.ReadOnly = true;
-            // 
-            // Volunteers
-            // 
-            this.Volunteers.HeaderText = "Pozvani volonteri";
-            this.Volunteers.MinimumWidth = 8;
-            this.Volunteers.Name = "Volunteers";
-            this.Volunteers.ReadOnly = true;
-            // 
-            // Donors
-            // 
-            this.Donors.HeaderText = "Pozvani davaoci";
-            this.Donors.MinimumWidth = 8;
-            this.Donors.Name = "Donors";
-            this.Donors.ReadOnly = true;
             // 
             // cmbActions
             // 
@@ -195,6 +146,55 @@
             this.checkedListBoxDonors.Size = new System.Drawing.Size(294, 85);
             this.checkedListBoxDonors.TabIndex = 21;
             // 
+            // ActionName
+            // 
+            this.ActionName.HeaderText = "Naziv akcije";
+            this.ActionName.MinimumWidth = 8;
+            this.ActionName.Name = "ActionName";
+            this.ActionName.ReadOnly = true;
+            // 
+            // Date
+            // 
+            this.Date.HeaderText = "Datum";
+            this.Date.MinimumWidth = 8;
+            this.Date.Name = "Date";
+            this.Date.ReadOnly = true;
+            // 
+            // Time
+            // 
+            this.Time.HeaderText = "Satnica";
+            this.Time.MinimumWidth = 8;
+            this.Time.Name = "Time";
+            this.Time.ReadOnly = true;
+            // 
+            // Place
+            // 
+            this.Place.HeaderText = "Mesto";
+            this.Place.MinimumWidth = 8;
+            this.Place.Name = "Place";
+            this.Place.ReadOnly = true;
+            // 
+            // ExactLocation
+            // 
+            this.ExactLocation.HeaderText = "Tačna lokacija";
+            this.ExactLocation.MinimumWidth = 8;
+            this.ExactLocation.Name = "ExactLocation";
+            this.ExactLocation.ReadOnly = true;
+            // 
+            // Volunteers
+            // 
+            this.Volunteers.HeaderText = "Pozvani volonteri";
+            this.Volunteers.MinimumWidth = 8;
+            this.Volunteers.Name = "Volunteers";
+            this.Volunteers.ReadOnly = true;
+            // 
+            // Donors
+            // 
+            this.Donors.HeaderText = "Pozvani davaoci";
+            this.Donors.MinimumWidth = 8;
+            this.Donors.Name = "Donors";
+            this.Donors.ReadOnly = true;
+            // 
             // UCCallToAction
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -220,13 +220,6 @@
 
         private System.Windows.Forms.Label lblHeader;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ActionName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Date;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Time;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Place;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Location;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Volunteers;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Donors;
         private System.Windows.Forms.ComboBox cmbActions;
         private System.Windows.Forms.Label lblAction;
         private System.Windows.Forms.Label lblVolunteers;
@@ -234,5 +227,12 @@
         private System.Windows.Forms.Button btnCallToAction;
         private System.Windows.Forms.CheckedListBox checkedListBoxVolunteers;
         private System.Windows.Forms.CheckedListBox checkedListBoxDonors;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ActionName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Date;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Time;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Place;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ExactLocation;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Volunteers;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Donors;
     }
 }

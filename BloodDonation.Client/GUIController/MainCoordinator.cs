@@ -1,4 +1,5 @@
 ﻿using BloodDonation.Client.Forms;
+using BloodDonation.Common.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,26 +17,39 @@ namespace BloodDonation.Client.GUIController
         {
             _volunteerGuiController = new VolunteerGuiController();
             _donorGuiController = new DonorGuiController();
-            _actionGuiController = new ActionGuiController();   
+            _actionGuiController = new ActionGuiController();
         }
+
+        public TransfusionCenterCoordinator coord;
 
         private VolunteerGuiController _volunteerGuiController;
         private DonorGuiController _donorGuiController;
         private ActionGuiController _actionGuiController;
 
-        internal void showVolunteerScreen()
-        {
-           
+        FrmMainScreen frmMain;
+
+        internal void showLoginScreen() { 
+            LoginGuiController.Instance.showFrmLogin();
         }
 
-        internal void showDonorScreen()
+        internal void showMainScreen() { 
+            frmMain = new FrmMainScreen();
+            frmMain.LblCoordinator.Text = coord.CoordinatorName + " " + coord.CoordinatorLastName;
+            frmMain.Show();
+        }
+        internal void showVolunteerScreen(FormMode mode)
         {
-            throw new NotImplementedException();
+            VolunteerGuiController.Instance.showUCVolunteer(frmMain, mode);
+        }
+
+        internal void showDonorScreen(FormMode mode)
+        {
+            DonorGuiController.Instance.showUCDonor(frmMain, mode);
         }
 
         internal void showActionScreen()
         {
-            throw new NotImplementedException();
+            ActionGuiController.Instance.showUCCallToAction(frmMain);
         }
     }
 }

@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BloodDonation.SystemOperati
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BloodDonation.Repository", "BloodDonation.Repository\BloodDonation.Repository.csproj", "{C1C336E0-5B64-45D2-B423-C280BABA9048}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessLogic", "BusinessLogic\BusinessLogic.csproj", "{2DAC0245-FBA9-4035-B6CA-8D3CAC9DC8C3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{C1C336E0-5B64-45D2-B423-C280BABA9048}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C1C336E0-5B64-45D2-B423-C280BABA9048}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C1C336E0-5B64-45D2-B423-C280BABA9048}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2DAC0245-FBA9-4035-B6CA-8D3CAC9DC8C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2DAC0245-FBA9-4035-B6CA-8D3CAC9DC8C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2DAC0245-FBA9-4035-B6CA-8D3CAC9DC8C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2DAC0245-FBA9-4035-B6CA-8D3CAC9DC8C3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -48,7 +48,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClientHandler.cs" />
-    <Compile Include="Controller.cs" />
     <Compile Include="FrmServer.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -87,6 +86,10 @@
     <ProjectReference Include="..\BloodDonation.Common\BloodDonation.Common.csproj">
       <Project>{E76D3154-85CD-430A-A5A3-8BE4E4428C37}</Project>
       <Name>BloodDonation.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BusinessLogic\BusinessLogic.csproj">
+      <Project>{2DAC0245-FBA9-4035-B6CA-8D3CAC9DC8C3}</Project>
+      <Name>BusinessLogic</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

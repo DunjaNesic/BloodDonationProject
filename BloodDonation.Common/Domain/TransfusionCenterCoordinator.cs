@@ -17,25 +17,35 @@ namespace BloodDonation.Common.Domain
         public string CoordinatorCode { get; set; }
         public string Password { get; set; }
 
-        public string TableName => throw new NotImplementedException();
+        public string TableName => "TransfusionCenterCoordinator";
 
-        public string TableAlias => throw new NotImplementedException();
+        public string TableAlias => "";
 
-        public string InsertValues => throw new NotImplementedException();
+        public string InsertValues => "";
 
-        public string SelectValues => throw new NotImplementedException();
+        public string SelectValues => "*";
 
-        public string JoinTable => throw new NotImplementedException();
+        public string JoinTable => "";
 
-        public string JoinCondition => throw new NotImplementedException();
+        public string JoinCondition => "";
 
-        public string UpdateValues => throw new NotImplementedException();
+        public string UpdateValues => "";
 
-        public string IDName => throw new NotImplementedException();
+        public string IDName => "CoordinatorCode";
 
         public List<IEntity> GetReaderList(SqlDataReader reader)
         {
-            throw new NotImplementedException();
+            List<IEntity> entityList = new List<IEntity>();
+            while (reader.Read()) {
+                entityList.Add(new TransfusionCenterCoordinator() { 
+                    CoordinatorID = (int)reader["CoordinatorID"],
+                    CoordinatorName = (string)reader["CoordinatorName"],
+                    CoordinatorLastName = (string)reader["CoordinatorLastName"],
+                    CoordinatorCode = (string)reader["CoordinatorCode"],
+                    Password = (string)reader["Password"]
+                });
+            }
+            return entityList;
         }
     }
 }

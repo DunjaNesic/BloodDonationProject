@@ -1,4 +1,6 @@
-﻿using BloodDonation.Client.Forms;
+﻿using BloodDonation.Client.ClientCommunication;
+using BloodDonation.Client.Forms;
+using BloodDonation.Common.Communication;
 using BloodDonation.Common.Domain;
 using System;
 using System.Collections.Generic;
@@ -13,7 +15,7 @@ namespace BloodDonation.Client.GUIController
     {
         private static LoginGuiController _instance;
         public static LoginGuiController Instance { get { if (_instance == null) _instance = new LoginGuiController(); return _instance; } }
-
+        private TransfusionCenterCoordinator _coordinator = new TransfusionCenterCoordinator();
         FrmLogin _frmLogin;
         internal void showFrmLogin() { 
             _frmLogin = new FrmLogin();
@@ -22,15 +24,29 @@ namespace BloodDonation.Client.GUIController
 
         public void Login(object sender, EventArgs e)
         {
-            TransfusionCenterCoordinator coordinator = new TransfusionCenterCoordinator
+            if (Communication.Instance.Connect())
             {
-                CoordinatorCode = _frmLogin.TxtCoordinatorCode.Text,
-                Password = _frmLogin.TxtPassword.Text,
-            };
+                string coordinatorCode = _frmLogin.TxtCoordinatorCode.Text;
+                string password = _frmLogin.TxtPassword.Text;
+
+                _coordinator = Communication.Instance.LoginCoord(coordinatorCode, password);
+                if (_coordinator != null)
+                {
+                    MainCoordinator.Instance.coord = _coordinator;
+                    MainCoordinator.Instance.showMainScreen();
+                }
+                else {
+                    MessageBox.Show("Ne postoji koordinator akcije sa unetim kredencijalima");
+                }
+            }
+            else {
+                MessageBox.Show("Povezivanje na server je neuspešno");
+            }
             //Response response = Communication.Instance.Login(user);
             //if (response.Exception == null)
             //{
             //    _frmLogin.Visible = false;
+            //    MainCoordinator.Instance.coord = coordinator;
             //    MainCoordinator.Instance.showMainScreen();
             //}
             //else

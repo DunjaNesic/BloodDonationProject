@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{E76D3154-85CD-430A-A5A3-8BE4E4428C37}</ProjectGuid>
+    <ProjectGuid>{2DAC0245-FBA9-4035-B6CA-8D3CAC9DC8C3}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BloodDonation.Common</RootNamespace>
-    <AssemblyName>BloodDonation.Common</AssemblyName>
+    <RootNamespace>BusinessLogic</RootNamespace>
+    <AssemblyName>BusinessLogic</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -41,25 +41,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Communication\Operation.cs" />
-    <Compile Include="Communication\Receiver.cs" />
-    <Compile Include="Communication\Request.cs" />
-    <Compile Include="Communication\Response.cs" />
-    <Compile Include="Communication\Sender.cs" />
-    <Compile Include="Domain\BloodTransfAction.cs" />
-    <Compile Include="Domain\CallToDonor.cs" />
-    <Compile Include="Domain\CallToVolunteer.cs" />
-    <Compile Include="Domain\Donor.cs" />
-    <Compile Include="Domain\Place.cs" />
-    <Compile Include="Domain\Questionnaire.cs" />
-    <Compile Include="Domain\TransfusionCenterCoordinator.cs" />
-    <Compile Include="Domain\Volunteer.cs" />
+    <Compile Include="Controller.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BloodDonation.Common\BloodDonation.Common.csproj">
+      <Project>{E76D3154-85CD-430A-A5A3-8BE4E4428C37}</Project>
+      <Name>BloodDonation.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BloodDonation.Repository\BloodDonation.Repository.csproj">
-      <Project>{c1c336e0-5b64-45d2-b423-c280baba9048}</Project>
+      <Project>{C1C336E0-5B64-45D2-B423-C280BABA9048}</Project>
       <Name>BloodDonation.Repository</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BloodDonation.SystemOperations\BloodDonation.SystemOperations.csproj">
+      <Project>{872A88BC-8488-4DED-8342-31AEFC96DD59}</Project>
+      <Name>BloodDonation.SystemOperations</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

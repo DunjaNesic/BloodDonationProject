@@ -1,5 +1,6 @@
 ﻿using BloodDonation.Client.GUIController;
 using BloodDonation.Client.UserControls;
+using BloodDonation.Common.Domain;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,13 +14,14 @@ using System.Windows.Forms;
 namespace BloodDonation.Client.Forms
 {
     public partial class FrmMainScreen : Form
-    {
+    {     
+
         public FrmMainScreen()
         {
             InitializeComponent();
-            toolStripVolunteers.Click += (s, a) => MainCoordinator.Instance.showVolunteerScreen();
-            toolStripDonors.Click += (s, a) => MainCoordinator.Instance.showDonorScreen();
-            toolStripActions.Click += (s, a) => MainCoordinator.Instance.showActionScreen();
+            toolStripVolunteers.Click += (s, a) => MainCoordinator.Instance.showVolunteerScreen(FormMode.View);
+            toolStripDonors.Click += (s, a) => MainCoordinator.Instance.showDonorScreen(FormMode.View);
+            toolStripActions.Click += (s, a) => MainCoordinator.Instance.showActionScreen();          
         }
 
         public void ChangePanel(UserControl control)
