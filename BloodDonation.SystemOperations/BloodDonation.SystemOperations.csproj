@@ -48,7 +48,7 @@
     <Compile Include="VolunteerSO\DeleteVolunteerSO.cs" />
     <Compile Include="ActionSO\FindCallToActionSO.cs" />
     <Compile Include="DonorSO\FindDonorSO.cs" />
-    <Compile Include="VolunteerSO\FindVolunteerSO.cs" />
+    <Compile Include="VolunteerSO\FindVolunteersSO.cs" />
     <Compile Include="ActionSO\GetAllActionsSO.cs" />
     <Compile Include="DonorSO\GetAllDonorsSO.cs" />
     <Compile Include="PlaceSO\GetAllPlacesSO.cs" />

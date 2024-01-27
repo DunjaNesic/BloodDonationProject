@@ -1,4 +1,6 @@
-﻿namespace BloodDonation.Client.UserControls
+﻿using System.Windows.Forms;
+
+namespace BloodDonation.Client.UserControls
 {
     partial class UCCreateVolunteer
     {
@@ -151,5 +153,11 @@
         private System.Windows.Forms.Label lblPlace;
         private System.Windows.Forms.ComboBox cmbPlaces;
         private System.Windows.Forms.Button btnCreateVolunteer;
+
+        public Button BtnCreateVolunteer { get => btnCreateVolunteer; set => btnCreateVolunteer = value; }
+        public MonthCalendar MonthCalendar1 { get => monthCalendar1; set => monthCalendar1 = value; }
+        public MonthCalendar MonthCalendar2 { get => monthCalendar2; set => monthCalendar2 = value; }
+        public ComboBox CmbPlaces { get => cmbPlaces; set => cmbPlaces = value; }
+        public TextBox TxtVolunteerNameSurname { get => txtVolunteerNameSurname; set => txtVolunteerNameSurname = value; }
     }
 }

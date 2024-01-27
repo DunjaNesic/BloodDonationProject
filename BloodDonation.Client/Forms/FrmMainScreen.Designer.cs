@@ -31,11 +31,11 @@ namespace BloodDonation.Client.Forms
         private void InitializeComponent()
         {
             this.pnlMain = new System.Windows.Forms.Panel();
+            this.lblCoordinator = new System.Windows.Forms.Label();
             this.menuStripMain = new System.Windows.Forms.MenuStrip();
             this.toolStripVolunteers = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripDonors = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripActions = new System.Windows.Forms.ToolStripMenuItem();
-            this.lblCoordinator = new System.Windows.Forms.Label();
             this.pnlMain.SuspendLayout();
             this.menuStripMain.SuspendLayout();
             this.SuspendLayout();
@@ -47,8 +47,18 @@ namespace BloodDonation.Client.Forms
             this.pnlMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlMain.Location = new System.Drawing.Point(0, 0);
             this.pnlMain.Name = "pnlMain";
-            this.pnlMain.Size = new System.Drawing.Size(800, 450);
+            this.pnlMain.Size = new System.Drawing.Size(1043, 616);
             this.pnlMain.TabIndex = 0;
+            // 
+            // lblCoordinator
+            // 
+            this.lblCoordinator.AutoSize = true;
+            this.lblCoordinator.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.lblCoordinator.Location = new System.Drawing.Point(39, 378);
+            this.lblCoordinator.Name = "lblCoordinator";
+            this.lblCoordinator.Size = new System.Drawing.Size(223, 30);
+            this.lblCoordinator.TabIndex = 1;
+            this.lblCoordinator.Text = "Coordinator Name";
             // 
             // menuStripMain
             // 
@@ -86,21 +96,11 @@ namespace BloodDonation.Client.Forms
             this.toolStripActions.Size = new System.Drawing.Size(107, 40);
             this.toolStripActions.Text = "AKCIJE";
             // 
-            // lblCoordinator
-            // 
-            this.lblCoordinator.AutoSize = true;
-            this.lblCoordinator.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.lblCoordinator.Location = new System.Drawing.Point(39, 378);
-            this.lblCoordinator.Name = "lblCoordinator";
-            this.lblCoordinator.Size = new System.Drawing.Size(223, 30);
-            this.lblCoordinator.TabIndex = 1;
-            this.lblCoordinator.Text = "Coordinator Name";
-            // 
             // FrmMainScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1043, 616);
             this.Controls.Add(this.pnlMain);
             this.MainMenuStrip = this.menuStripMain;
             this.Name = "FrmMainScreen";

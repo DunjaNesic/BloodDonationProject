@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace BloodDonation.Client.GUIController
 {
@@ -32,14 +33,15 @@ namespace BloodDonation.Client.GUIController
             LoginGuiController.Instance.showFrmLogin();
         }
 
-        internal void showMainScreen() { 
+        internal void showMainScreen() {
             frmMain = new FrmMainScreen();
             frmMain.LblCoordinator.Text = coord.CoordinatorName + " " + coord.CoordinatorLastName;
             frmMain.Show();
+            //Application.Run(frmMain);
         }
         internal void showVolunteerScreen(FormMode mode)
         {
-            VolunteerGuiController.Instance.showUCVolunteer(frmMain, mode);
+            VolunteerGuiController.Instance.ShowUCVolunteer(frmMain, mode);
         }
 
         internal void showDonorScreen(FormMode mode)
@@ -51,5 +53,7 @@ namespace BloodDonation.Client.GUIController
         {
             ActionGuiController.Instance.showUCCallToAction(frmMain);
         }
+
+      
     }
 }

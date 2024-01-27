@@ -43,5 +43,10 @@ namespace BloodDonation.Common.Domain
             }
             return entityList;
         }
+
+        public override string ToString()
+        {
+            return this.PlaceName; 
+        }
     }
 }

@@ -56,9 +56,8 @@ namespace BloodDonation.Server
             Response resp = new Response();
             switch (req.Operation)
             {
-                case Operation.Login:
-                    TransfusionCenterCoordinator c = (TransfusionCenterCoordinator)req.Argument;
-                    TransfusionCenterCoordinator loggedCoord = Controller.Instance.Login(c);
+                case Operation.Login:                 
+                    TransfusionCenterCoordinator loggedCoord = Controller.Instance.Login((TransfusionCenterCoordinator)req.Argument);
                     if (loggedCoord != null)
                     {
                         this._coordinator = loggedCoord;
@@ -70,14 +69,26 @@ namespace BloodDonation.Server
                     }
                     break;
                 case Operation.CreateVolunteer:
+                    Volunteer newVolunteer = Controller.Instance.CreateNewVolunteer((Volunteer)req.Argument);
+                    resp.Result = newVolunteer;
                     break;
                 case Operation.FindVolunteers:
+                    List<Volunteer> filteredVolunteers = Controller.Instance.GetFilteredVolunteers(new Volunteer()
+                    {
+                        FilterQuery = (string)req.Argument
+                    });
+                    resp.Result = filteredVolunteers;
                     break;
                 case Operation.LoadVolunteer:
                     break;
                 case Operation.DeleteVolunteer:
+                    Volunteer volToDelete = (Volunteer)req.Argument;
+                    bool deleted = Controller.Instance.DeleteVolunteer(volToDelete);
+                    resp.Result = deleted;
                     break;
                 case Operation.GetAllVolunteers:
+                    List<Volunteer> volunteers = Controller.Instance.GetAllVolunteers(new Volunteer());
+                    resp.Result = volunteers;
                     break;
                 case Operation.CreateDonor:
                     break;
@@ -100,6 +111,8 @@ namespace BloodDonation.Server
                 case Operation.GetAllCallsToAction:
                     break;
                 case Operation.GetAllPlaces:
+                    List<Place> places = Controller.Instance.GetAllPlaces(new Place());
+                    resp.Result = places;
                     break;
                 default:
                     break;

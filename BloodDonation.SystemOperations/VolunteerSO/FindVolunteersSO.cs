@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace BloodDonation.SystemOperations
 {
-    public class GetAllPlacesSO : SystemOperationBase
+    public class FindVolunteersSO : SystemOperationBase
     {
         protected override void ExecuteConcreteOperation(IEntity entity)
         {
-            Place place = (Place)entity;
-            Result = genericRepository.GetAll(place).Cast<Place>().ToList();
+            Volunteer v = (Volunteer)entity;
+            Result = genericRepository.Find(v, v.FilterQuery).Cast<Volunteer>().ToList();
         }
     }
 }

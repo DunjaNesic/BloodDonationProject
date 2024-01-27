@@ -15,6 +15,7 @@ namespace BloodDonation.Client.GUIController
 
         internal void showUCDonor(FrmMainScreen frmMain, FormMode mode)
         {
+
             if (mode == FormMode.View)
             {
                 UCDonors uCDonors = new UCDonors();

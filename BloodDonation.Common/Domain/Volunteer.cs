@@ -1,7 +1,9 @@
 ﻿using BloodDonation.Repository.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,33 +13,59 @@ namespace BloodDonation.Common.Domain
     [Serializable]
     public class Volunteer : IEntity
     {
+        [Browsable(false)]
         public int VolunteerID { get; set; }
         public string VolunteerName { get; set; }
         public string VolunteerLastName { get; set; }
         public DateTime DateFreeFrom { get; set; }
         public DateTime DateFreeTo { get; set; }
-        //public int PlaceID { get; set; } mozda je bolje s ovim nisam sig videcu posle
+
+        [Browsable(false)]
+        public string FilterQuery { get; set; }
+
+        [Browsable(false)]
+        public string DeleteQuery => $"VolunteerID = {VolunteerID}";
+
+        [Browsable(false)]
+        public int PlaceID { get; set; }
+        
         public Place Place { get; set; }
 
+        [Browsable(false)]
         public string TableName => "Volunteer";
-
+        [Browsable(false)]
         public string TableAlias => "v";
+        [Browsable(false)]
+        public string InsertValues => $"'{VolunteerName}', '{VolunteerLastName}', '{DateFreeFrom:yyyy-MM-dd HH:mm:ss}', '{DateFreeTo:yyyy-MM-dd HH:mm:ss}', {PlaceID}";
 
-        public string InsertValues => $"{VolunteerID}, '{VolunteerName}', '{VolunteerLastName}', {DateFreeFrom.ToString("yyyy-MM-dd HH:mm:ss")}, {DateFreeTo.ToString("yyyy-MM-dd HH:mm:ss")}, {Place.PlaceID}";
-
-        public string SelectValues => throw new NotImplementedException();
-
-        public string JoinTable => throw new NotImplementedException();
-
-        public string JoinCondition => throw new NotImplementedException();
-
-        public string UpdateValues => throw new NotImplementedException();
-
-        public string IDName => throw new NotImplementedException();
+        [Browsable(false)]
+        public string SelectValues => "*";
+        [Browsable(false)]
+        public string JoinTable => "JOIN PLACE p";
+        [Browsable(false)]
+        public string JoinCondition => "ON(v.PlaceID = p.PlaceID)";
+        [Browsable(false)]
+        public string UpdateValues => "";
+        [Browsable(false)]
+        public string IDName => "VolunteerID";
 
         public List<IEntity> GetReaderList(SqlDataReader reader)
         {
-            throw new NotImplementedException();
+            List<IEntity> volunteers = new List<IEntity>();
+            while (reader.Read()) {
+                volunteers.Add(new Volunteer() { 
+                    VolunteerID = reader.GetInt32(0),
+                    VolunteerName = reader.GetString(1),
+                    VolunteerLastName = reader.GetString(2),    
+                    DateFreeFrom = reader.GetDateTime(3),
+                    DateFreeTo = reader.GetDateTime(4),
+                    Place = new Place() { 
+                    PlaceID = reader.GetInt32(5),
+                    PlaceName = reader.GetString(7)
+                    }
+                });
+            }
+            return volunteers;
         }
     }
 }

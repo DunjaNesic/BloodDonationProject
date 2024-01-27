@@ -17,7 +17,8 @@ namespace BloodDonation.Client.GUIController
         public static LoginGuiController Instance { get { if (_instance == null) _instance = new LoginGuiController(); return _instance; } }
         private TransfusionCenterCoordinator _coordinator = new TransfusionCenterCoordinator();
         FrmLogin _frmLogin;
-        internal void showFrmLogin() { 
+        internal void showFrmLogin()
+        {
             _frmLogin = new FrmLogin();
             Application.Run(_frmLogin);
         }
@@ -35,24 +36,16 @@ namespace BloodDonation.Client.GUIController
                     MainCoordinator.Instance.coord = _coordinator;
                     MainCoordinator.Instance.showMainScreen();
                 }
-                else {
+                else
+                {
                     MessageBox.Show("Ne postoji koordinator akcije sa unetim kredencijalima");
                 }
             }
-            else {
+            else
+            {
                 MessageBox.Show("Povezivanje na server je neuspešno");
             }
-            //Response response = Communication.Instance.Login(user);
-            //if (response.Exception == null)
-            //{
-            //    _frmLogin.Visible = false;
-            //    MainCoordinator.Instance.coord = coordinator;
-            //    MainCoordinator.Instance.showMainScreen();
-            //}
-            //else
-            //{
-            //    MessageBox.Show(">>>" + response.Exception.ToString());
-            //}
+        
         }
 
     }
