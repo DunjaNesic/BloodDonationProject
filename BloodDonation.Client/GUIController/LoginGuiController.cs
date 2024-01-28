@@ -17,7 +17,7 @@ namespace BloodDonation.Client.GUIController
         public static LoginGuiController Instance { get { if (_instance == null) _instance = new LoginGuiController(); return _instance; } }
         private TransfusionCenterCoordinator _coordinator = new TransfusionCenterCoordinator();
         FrmLogin _frmLogin;
-        internal void showFrmLogin()
+        internal void ShowFrmLogin()
         {
             _frmLogin = new FrmLogin();
             Application.Run(_frmLogin);
@@ -34,7 +34,7 @@ namespace BloodDonation.Client.GUIController
                 if (_coordinator != null)
                 {
                     MainCoordinator.Instance.coord = _coordinator;
-                    MainCoordinator.Instance.showMainScreen();
+                    MainCoordinator.Instance.ShowMainScreen();
                 }
                 else
                 {

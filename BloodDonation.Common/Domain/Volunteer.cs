@@ -37,7 +37,6 @@ namespace BloodDonation.Common.Domain
         public string TableAlias => "v";
         [Browsable(false)]
         public string InsertValues => $"'{VolunteerName}', '{VolunteerLastName}', '{DateFreeFrom:yyyy-MM-dd HH:mm:ss}', '{DateFreeTo:yyyy-MM-dd HH:mm:ss}', {PlaceID}";
-
         [Browsable(false)]
         public string SelectValues => "*";
         [Browsable(false)]
@@ -48,7 +47,10 @@ namespace BloodDonation.Common.Domain
         public string UpdateValues => "";
         [Browsable(false)]
         public string IDName => "VolunteerID";
-
+        public override string ToString()
+        {
+            return this.VolunteerName + " " + this.VolunteerLastName;
+        }
         public List<IEntity> GetReaderList(SqlDataReader reader)
         {
             List<IEntity> volunteers = new List<IEntity>();

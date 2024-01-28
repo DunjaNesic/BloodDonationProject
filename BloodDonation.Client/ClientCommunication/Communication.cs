@@ -125,6 +125,78 @@ namespace BloodDonation.Client.ClientCommunication
             Response resp = _clientController.Receive();
             return resp.ParseResponse<Volunteer>();
         }
+        internal Donor CreateDonor(Donor donor)
+        {
+            _clientController.Send(new Request()
+            {
+                Operation = Operation.CreateDonor,
+                Argument = donor
+            });
+            Response resp = _clientController.Receive();
+            return resp.ParseResponse<Donor>();
+        }
+
+        internal bool DeleteDonor(Donor selectedDonor)
+        {
+            _clientController.Send(new Request()
+            {
+                Operation = Operation.DeleteDonor,
+                Argument = selectedDonor
+            });
+            Response resp = _clientController.Receive();
+            return resp.ParseResponse<bool>();
+        }
+
+        internal List<Donor> GetAllDonors()
+        {
+            _clientController.Send(new Request()
+            {
+                Operation = Operation.GetAllDonors
+            });
+            Response resp = _clientController.Receive();
+            return resp.ParseResponse<List<Donor>>();
+        }
+
+        internal List<Questionnaire> GetAllQuestionnaires(Donor donor)
+        {
+            _clientController.Send(new Request()
+            {
+                Operation = Operation.GetAllQuestionnaires,
+                Argument = donor
+            });
+            Response resp = _clientController.Receive();
+            return resp.ParseResponse<List<Questionnaire>>();
+        }
+
+        internal Donor FilterDonor(string filterCondition)
+        {
+            _clientController.Send(new Request()
+            {
+                Operation = Operation.FindDonor,
+                Argument = filterCondition
+            });
+            Response resp = _clientController.Receive();
+            return resp.ParseResponse<Donor>();
+        }
+
+        internal bool UpdateDonor(Donor donorToUpdate)
+        {
+            _clientController.Send(new Request() { 
+            Operation = Operation.UpdateDonor,
+            Argument = donorToUpdate
+            });
+            Response resp = _clientController.Receive();
+            return resp.ParseResponse<bool>();
+        }
+
+        internal List<BloodTransfAction> GetAllActions()
+        {
+            _clientController.Send(new Request() { 
+            Operation = Operation.GetAllActions
+            });
+            Response resp = _clientController.Receive();
+            return resp.ParseResponse<List<BloodTransfAction>>();
+        }
 
 
 

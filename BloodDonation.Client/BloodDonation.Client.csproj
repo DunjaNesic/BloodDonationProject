@@ -84,6 +84,18 @@
     <Compile Include="UserControls\UCCreateDonor.Designer.cs">
       <DependentUpon>UCCreateDonor.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\UCUpdateCallToAction.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\UCUpdateCallToAction.Designer.cs">
+      <DependentUpon>UCUpdateCallToAction.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UCUpdateDonor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\UCUpdateDonor.Designer.cs">
+      <DependentUpon>UCUpdateDonor.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\UCVolunteers.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -122,6 +134,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\UCCreateDonor.resx">
       <DependentUpon>UCCreateDonor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\UCUpdateCallToAction.resx">
+      <DependentUpon>UCUpdateCallToAction.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\UCUpdateDonor.resx">
+      <DependentUpon>UCUpdateDonor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\UCVolunteers.resx">
       <DependentUpon>UCVolunteers.cs</DependentUpon>

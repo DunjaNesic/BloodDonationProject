@@ -42,6 +42,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DonorSO\AddDonorSO.cs" />
+    <Compile Include="DonorSO\UpdateDonorSO.cs" />
+    <Compile Include="TransfusionCoordinator\GetAllQuestionnairesSO.cs" />
     <Compile Include="VolunteerSO\AddVolunteerSO.cs" />
     <Compile Include="ActionSO\CreateCallToActionSO.cs" />
     <Compile Include="DonorSO\DeleteDonorSO.cs" />
@@ -54,9 +56,8 @@
     <Compile Include="PlaceSO\GetAllPlacesSO.cs" />
     <Compile Include="VolunteerSO\GetAllVolunteersSO.cs" />
     <Compile Include="ActionSO\LoadActionSO.cs" />
-    <Compile Include="VolunteerSO\LoadVolunteerSO.cs" />
     <Compile Include="TransfusionCoordinator\LoginSO.cs" />
-    <Compile Include="ActionSO\SaveCallToActionSO.cs" />
+    <Compile Include="ActionSO\UpdateCallToActionSO.cs" />
     <Compile Include="SystemOperationBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

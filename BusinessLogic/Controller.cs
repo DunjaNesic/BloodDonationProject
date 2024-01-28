@@ -2,8 +2,11 @@
 using BloodDonation.Repository.Implementation;
 using BloodDonation.Repository.Interfaces;
 using BloodDonation.SystemOperations;
+using BloodDonation.SystemOperations.DonorSO;
+using BloodDonation.SystemOperations.TransfusionCoordinator;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,11 +18,25 @@ namespace BusinessLogic
         private static Controller _instance;
         public static Controller Instance { get { if (_instance == null) _instance = new Controller(); return _instance; } }
 
+        public Donor CreateNewDonor(Donor donor)
+        {
+            SystemOperationBase so = new AddDonorSO();
+            so.ExecuteTemplate(donor);
+            return (Donor)so.Result;
+        }
+
         public Volunteer CreateNewVolunteer(Volunteer volunteer)
         {
             SystemOperationBase so = new AddVolunteerSO();
             so.ExecuteTemplate(volunteer);
             return (Volunteer)so.Result;
+        }
+
+        public bool DeleteDonor(Donor donor)
+        {
+            SystemOperationBase so = new DeleteDonorSO();
+            so.ExecuteTemplate(donor);
+            return (bool)so.Result;
         }
 
         public bool DeleteVolunteer(Volunteer volunteer)
@@ -29,11 +46,39 @@ namespace BusinessLogic
             return (bool)so.Result;
         }
 
+        public Donor FindDonor(Donor donor)
+        {
+            SystemOperationBase so = new FindDonorSO();
+            so.ExecuteTemplate(donor);
+            return (Donor)so.Result;
+        }
+
+        public List<BloodTransfAction> GetAllActions(BloodTransfAction bloodTransfAction)
+        {
+            SystemOperationBase so = new GetAllActionsSO();
+            so.ExecuteTemplate(bloodTransfAction);
+            return (List<BloodTransfAction>)so.Result;
+        }
+
+        public List<Donor> GetAllDonors(Donor donor)
+        {
+            SystemOperationBase so = new GetAllDonorsSO();
+            so.ExecuteTemplate(donor);
+            return (List<Donor>)so.Result;
+        }
+
         public List<Place> GetAllPlaces(Place place)
         {
             SystemOperationBase so = new GetAllPlacesSO();
             so.ExecuteTemplate(place);
             return (List<Place>)so.Result;
+        }
+
+        public List<Questionnaire> GetAllQuestionnaires(Questionnaire questionnaire)
+        {
+            SystemOperationBase so = new GetAllQuestionnairesSO();
+            so.ExecuteTemplate(questionnaire);
+            return (List<Questionnaire>)so.Result;
         }
 
         public List<Volunteer> GetAllVolunteers(Volunteer volunteer)
@@ -57,6 +102,11 @@ namespace BusinessLogic
             return (TransfusionCenterCoordinator)so.Result;
         }
 
-
+        public bool UpdateDonor(Donor donor)
+        {
+            SystemOperationBase so = new UpdateDonorSO();
+            so.ExecuteTemplate(donor);
+            return (bool)so.Result; 
+        }
     }
 }

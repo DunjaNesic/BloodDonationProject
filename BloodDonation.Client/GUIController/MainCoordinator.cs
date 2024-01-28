@@ -29,29 +29,31 @@ namespace BloodDonation.Client.GUIController
 
         FrmMainScreen frmMain;
 
-        internal void showLoginScreen() { 
-            LoginGuiController.Instance.showFrmLogin();
+        internal void ShowLoginScreen()
+        {
+            LoginGuiController.Instance.ShowFrmLogin();
         }
 
-        internal void showMainScreen() {
+        internal void ShowMainScreen()
+        {
             frmMain = new FrmMainScreen();
             frmMain.LblCoordinator.Text = coord.CoordinatorName + " " + coord.CoordinatorLastName;
             frmMain.Show();
             //Application.Run(frmMain);
         }
-        internal void showVolunteerScreen(FormMode mode)
+        internal void ShowVolunteerScreen(FormMode mode)
         {
             VolunteerGuiController.Instance.ShowUCVolunteer(frmMain, mode);
         }
 
-        internal void showDonorScreen(FormMode mode)
+        internal void ShowDonorScreen(FormMode mode)
         {
-            DonorGuiController.Instance.showUCDonor(frmMain, mode);
+            DonorGuiController.Instance.ShowUCDonor(frmMain, mode);
         }
 
-        internal void showActionScreen()
+        internal void ShowActionScreen(FormMode mode)
         {
-            ActionGuiController.Instance.showUCCallToAction(frmMain);
+            ActionGuiController.Instance.ShowUCCallToAction(frmMain, mode);
         }
 
       

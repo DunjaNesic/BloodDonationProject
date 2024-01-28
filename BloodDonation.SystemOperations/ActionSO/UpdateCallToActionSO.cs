@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BloodDonation.SystemOperations
 {
-    public class LoadVolunteerSO
+    public class UpdateCallToActionSO
     {
     }
 }

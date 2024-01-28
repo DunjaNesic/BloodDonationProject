@@ -22,13 +22,13 @@ namespace BloodDonation.SystemOperations
         public void ExecuteTemplate(IEntity entity) {
             try
             {
-                //genericRepository.BeginTransaction();
+                genericRepository.BeginTransaction();
                 ExecuteConcreteOperation(entity);
-                //genericRepository.Commit();
+                genericRepository.Commit();
             }
             catch (Exception ex)
             {
-                //genericRepository.Rollback();
+                genericRepository.Rollback();
                 Debug.WriteLine(">>>" + ex.Message);
                 throw;
                 //mogla bih i ovde jedan throw new SystemOperationException

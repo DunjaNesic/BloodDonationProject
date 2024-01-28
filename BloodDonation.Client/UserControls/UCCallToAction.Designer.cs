@@ -1,4 +1,6 @@
-﻿namespace BloodDonation.Client.UserControls
+﻿using System.Windows.Forms;
+
+namespace BloodDonation.Client.UserControls
 {
     partial class UCCallToAction
     {
@@ -30,13 +32,6 @@
         {
             this.lblHeader = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.cmbActions = new System.Windows.Forms.ComboBox();
-            this.lblAction = new System.Windows.Forms.Label();
-            this.lblVolunteers = new System.Windows.Forms.Label();
-            this.lblDonors = new System.Windows.Forms.Label();
-            this.btnCallToAction = new System.Windows.Forms.Button();
-            this.checkedListBoxVolunteers = new System.Windows.Forms.CheckedListBox();
-            this.checkedListBoxDonors = new System.Windows.Forms.CheckedListBox();
             this.ActionName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Date = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Time = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -44,6 +39,15 @@
             this.ExactLocation = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Volunteers = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Donors = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cmbActions = new System.Windows.Forms.ComboBox();
+            this.lblAction = new System.Windows.Forms.Label();
+            this.lblVolunteers = new System.Windows.Forms.Label();
+            this.lblDonors = new System.Windows.Forms.Label();
+            this.btnCallToAction = new System.Windows.Forms.Button();
+            this.checkedListBoxVolunteers = new System.Windows.Forms.CheckedListBox();
+            this.checkedListBoxDonors = new System.Windows.Forms.CheckedListBox();
+            this.btnDeleteAction = new System.Windows.Forms.Button();
+            this.btnUpdateCallsToAction = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -78,73 +82,6 @@
             this.dataGridView1.RowTemplate.Height = 28;
             this.dataGridView1.Size = new System.Drawing.Size(927, 150);
             this.dataGridView1.TabIndex = 5;
-            // 
-            // cmbActions
-            // 
-            this.cmbActions.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.cmbActions.FormattingEnabled = true;
-            this.cmbActions.Location = new System.Drawing.Point(292, 284);
-            this.cmbActions.Name = "cmbActions";
-            this.cmbActions.Size = new System.Drawing.Size(186, 33);
-            this.cmbActions.TabIndex = 14;
-            // 
-            // lblAction
-            // 
-            this.lblAction.AutoSize = true;
-            this.lblAction.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.lblAction.Location = new System.Drawing.Point(53, 289);
-            this.lblAction.Name = "lblAction";
-            this.lblAction.Size = new System.Drawing.Size(146, 22);
-            this.lblAction.TabIndex = 13;
-            this.lblAction.Text = "IZABERI AKCIJU";
-            // 
-            // lblVolunteers
-            // 
-            this.lblVolunteers.AutoSize = true;
-            this.lblVolunteers.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.lblVolunteers.Location = new System.Drawing.Point(90, 360);
-            this.lblVolunteers.Name = "lblVolunteers";
-            this.lblVolunteers.Size = new System.Drawing.Size(195, 22);
-            this.lblVolunteers.TabIndex = 15;
-            this.lblVolunteers.Text = "IZABERI VOLONTERE";
-            // 
-            // lblDonors
-            // 
-            this.lblDonors.AutoSize = true;
-            this.lblDonors.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.lblDonors.Location = new System.Drawing.Point(467, 360);
-            this.lblDonors.Name = "lblDonors";
-            this.lblDonors.Size = new System.Drawing.Size(171, 22);
-            this.lblDonors.TabIndex = 17;
-            this.lblDonors.Text = "IZABERI DAVAOCE";
-            // 
-            // btnCallToAction
-            // 
-            this.btnCallToAction.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.btnCallToAction.Location = new System.Drawing.Point(710, 289);
-            this.btnCallToAction.Name = "btnCallToAction";
-            this.btnCallToAction.Size = new System.Drawing.Size(268, 57);
-            this.btnCallToAction.TabIndex = 19;
-            this.btnCallToAction.Text = "POZOVI NA AKCIJU";
-            this.btnCallToAction.UseVisualStyleBackColor = true;
-            // 
-            // checkedListBoxVolunteers
-            // 
-            this.checkedListBoxVolunteers.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.checkedListBoxVolunteers.FormattingEnabled = true;
-            this.checkedListBoxVolunteers.Location = new System.Drawing.Point(51, 405);
-            this.checkedListBoxVolunteers.Name = "checkedListBoxVolunteers";
-            this.checkedListBoxVolunteers.Size = new System.Drawing.Size(294, 85);
-            this.checkedListBoxVolunteers.TabIndex = 20;
-            // 
-            // checkedListBoxDonors
-            // 
-            this.checkedListBoxDonors.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.checkedListBoxDonors.FormattingEnabled = true;
-            this.checkedListBoxDonors.Location = new System.Drawing.Point(414, 405);
-            this.checkedListBoxDonors.Name = "checkedListBoxDonors";
-            this.checkedListBoxDonors.Size = new System.Drawing.Size(294, 85);
-            this.checkedListBoxDonors.TabIndex = 21;
             // 
             // ActionName
             // 
@@ -195,10 +132,99 @@
             this.Donors.Name = "Donors";
             this.Donors.ReadOnly = true;
             // 
+            // cmbActions
+            // 
+            this.cmbActions.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.cmbActions.FormattingEnabled = true;
+            this.cmbActions.Location = new System.Drawing.Point(292, 284);
+            this.cmbActions.Name = "cmbActions";
+            this.cmbActions.Size = new System.Drawing.Size(186, 33);
+            this.cmbActions.TabIndex = 14;
+            // 
+            // lblAction
+            // 
+            this.lblAction.AutoSize = true;
+            this.lblAction.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.lblAction.Location = new System.Drawing.Point(53, 289);
+            this.lblAction.Name = "lblAction";
+            this.lblAction.Size = new System.Drawing.Size(146, 22);
+            this.lblAction.TabIndex = 13;
+            this.lblAction.Text = "IZABERI AKCIJU";
+            // 
+            // lblVolunteers
+            // 
+            this.lblVolunteers.AutoSize = true;
+            this.lblVolunteers.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.lblVolunteers.Location = new System.Drawing.Point(90, 360);
+            this.lblVolunteers.Name = "lblVolunteers";
+            this.lblVolunteers.Size = new System.Drawing.Size(195, 22);
+            this.lblVolunteers.TabIndex = 15;
+            this.lblVolunteers.Text = "IZABERI VOLONTERE";
+            // 
+            // lblDonors
+            // 
+            this.lblDonors.AutoSize = true;
+            this.lblDonors.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.lblDonors.Location = new System.Drawing.Point(467, 360);
+            this.lblDonors.Name = "lblDonors";
+            this.lblDonors.Size = new System.Drawing.Size(171, 22);
+            this.lblDonors.TabIndex = 17;
+            this.lblDonors.Text = "IZABERI DAVAOCE";
+            // 
+            // btnCallToAction
+            // 
+            this.btnCallToAction.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.btnCallToAction.Location = new System.Drawing.Point(714, 289);
+            this.btnCallToAction.Name = "btnCallToAction";
+            this.btnCallToAction.Size = new System.Drawing.Size(268, 57);
+            this.btnCallToAction.TabIndex = 19;
+            this.btnCallToAction.Text = "POZOVI NA AKCIJU";
+            this.btnCallToAction.UseVisualStyleBackColor = true;
+            // 
+            // checkedListBoxVolunteers
+            // 
+            this.checkedListBoxVolunteers.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.checkedListBoxVolunteers.FormattingEnabled = true;
+            this.checkedListBoxVolunteers.Location = new System.Drawing.Point(51, 405);
+            this.checkedListBoxVolunteers.Name = "checkedListBoxVolunteers";
+            this.checkedListBoxVolunteers.Size = new System.Drawing.Size(294, 85);
+            this.checkedListBoxVolunteers.TabIndex = 20;
+            // 
+            // checkedListBoxDonors
+            // 
+            this.checkedListBoxDonors.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.checkedListBoxDonors.FormattingEnabled = true;
+            this.checkedListBoxDonors.Location = new System.Drawing.Point(414, 405);
+            this.checkedListBoxDonors.Name = "checkedListBoxDonors";
+            this.checkedListBoxDonors.Size = new System.Drawing.Size(294, 85);
+            this.checkedListBoxDonors.TabIndex = 21;
+            // 
+            // btnDeleteAction
+            // 
+            this.btnDeleteAction.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.btnDeleteAction.Location = new System.Drawing.Point(584, 517);
+            this.btnDeleteAction.Name = "btnDeleteAction";
+            this.btnDeleteAction.Size = new System.Drawing.Size(329, 57);
+            this.btnDeleteAction.TabIndex = 22;
+            this.btnDeleteAction.Text = "IZBRIŠI AKCIJU";
+            this.btnDeleteAction.UseVisualStyleBackColor = true;
+            // 
+            // btnUpdateCallsToAction
+            // 
+            this.btnUpdateCallsToAction.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.btnUpdateCallsToAction.Location = new System.Drawing.Point(51, 517);
+            this.btnUpdateCallsToAction.Name = "btnUpdateCallsToAction";
+            this.btnUpdateCallsToAction.Size = new System.Drawing.Size(326, 57);
+            this.btnUpdateCallsToAction.TabIndex = 23;
+            this.btnUpdateCallsToAction.Text = "IZMENI POZIVE NA AKCIJU";
+            this.btnUpdateCallsToAction.UseVisualStyleBackColor = true;
+            // 
             // UCCallToAction
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.btnUpdateCallsToAction);
+            this.Controls.Add(this.btnDeleteAction);
             this.Controls.Add(this.checkedListBoxDonors);
             this.Controls.Add(this.checkedListBoxVolunteers);
             this.Controls.Add(this.btnCallToAction);
@@ -209,7 +235,7 @@
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.lblHeader);
             this.Name = "UCCallToAction";
-            this.Size = new System.Drawing.Size(1044, 539);
+            this.Size = new System.Drawing.Size(1044, 588);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -234,5 +260,16 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ExactLocation;
         private System.Windows.Forms.DataGridViewTextBoxColumn Volunteers;
         private System.Windows.Forms.DataGridViewTextBoxColumn Donors;
+        private System.Windows.Forms.Button btnDeleteAction;
+        private System.Windows.Forms.Button btnUpdateCallsToAction;
+
+        public Button BtnCallToAction { get => btnCallToAction; set => btnCallToAction = value; }
+        public CheckedListBox CheckedListBoxVolunteers { get => checkedListBoxVolunteers; set => checkedListBoxVolunteers = value; }
+        public CheckedListBox CheckedListBoxDonors { get => checkedListBoxDonors; set => checkedListBoxDonors = value; }
+        public Button BtnDeleteAction { get => btnDeleteAction; set => btnDeleteAction = value; }
+        public Button BtnUpdateCallsToAction { get => btnUpdateCallsToAction; set => btnUpdateCallsToAction = value; }
+        public Button BtnCallToAction1 { get => btnCallToAction; set => btnCallToAction = value; }
+        public DataGridView DataGridView1 { get => dataGridView1; set => dataGridView1 = value; }
+        public ComboBox CmbActions { get => cmbActions; set => cmbActions = value; }
     }
 }

@@ -54,7 +54,7 @@ namespace BloodDonation.Client.Forms
             // 
             this.lblCoordinator.AutoSize = true;
             this.lblCoordinator.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.lblCoordinator.Location = new System.Drawing.Point(39, 378);
+            this.lblCoordinator.Location = new System.Drawing.Point(36, 548);
             this.lblCoordinator.Name = "lblCoordinator";
             this.lblCoordinator.Size = new System.Drawing.Size(223, 30);
             this.lblCoordinator.TabIndex = 1;

@@ -1,4 +1,6 @@
-﻿namespace BloodDonation.Client.UserControls
+﻿using System.Windows.Forms;
+
+namespace BloodDonation.Client.UserControls
 {
     partial class UCDonors
     {
@@ -29,17 +31,11 @@
         private void InitializeComponent()
         {
             this.dgvDonors = new System.Windows.Forms.DataGridView();
-            this.JMBG = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DonorNameSurname = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.BloodType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.LastDonation = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Place = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Contact = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.IsActive = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Questionnaires = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnAddNewDonor = new System.Windows.Forms.Button();
             this.btnUpdateDonorInfo = new System.Windows.Forms.Button();
             this.btnDeleteDonor = new System.Windows.Forms.Button();
+            this.btnFindDonor = new System.Windows.Forms.Button();
+            this.txtFindDonor = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDonors)).BeginInit();
             this.SuspendLayout();
             // 
@@ -49,83 +45,18 @@
             this.dgvDonors.AllowUserToDeleteRows = false;
             this.dgvDonors.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvDonors.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvDonors.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.JMBG,
-            this.DonorNameSurname,
-            this.BloodType,
-            this.LastDonation,
-            this.Place,
-            this.Contact,
-            this.IsActive,
-            this.Questionnaires});
-            this.dgvDonors.Location = new System.Drawing.Point(82, 44);
+            this.dgvDonors.Location = new System.Drawing.Point(37, 44);
             this.dgvDonors.Name = "dgvDonors";
             this.dgvDonors.ReadOnly = true;
             this.dgvDonors.RowHeadersWidth = 62;
             this.dgvDonors.RowTemplate.Height = 28;
-            this.dgvDonors.Size = new System.Drawing.Size(866, 271);
+            this.dgvDonors.Size = new System.Drawing.Size(959, 271);
             this.dgvDonors.TabIndex = 0;
-            // 
-            // JMBG
-            // 
-            this.JMBG.HeaderText = "JMBG";
-            this.JMBG.MinimumWidth = 8;
-            this.JMBG.Name = "JMBG";
-            this.JMBG.ReadOnly = true;
-            // 
-            // DonorNameSurname
-            // 
-            this.DonorNameSurname.HeaderText = "Ime i prezime";
-            this.DonorNameSurname.MinimumWidth = 8;
-            this.DonorNameSurname.Name = "DonorNameSurname";
-            this.DonorNameSurname.ReadOnly = true;
-            // 
-            // BloodType
-            // 
-            this.BloodType.HeaderText = "Krvna grupa";
-            this.BloodType.MinimumWidth = 8;
-            this.BloodType.Name = "BloodType";
-            this.BloodType.ReadOnly = true;
-            // 
-            // LastDonation
-            // 
-            this.LastDonation.HeaderText = "Datum poslednjeg davanja krvi";
-            this.LastDonation.MinimumWidth = 8;
-            this.LastDonation.Name = "LastDonation";
-            this.LastDonation.ReadOnly = true;
-            // 
-            // Place
-            // 
-            this.Place.HeaderText = "Mesto";
-            this.Place.MinimumWidth = 8;
-            this.Place.Name = "Place";
-            this.Place.ReadOnly = true;
-            // 
-            // Contact
-            // 
-            this.Contact.HeaderText = "Kontakt";
-            this.Contact.MinimumWidth = 8;
-            this.Contact.Name = "Contact";
-            this.Contact.ReadOnly = true;
-            // 
-            // IsActive
-            // 
-            this.IsActive.HeaderText = "Trenutno aktivan";
-            this.IsActive.MinimumWidth = 8;
-            this.IsActive.Name = "IsActive";
-            this.IsActive.ReadOnly = true;
-            // 
-            // Questionnaires
-            // 
-            this.Questionnaires.HeaderText = "Upitnici";
-            this.Questionnaires.MinimumWidth = 8;
-            this.Questionnaires.Name = "Questionnaires";
-            this.Questionnaires.ReadOnly = true;
             // 
             // btnAddNewDonor
             // 
             this.btnAddNewDonor.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.btnAddNewDonor.Location = new System.Drawing.Point(626, 428);
+            this.btnAddNewDonor.Location = new System.Drawing.Point(674, 428);
             this.btnAddNewDonor.Name = "btnAddNewDonor";
             this.btnAddNewDonor.Size = new System.Drawing.Size(322, 64);
             this.btnAddNewDonor.TabIndex = 2;
@@ -135,7 +66,7 @@
             // btnUpdateDonorInfo
             // 
             this.btnUpdateDonorInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.btnUpdateDonorInfo.Location = new System.Drawing.Point(82, 428);
+            this.btnUpdateDonorInfo.Location = new System.Drawing.Point(37, 428);
             this.btnUpdateDonorInfo.Name = "btnUpdateDonorInfo";
             this.btnUpdateDonorInfo.Size = new System.Drawing.Size(322, 64);
             this.btnUpdateDonorInfo.TabIndex = 3;
@@ -145,17 +76,38 @@
             // btnDeleteDonor
             // 
             this.btnDeleteDonor.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.btnDeleteDonor.Location = new System.Drawing.Point(82, 343);
+            this.btnDeleteDonor.Location = new System.Drawing.Point(37, 338);
             this.btnDeleteDonor.Name = "btnDeleteDonor";
             this.btnDeleteDonor.Size = new System.Drawing.Size(322, 64);
             this.btnDeleteDonor.TabIndex = 4;
             this.btnDeleteDonor.Text = "IZBRIŠI IZABRANOG DAVAOCA";
             this.btnDeleteDonor.UseVisualStyleBackColor = true;
             // 
+            // btnFindDonor
+            // 
+            this.btnFindDonor.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.btnFindDonor.Location = new System.Drawing.Point(674, 338);
+            this.btnFindDonor.Name = "btnFindDonor";
+            this.btnFindDonor.Size = new System.Drawing.Size(322, 64);
+            this.btnFindDonor.TabIndex = 6;
+            this.btnFindDonor.Text = "PRONAĐI DAVAOCA";
+            this.btnFindDonor.UseVisualStyleBackColor = true;
+            // 
+            // txtFindDonor
+            // 
+            this.txtFindDonor.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.txtFindDonor.Location = new System.Drawing.Point(396, 350);
+            this.txtFindDonor.Name = "txtFindDonor";
+            this.txtFindDonor.Size = new System.Drawing.Size(249, 37);
+            this.txtFindDonor.TabIndex = 5;
+            this.txtFindDonor.Text = "Nađi davaoca...";
+            // 
             // UCDonors
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.btnFindDonor);
+            this.Controls.Add(this.txtFindDonor);
             this.Controls.Add(this.btnDeleteDonor);
             this.Controls.Add(this.btnUpdateDonorInfo);
             this.Controls.Add(this.btnAddNewDonor);
@@ -164,22 +116,23 @@
             this.Size = new System.Drawing.Size(1052, 543);
             ((System.ComponentModel.ISupportInitialize)(this.dgvDonors)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
-
         private System.Windows.Forms.DataGridView dgvDonors;
-        private System.Windows.Forms.DataGridViewTextBoxColumn JMBG;
-        private System.Windows.Forms.DataGridViewTextBoxColumn DonorNameSurname;
-        private System.Windows.Forms.DataGridViewTextBoxColumn BloodType;
-        private System.Windows.Forms.DataGridViewTextBoxColumn LastDonation;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Place;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Contact;
-        private System.Windows.Forms.DataGridViewTextBoxColumn IsActive;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Questionnaires;
         private System.Windows.Forms.Button btnAddNewDonor;
         private System.Windows.Forms.Button btnUpdateDonorInfo;
         private System.Windows.Forms.Button btnDeleteDonor;
+        private Button btnFindDonor;
+        private TextBox txtFindDonor;
+
+        public DataGridView DgvDonors { get => dgvDonors; set => dgvDonors = value; }
+        public Button BtnAddNewDonor { get => btnAddNewDonor; set => btnAddNewDonor = value; }
+        public Button BtnUpdateDonorInfo { get => btnUpdateDonorInfo; set => btnUpdateDonorInfo = value; }
+        public Button BtnDeleteDonor { get => btnDeleteDonor; set => btnDeleteDonor = value; }
+        public Button BtnFindDonor { get => btnFindDonor; set => btnFindDonor = value; }
+        public TextBox TxtFindDonor { get => txtFindDonor; set => txtFindDonor = value; }
     }
 }
