@@ -77,7 +77,7 @@ namespace BloodDonation.Client.GUIController
 
         internal void ShowActionScreen(FormMode mode)
         {
-            ActionGuiController.Instance.ShowUCCallToAction(_frmMain, mode);
+            _frmMain.ChangePanel(_actionGuiController.ShowUCCallToAction(mode));
         }
 
       

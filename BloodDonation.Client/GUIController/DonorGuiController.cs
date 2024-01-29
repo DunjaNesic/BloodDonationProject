@@ -17,8 +17,7 @@ namespace BloodDonation.Client.GUIController
     public class DonorGuiController
     {       
         UCDonors uCDonors;
-        UCCreateDonor uCCreateDonor;
-        UCUpdateDonor uCUpdateDonor;
+        UCDetailsDonor uCDetailsDonor;
 
         FrmMainScreen _frmMain;
         public List<Place> listOfPlaces = new List<Place>();
@@ -28,14 +27,15 @@ namespace BloodDonation.Client.GUIController
 
         Donor loadedDonor = new Donor();
 
-        public Donor donorToUpdate;
-
         public List<Questionnaire> listOfQuestionnaires = new List<Questionnaire>();
         internal UserControl ShowUCDonor(FormMode mode)
         {
             if (mode == FormMode.View)
             {
                 uCDonors = new UCDonors();
+
+                uCDonors.ToolStripVolunteers1.Click += (s, a) => MainCoordinator.Instance.ShowVolunteerScreen(FormMode.View);
+                uCDonors.ToolStripActions1.Click += (s, a) => MainCoordinator.Instance.ShowActionScreen(FormMode.Add);
 
                 uCDonors.BtnAddNewDonor.Click += BtnAddNewDonor_Click;
                 uCDonors.BtnFindDonor.Click += BtnFindDonor_Click;
@@ -46,12 +46,53 @@ namespace BloodDonation.Client.GUIController
             }
             else if (mode == FormMode.Add)
             {
-                return uCCreateDonor;
+                uCDetailsDonor = new UCDetailsDonor();
+
+                listOfPlaces = Communication.Instance.GetAllPlaces();
+                uCDetailsDonor.CmbPlaces.DataSource = listOfPlaces;
+                uCDetailsDonor.CmbBloodType.DataSource = Enum.GetValues(typeof(BloodType));
+                uCDetailsDonor.CmbIsActive.DataSource = Enum.GetValues(typeof(IsActive));
+                uCDetailsDonor.BtnDeleteDonor.Visible = false;
+                uCDetailsDonor.BtnUpdateDonor.Visible = false;
+                uCDetailsDonor.DgvQuestionnaires.Visible = false;
+                uCDetailsDonor.LblQuest.Visible = false;
+                uCDetailsDonor.LblIsActive.Visible = false;
+                uCDetailsDonor.CmbIsActive.Visible = false;
+                uCDetailsDonor.BtnGoBack.Click += BtnGoBack_Click;
+
+                uCDetailsDonor.BtnCreateDonor.Click += BtnCreateDonor_Click;
+
+                return uCDetailsDonor;
             }
-            else if (mode == FormMode.Details) {
-            
+            else if (mode == FormMode.Details) 
+            {
+                uCDetailsDonor = new UCDetailsDonor();
+
+                listOfPlaces = Communication.Instance.GetAllPlaces();
+                uCDetailsDonor.CmbPlaces.DataSource = listOfPlaces;
+                uCDetailsDonor.CmbBloodType.DataSource = Enum.GetValues(typeof(BloodType));
+                uCDetailsDonor.CmbIsActive.DataSource = Enum.GetValues(typeof(IsActive));
+                uCDetailsDonor.TxtJMBG.Enabled = false;
+                uCDetailsDonor.TxtJMBG.Text = loadedDonor.JMBG;
+                uCDetailsDonor.BtnCreateDonor.Visible = false;
+                uCDetailsDonor.BtnGoBack.Click += BtnGoBack_Click;
+
+
+                listOfQuestionnaires = Communication.Instance.GetAllQuestionnaires(loadedDonor);
+                uCDetailsDonor.DgvQuestionnaires.DataSource = listOfQuestionnaires;
+
+
+                uCDetailsDonor.BtnUpdateDonor.Click += BtnUpdateDonor_Click;
+                uCDetailsDonor.BtnDeleteDonor.Click += BtnDeleteDonor_Click;
+
+                return uCDetailsDonor;
             }
             return uCDonors;
+        }
+
+        private void BtnGoBack_Click(object sender, EventArgs e)
+        {
+            MainCoordinator.Instance.ShowDonorScreen(FormMode.View);
         }
 
         private void BtnFindDonor_Click(object sender, EventArgs e)
@@ -62,14 +103,13 @@ namespace BloodDonation.Client.GUIController
                 if (filter.Length > 0)
                 {
                     string filterCondition = $"lower(d.JMBG) = '{filter.ToLower()}'";
-                    Donor filteredDonor = Communication.Instance.FilterDonor(filterCondition);
+                    loadedDonor = Communication.Instance.FilterDonor(filterCondition);
 
-                    List<Donor> filteredDonors = new List<Donor>();
+                   
 
-                    if (filteredDonor != null)
+                    if (loadedDonor != null)
                     {
-                        filteredDonors.Add(filteredDonor);
-                        uCDonors.DgvDonors.DataSource = filteredDonors;
+                        MainCoordinator.Instance.ShowDonorScreen(FormMode.Details);                 
                     }
                     else
                     {
@@ -102,24 +142,12 @@ namespace BloodDonation.Client.GUIController
             listOfDonors = new BindingList<Donor>(donors);
             uCDonors.DgvDonors.DataSource = listOfDonors;
         }
-        private void AddNewDonor() {
-            uCCreateDonor = new UCCreateDonor();         
-
-            listOfPlaces = Communication.Instance.GetAllPlaces();
-            uCCreateDonor.CmbPlaces.DataSource = listOfPlaces;
-            uCCreateDonor.CmbBloodType.DataSource = Enum.GetValues(typeof(BloodType));
-
-            uCCreateDonor.BtnCreateDonor.Click += BtnCreateDonor_Click;
-
-            MainCoordinator.Instance.ShowDonorScreen((FormMode.Add));
-        }
-
         private void BtnCreateDonor_Click(object sender, EventArgs e)
         {
                 bool successful = true;
             try
             {
-                string JMBG = uCCreateDonor.TxtJMBG.Text;
+                string JMBG = uCDetailsDonor.TxtJMBG.Text;
 
                 if (JMBG.Length != 13 || !IsNumeric(JMBG))
                 {
@@ -128,7 +156,7 @@ namespace BloodDonation.Client.GUIController
                     return;
                 }
 
-                string[] fullName = uCCreateDonor.TxtDonorNameSurname.Text.Split(' ');
+                string[] fullName = uCDetailsDonor.TxtDonorNameSurname.Text.Split(' ');
 
                 if (fullName.Length != 2)
                 {
@@ -140,8 +168,8 @@ namespace BloodDonation.Client.GUIController
                 string name = fullName[0];
                 string surname = fullName[1];
 
-                string contact = uCCreateDonor.TxtContact.Text;
-                DateTime lastDonation = uCCreateDonor.MonthCalendar1.SelectionStart;
+                string contact = uCDetailsDonor.TxtContact.Text;
+                DateTime lastDonation = uCDetailsDonor.MonthCalendar1.SelectionStart;
 
                 if (lastDonation > DateTime.Now)
                 {
@@ -150,7 +178,7 @@ namespace BloodDonation.Client.GUIController
                     return;
                 }
 
-                Place place = (Place)uCCreateDonor.CmbPlaces.SelectedItem;
+                Place place = (Place)uCDetailsDonor.CmbPlaces.SelectedItem;
 
                 if (place == null)
                 {
@@ -159,7 +187,7 @@ namespace BloodDonation.Client.GUIController
                     return;
                 }
 
-                BloodType bloodType = (BloodType)uCCreateDonor.CmbBloodType.SelectedItem;
+                BloodType bloodType = (BloodType)uCDetailsDonor.CmbBloodType.SelectedItem;
 
                 Donor donor = Communication.Instance.CreateDonor(new Donor()
                 {
@@ -200,12 +228,12 @@ namespace BloodDonation.Client.GUIController
                 {
                     if (successful)
                     {
-                        uCCreateDonor.TxtJMBG.Text = string.Empty;
-                        uCCreateDonor.TxtDonorNameSurname.Text = string.Empty;
-                        uCCreateDonor.TxtContact.Text = string.Empty;
-                        uCCreateDonor.MonthCalendar1.SelectionStart = DateTime.Now; 
-                        uCCreateDonor.CmbPlaces.SelectedIndex = -1; 
-                        uCCreateDonor.CmbBloodType.SelectedIndex = -1; 
+                        uCDetailsDonor.TxtJMBG.Text = string.Empty;
+                        uCDetailsDonor.TxtDonorNameSurname.Text = string.Empty;
+                        uCDetailsDonor.TxtContact.Text = string.Empty;
+                        uCDetailsDonor.MonthCalendar1.SelectionStart = DateTime.Now;
+                        uCDetailsDonor.CmbPlaces.SelectedIndex = -1;
+                        uCDetailsDonor.CmbBloodType.SelectedIndex = -1; 
                     }
                    
                 }
@@ -223,38 +251,52 @@ namespace BloodDonation.Client.GUIController
             }
             return true;
         }
-        private void BtnUpdateDonorInfo_Click(object sender, EventArgs e)
-        {
-            donorToUpdate = (Donor)uCDonors.DgvDonors.SelectedRows[0].DataBoundItem;
-
-            uCUpdateDonor = new UCUpdateDonor();
-            _frmMain.ChangePanel(uCUpdateDonor);
-            uCUpdateDonor.CmbIsActive.DataSource = Enum.GetValues(typeof(IsActive));
-
-            listOfQuestionnaires = Communication.Instance.GetAllQuestionnaires(donorToUpdate);
-            uCUpdateDonor.DgvQuestionnaires.DataSource = listOfQuestionnaires;
-
-
-            uCUpdateDonor.BtnUpdateDonor.Click += BtnUpdateDonor_Click;
-        }
-
         private void BtnUpdateDonor_Click(object sender, EventArgs e)
         {
             try
             {
-                string[] fullName = uCUpdateDonor.TxtDonorNameSurname.Text.Split(' ');
+                string[] fullName = uCDetailsDonor.TxtDonorNameSurname.Text.Split(' ');
+
+                if (fullName.Length != 2)
+                {
+                    MessageBox.Show("Ime i prezime davaoca mora biti uneto u formatu Ime Prezime");
+                    return;
+                }
+
                 string name = fullName[0];
                 string surname = fullName[1];
-                string contact = uCUpdateDonor.TxtContact.Text;
-                DateTime lastDonation = uCUpdateDonor.MonthCalendar1.SelectionStart;
-                IsActive isActive = (IsActive)uCUpdateDonor.CmbIsActive.SelectedItem;
-                donorToUpdate.DonorName = name;
-                donorToUpdate.DonorLastName = surname;
-                donorToUpdate.DonorContact = contact;
-                donorToUpdate.LastDonationDate = lastDonation;
-                donorToUpdate.IsActive = isActive;
 
-                Communication.Instance.UpdateDonor(donorToUpdate);
+                if (string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(surname))
+                {
+                    MessageBox.Show("Polje za ime i prezime ne sme biti prazno");
+                    return;
+                }
+
+                string contact = uCDetailsDonor.TxtContact.Text;
+
+                if (string.IsNullOrWhiteSpace(contact))
+                {
+                    MessageBox.Show("Morate upisati kontakt davaoca");
+                    return;
+                }
+
+                DateTime lastDonation = uCDetailsDonor.MonthCalendar1.SelectionStart;
+
+                if (lastDonation > DateTime.Now)
+                {
+                    MessageBox.Show("Datum poslednjeg davanja krvi ne može biti u budućnosti");
+                    return;
+                }
+
+                IsActive isActive = (IsActive)uCDetailsDonor.CmbIsActive.SelectedItem;
+   
+                loadedDonor.DonorName = name;
+                loadedDonor.DonorLastName = surname;
+                loadedDonor.DonorContact = contact;
+                loadedDonor.LastDonationDate = lastDonation;
+                loadedDonor.IsActive = isActive;
+
+                Communication.Instance.UpdateDonor(loadedDonor);
             }
             catch (SystemOperationException ex)
             {
@@ -268,16 +310,27 @@ namespace BloodDonation.Client.GUIController
             {
                 MessageBox.Show(ex.Message);
             }
+            finally
+            {
+                DialogResult result = MessageBox.Show("Želite li da nastavite sa ažuriranjem davaoca?", "Nastavi?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                if (result == DialogResult.No)
+                {
+                    MainCoordinator.Instance.ShowDonorScreen(FormMode.View);
+                }
+            }
         }
+
 
         private void BtnDeleteDonor_Click(object sender, EventArgs e)
         {
             try
-            {
-                Donor selectedDonor = (Donor)uCDonors.DgvDonors.SelectedRows[0].DataBoundItem;
-                Communication.Instance.DeleteDonor(selectedDonor);
-                donors.Remove(selectedDonor);
+            {           
+                Communication.Instance.DeleteDonor(loadedDonor);
+                donors.Remove(loadedDonor);
                 listOfDonors.ResetBindings();
+
+                MainCoordinator.Instance.ShowDonorScreen(FormMode.View);
             }
             catch (SystemOperationException ex)
             {
@@ -293,10 +346,9 @@ namespace BloodDonation.Client.GUIController
             }                     
           
         }
-
         private void BtnAddNewDonor_Click(object sender, EventArgs e)
         {
-            AddNewDonor();
+            MainCoordinator.Instance.ShowDonorScreen(FormMode.Add);
         }
     }
 }

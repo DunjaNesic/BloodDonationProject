@@ -48,7 +48,11 @@ namespace BloodDonation.Client.UserControls
             this.checkedListBoxDonors = new System.Windows.Forms.CheckedListBox();
             this.btnDeleteAction = new System.Windows.Forms.Button();
             this.btnUpdateCallsToAction = new System.Windows.Forms.Button();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.ToolStripDonors = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolStripVolunteers = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblHeader
@@ -219,6 +223,33 @@ namespace BloodDonation.Client.UserControls
             this.btnUpdateCallsToAction.Text = "IZMENI POZIVE NA AKCIJU";
             this.btnUpdateCallsToAction.UseVisualStyleBackColor = true;
             // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.menuStrip1.Dock = System.Windows.Forms.DockStyle.None;
+            this.menuStrip1.GripMargin = new System.Windows.Forms.Padding(2, 2, 0, 2);
+            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ToolStripDonors,
+            this.ToolStripVolunteers});
+            this.menuStrip1.Location = new System.Drawing.Point(510, 4);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(413, 33);
+            this.menuStrip1.TabIndex = 24;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // ToolStripDonors
+            // 
+            this.ToolStripDonors.Name = "ToolStripDonors";
+            this.ToolStripDonors.Size = new System.Drawing.Size(104, 29);
+            this.ToolStripDonors.Text = "DAVAOCI";
+            // 
+            // ToolStripVolunteers
+            // 
+            this.ToolStripVolunteers.Name = "ToolStripVolunteers";
+            this.ToolStripVolunteers.Size = new System.Drawing.Size(121, 29);
+            this.ToolStripVolunteers.Text = "VOLONTERI";
+            // 
             // UCCallToAction
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -234,9 +265,12 @@ namespace BloodDonation.Client.UserControls
             this.Controls.Add(this.lblAction);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.lblHeader);
+            this.Controls.Add(this.menuStrip1);
             this.Name = "UCCallToAction";
             this.Size = new System.Drawing.Size(1044, 588);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -262,6 +296,9 @@ namespace BloodDonation.Client.UserControls
         private System.Windows.Forms.DataGridViewTextBoxColumn Donors;
         private System.Windows.Forms.Button btnDeleteAction;
         private System.Windows.Forms.Button btnUpdateCallsToAction;
+        private MenuStrip menuStrip1;
+        private ToolStripMenuItem ToolStripDonors;
+        private ToolStripMenuItem ToolStripVolunteers;
 
         public Button BtnCallToAction { get => btnCallToAction; set => btnCallToAction = value; }
         public CheckedListBox CheckedListBoxVolunteers { get => checkedListBoxVolunteers; set => checkedListBoxVolunteers = value; }
@@ -271,5 +308,8 @@ namespace BloodDonation.Client.UserControls
         public Button BtnCallToAction1 { get => btnCallToAction; set => btnCallToAction = value; }
         public DataGridView DataGridView1 { get => dataGridView1; set => dataGridView1 = value; }
         public ComboBox CmbActions { get => cmbActions; set => cmbActions = value; }
+        public MenuStrip MenuStrip1 { get => menuStrip1; set => menuStrip1 = value; }
+        public ToolStripMenuItem ToolStripDonors1 { get => ToolStripDonors; set => ToolStripDonors = value; }
+        public ToolStripMenuItem ToolStripVolunteers1 { get => ToolStripVolunteers; set => ToolStripVolunteers = value; }
     }
 }

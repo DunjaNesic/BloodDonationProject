@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace BloodDonation.Client.GUIController
 {
@@ -18,18 +19,18 @@ namespace BloodDonation.Client.GUIController
         UCCallToAction uCCallToAction;
         UCUpdateCallToAction uCUpdateCallToAction;
 
-        FrmMainScreen _frmMain;
-
         public List<BloodTransfAction> actions = new List<BloodTransfAction>();
         public List<Donor> donors = new List<Donor>();
         public List<Volunteer> volunteers = new List<Volunteer>();
-        internal void ShowUCCallToAction(FrmMainScreen frmMain, FormMode mode)
+
+        internal UserControl ShowUCCallToAction(FormMode mode)
         {
-            _frmMain = frmMain;
             if (mode == FormMode.Add)
             {
                 uCCallToAction = new UCCallToAction();
-                _frmMain.ChangePanel(uCCallToAction);
+
+                uCCallToAction.ToolStripVolunteers1.Click += (s, a) => MainCoordinator.Instance.ShowVolunteerScreen(FormMode.View);
+                uCCallToAction.ToolStripDonors1.Click += (s, a) => MainCoordinator.Instance.ShowDonorScreen(FormMode.View);
 
                 volunteers = Communication.Instance.GetAllVolunteers();
                 donors = Communication.Instance.GetAllDonors();
@@ -39,12 +40,15 @@ namespace BloodDonation.Client.GUIController
                 uCCallToAction.CheckedListBoxVolunteers.Items.AddRange(volunteers.ToArray());
                 uCCallToAction.CheckedListBoxDonors.Items.AddRange(donors.ToArray());
 
+                return uCCallToAction;
             }
             else if (mode == FormMode.Update) 
             { 
                 uCUpdateCallToAction = new UCUpdateCallToAction();
-                _frmMain.ChangePanel(uCUpdateCallToAction);
+                return uCUpdateCallToAction;
             }
+            return uCCallToAction;
+
         }
 
 

@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace BloodDonation.Client.UserControls
 {
-    public partial class UCCreateDonor : UserControl
+    public partial class UCDetailsDonor : UserControl
     {
-        public UCCreateDonor()
+        public UCDetailsDonor()
         {
             InitializeComponent();
         }

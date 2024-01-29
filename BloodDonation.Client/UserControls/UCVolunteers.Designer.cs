@@ -35,8 +35,11 @@ namespace BloodDonation.Client.UserControls
             this.txtFilterVolunteers = new System.Windows.Forms.TextBox();
             this.btnDeleteVolunteer = new System.Windows.Forms.Button();
             this.btnChooseVolunteer = new System.Windows.Forms.Button();
-            this.btnGoBack = new System.Windows.Forms.Button();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.ToolStripDonors = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolStripActions = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dgvVolunteers)).BeginInit();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // dgvVolunteers
@@ -91,20 +94,38 @@ namespace BloodDonation.Client.UserControls
             this.btnChooseVolunteer.Text = "IZABERI VOLONTERA";
             this.btnChooseVolunteer.UseVisualStyleBackColor = true;
             // 
-            // btnGoBack
+            // menuStrip1
             // 
-            this.btnGoBack.Location = new System.Drawing.Point(987, 18);
-            this.btnGoBack.Name = "btnGoBack";
-            this.btnGoBack.Size = new System.Drawing.Size(50, 44);
-            this.btnGoBack.TabIndex = 10;
-            this.btnGoBack.Text = "<=";
-            this.btnGoBack.UseVisualStyleBackColor = true;
+            this.menuStrip1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.menuStrip1.Dock = System.Windows.Forms.DockStyle.None;
+            this.menuStrip1.GripMargin = new System.Windows.Forms.Padding(2, 2, 0, 2);
+            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ToolStripDonors,
+            this.ToolStripActions});
+            this.menuStrip1.Location = new System.Drawing.Point(845, 12);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(192, 33);
+            this.menuStrip1.TabIndex = 25;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // ToolStripDonors
+            // 
+            this.ToolStripDonors.Name = "ToolStripDonors";
+            this.ToolStripDonors.Size = new System.Drawing.Size(104, 29);
+            this.ToolStripDonors.Text = "DAVAOCI";
+            // 
+            // ToolStripActions
+            // 
+            this.ToolStripActions.Name = "ToolStripActions";
+            this.ToolStripActions.Size = new System.Drawing.Size(80, 29);
+            this.ToolStripActions.Text = "AKCIJE";
             // 
             // UCVolunteers
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.btnGoBack);
+            this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.btnChooseVolunteer);
             this.Controls.Add(this.btnDeleteVolunteer);
             this.Controls.Add(this.txtFilterVolunteers);
@@ -113,6 +134,8 @@ namespace BloodDonation.Client.UserControls
             this.Name = "UCVolunteers";
             this.Size = new System.Drawing.Size(1061, 534);
             ((System.ComponentModel.ISupportInitialize)(this.dgvVolunteers)).EndInit();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -125,13 +148,17 @@ namespace BloodDonation.Client.UserControls
         private System.Windows.Forms.TextBox txtFilterVolunteers;
         private System.Windows.Forms.Button btnDeleteVolunteer;
         private Button btnChooseVolunteer;
-        private Button btnGoBack;
+        private MenuStrip menuStrip1;
+        private ToolStripMenuItem ToolStripDonors;
+        private ToolStripMenuItem ToolStripActions;
 
         public DataGridView DgvVolunteers { get => dgvVolunteers; set => dgvVolunteers = value; }
         public Button BtnAddNewVolunteer { get => btnAddNewVolunteer; set => btnAddNewVolunteer = value; }
         public Button BtnDeleteVolunteer { get => btnDeleteVolunteer; set => btnDeleteVolunteer = value; }
         public Button BtnChooseVolunteer { get => btnChooseVolunteer; set => btnChooseVolunteer = value; }
         public TextBox TxtFilterVolunteers { get => txtFilterVolunteers; set => txtFilterVolunteers = value; }
-        public Button BtnGoBack { get => btnGoBack; set => btnGoBack = value; }
+        public MenuStrip MenuStrip1 { get => menuStrip1; set => menuStrip1 = value; }
+        public ToolStripMenuItem ToolStripDonors1 { get => ToolStripDonors; set => ToolStripDonors = value; }
+        public ToolStripMenuItem ToolStripActions1 { get => ToolStripActions; set => ToolStripActions = value; }
     }
 }

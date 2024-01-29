@@ -34,7 +34,11 @@ namespace BloodDonation.Client.UserControls
             this.btnAddNewDonor = new System.Windows.Forms.Button();
             this.btnFindDonor = new System.Windows.Forms.Button();
             this.txtFindDonor = new System.Windows.Forms.TextBox();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.ToolStripActions = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolStripVolunteers = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDonors)).BeginInit();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // dgvDonors
@@ -79,10 +83,38 @@ namespace BloodDonation.Client.UserControls
             this.txtFindDonor.Size = new System.Drawing.Size(249, 37);
             this.txtFindDonor.TabIndex = 5;
             // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.menuStrip1.Dock = System.Windows.Forms.DockStyle.None;
+            this.menuStrip1.GripMargin = new System.Windows.Forms.Padding(2, 2, 0, 2);
+            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ToolStripActions,
+            this.ToolStripVolunteers});
+            this.menuStrip1.Location = new System.Drawing.Point(805, 8);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(209, 33);
+            this.menuStrip1.TabIndex = 25;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // ToolStripActions
+            // 
+            this.ToolStripActions.Name = "ToolStripActions";
+            this.ToolStripActions.Size = new System.Drawing.Size(80, 29);
+            this.ToolStripActions.Text = "AKCIJE";
+            // 
+            // ToolStripVolunteers
+            // 
+            this.ToolStripVolunteers.Name = "ToolStripVolunteers";
+            this.ToolStripVolunteers.Size = new System.Drawing.Size(121, 29);
+            this.ToolStripVolunteers.Text = "VOLONTERI";
+            // 
             // UCDonors
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.btnFindDonor);
             this.Controls.Add(this.txtFindDonor);
             this.Controls.Add(this.btnAddNewDonor);
@@ -90,6 +122,8 @@ namespace BloodDonation.Client.UserControls
             this.Name = "UCDonors";
             this.Size = new System.Drawing.Size(1052, 543);
             ((System.ComponentModel.ISupportInitialize)(this.dgvDonors)).EndInit();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -100,10 +134,16 @@ namespace BloodDonation.Client.UserControls
         private System.Windows.Forms.Button btnAddNewDonor;
         private Button btnFindDonor;
         private TextBox txtFindDonor;
+        private MenuStrip menuStrip1;
+        private ToolStripMenuItem ToolStripActions;
+        private ToolStripMenuItem ToolStripVolunteers;
 
         public DataGridView DgvDonors { get => dgvDonors; set => dgvDonors = value; }
         public Button BtnAddNewDonor { get => btnAddNewDonor; set => btnAddNewDonor = value; }
         public Button BtnFindDonor { get => btnFindDonor; set => btnFindDonor = value; }
         public TextBox TxtFindDonor { get => txtFindDonor; set => txtFindDonor = value; }
+        public MenuStrip MenuStrip1 { get => menuStrip1; set => menuStrip1 = value; }
+        public ToolStripMenuItem ToolStripActions1 { get => ToolStripActions; set => ToolStripActions = value; }
+        public ToolStripMenuItem ToolStripVolunteers1 { get => ToolStripVolunteers; set => ToolStripVolunteers = value; }
     }
 }

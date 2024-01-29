@@ -31,8 +31,10 @@ namespace BloodDonation.Client.GUIController
                 uCVolunteers.BtnDeleteVolunteer.Click += BtnDeleteVolunteer_Click;
                 uCVolunteers.BtnChooseVolunteer.Click += BtnFilter_Click;
                 uCVolunteers.TxtFilterVolunteers.TextChanged += TxtFilterVolunteers_TextChanged;
-              
-              
+
+                uCVolunteers.ToolStripActions1.Click += (s, a) => MainCoordinator.Instance.ShowActionScreen(FormMode.Add);
+                uCVolunteers.ToolStripDonors1.Click += (s, a) => MainCoordinator.Instance.ShowDonorScreen(FormMode.View);
+
                 GetAllVolunteers();
                 return uCVolunteers;
             }
