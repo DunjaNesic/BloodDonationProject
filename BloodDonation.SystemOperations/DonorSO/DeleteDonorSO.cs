@@ -18,16 +18,11 @@ namespace BloodDonation.SystemOperations
             {
                 Donor donor = (Donor)entity;
                 genericRepository.Delete(donor, donor.DeleteQuery);
-                Result = true;
+               
             }
-            catch (SqlException ex) {
-                Debug.WriteLine(">>>>>" + ex.Message);
-                Result = false;
-            }
-            catch (Exception ex)
+            catch (Exception)
             {
-                Result = false;
-                Debug.WriteLine(">>>" + ex.Message);
+                throw new Exception("Sistem ne može da obriše davaoca");
             }
         }
     }

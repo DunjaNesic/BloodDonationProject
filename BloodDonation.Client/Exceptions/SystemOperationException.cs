@@ -6,7 +6,13 @@ using System.Threading.Tasks;
 
 namespace BloodDonation.Client.Exceptions
 {
-    public class SystemOperationException
+    public class SystemOperationException : Exception
     {
+        public string ErrorMessage;
+
+        public SystemOperationException(string message)
+        {
+            ErrorMessage = message;
+        }
     }
 }

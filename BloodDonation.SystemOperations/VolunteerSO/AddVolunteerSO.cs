@@ -12,9 +12,16 @@ namespace BloodDonation.SystemOperations
     {
         protected override void ExecuteConcreteOperation(IEntity entity)
         {
-            Volunteer volunteer = (Volunteer)entity;
-            genericRepository.Add(volunteer);
-            Result = volunteer;
+            try
+            {
+                Volunteer volunteer = (Volunteer)entity;
+                genericRepository.Add(volunteer);
+                Result = volunteer;
+            }
+            catch (Exception)
+            {
+                throw new Exception("Sistem ne može da kreira volontera");
+            }
 
         }
     }

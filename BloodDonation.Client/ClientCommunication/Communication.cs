@@ -14,6 +14,8 @@ using System.Runtime.Serialization;
 using BloodDonation.Client.GUIController;
 using System.Threading;
 using BloodDonation.Client.Forms;
+using BloodDonation.Client.Exceptions;
+using System.Windows.Forms;
 
 namespace BloodDonation.Client.ClientCommunication
 {
@@ -40,20 +42,18 @@ namespace BloodDonation.Client.ClientCommunication
                 return _instance;
             }
         }
-        public bool Connect()
+        public void Connect()
         {
             try
             {
                 _socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
                 _socket.Connect("127.0.0.1", 9999);
-                _clientController = new ClientController(_socket);
-               
-                return true;
+                _clientController = new ClientController(_socket);            
             }
             catch (Exception ex)
             {
-                Debug.WriteLine(">>>" + ex.Message);
-                return false;
+                Debug.WriteLine("Connect>>>>" + ex.Message);
+                throw new ServerCommunicationException("Konekcija sa serverom nije uspostavljena");             
             }
         }
         public void Close()
@@ -75,7 +75,7 @@ namespace BloodDonation.Client.ClientCommunication
                 }
             });
             Response resp = _clientController.Receive();
-            if (resp.IsSuccessful == false) return null;
+            MessageBox.Show(resp.Message);
             return resp.ParseResponse<TransfusionCenterCoordinator>();
         }
         internal List<Volunteer> GetAllVolunteers()
@@ -97,14 +97,14 @@ namespace BloodDonation.Client.ClientCommunication
             return resp.ParseResponse<List<Volunteer>>();
         }
 
-        internal bool DeleteVolunteer(Volunteer selectedVol)
+        internal void DeleteVolunteer(Volunteer selectedVol)
         {
             _clientController.Send(new Request() { 
             Operation = Operation.DeleteVolunteer,
             Argument = selectedVol
             });
             Response resp = _clientController.Receive();
-            return resp.ParseResponse<bool>();
+            MessageBox.Show(resp.Message);
         }
 
         internal List<Place> GetAllPlaces()
@@ -123,6 +123,7 @@ namespace BloodDonation.Client.ClientCommunication
             Argument = volunteer
             });
             Response resp = _clientController.Receive();
+            MessageBox.Show(resp.Message);
             return resp.ParseResponse<Volunteer>();
         }
         internal Donor CreateDonor(Donor donor)
@@ -133,10 +134,11 @@ namespace BloodDonation.Client.ClientCommunication
                 Argument = donor
             });
             Response resp = _clientController.Receive();
+            MessageBox.Show(resp.Message);
             return resp.ParseResponse<Donor>();
         }
 
-        internal bool DeleteDonor(Donor selectedDonor)
+        internal void DeleteDonor(Donor selectedDonor)
         {
             _clientController.Send(new Request()
             {
@@ -144,7 +146,7 @@ namespace BloodDonation.Client.ClientCommunication
                 Argument = selectedDonor
             });
             Response resp = _clientController.Receive();
-            return resp.ParseResponse<bool>();
+            MessageBox.Show(resp.Message); 
         }
 
         internal List<Donor> GetAllDonors()
@@ -176,17 +178,19 @@ namespace BloodDonation.Client.ClientCommunication
                 Argument = filterCondition
             });
             Response resp = _clientController.Receive();
+            MessageBox.Show(resp.Message);
             return resp.ParseResponse<Donor>();
         }
 
-        internal bool UpdateDonor(Donor donorToUpdate)
+        internal void UpdateDonor(Donor donorToUpdate)
         {
             _clientController.Send(new Request() { 
             Operation = Operation.UpdateDonor,
             Argument = donorToUpdate
             });
             Response resp = _clientController.Receive();
-            return resp.ParseResponse<bool>();
+            MessageBox.Show(resp.Message);
+         
         }
 
         internal List<BloodTransfAction> GetAllActions()
@@ -198,14 +202,16 @@ namespace BloodDonation.Client.ClientCommunication
             return resp.ParseResponse<List<BloodTransfAction>>();
         }
 
-
-
-
-        //public Donor Dunja(Request req) {
-        //    _clientController.Send(req);
-        //    Response resp = _clientController.Receive();
-        //    return resp.ParseResponse<Donor>();
-        //}
+        internal Volunteer GetVolunteer(int volunteerID)
+        {
+            _clientController.Send(new Request() { 
+            Operation = Operation.LoadVolunteer,
+            Argument = volunteerID
+            });
+            Response resp = _clientController.Receive();
+            MessageBox.Show(resp.Message);
+            return resp.ParseResponse<Volunteer>();
+        }
 
     }
 }

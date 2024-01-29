@@ -12,9 +12,16 @@ namespace BloodDonation.SystemOperations
     {
         protected override void ExecuteConcreteOperation(IEntity entity)
         {
-            Donor donor = (Donor)entity;
-            genericRepository.Add(donor);
-            Result = donor;
+            try
+            {
+                Donor donor = (Donor)entity;
+                genericRepository.Add(donor);
+                Result = donor;
+            }
+            catch (Exception)
+            {
+                throw new Exception("Sistem ne može da kreira davaoca");
+            }
         }
     }
 }

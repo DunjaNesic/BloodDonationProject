@@ -1,4 +1,5 @@
-﻿using BloodDonation.Common.Communication;
+﻿using BloodDonation.Client.Exceptions;
+using BloodDonation.Common.Communication;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -30,19 +31,24 @@ namespace BloodDonation.Client.ClientCommunication
             }
             catch (IOException ex)
             {
-                Debug.WriteLine(">>>>" + ex.Message);
-                //ovde bih bacila ServerException
+                Debug.WriteLine("Send1>>>>" + ex.Message);
+                throw new ServerCommunicationException("Konekcija sa serverom je prekinuta");
             }
             catch (SocketException ex)
             { 
-                Debug.WriteLine(">>>>" + ex.Message);
+                Debug.WriteLine("Send2>>>>>>>>" + ex.Message);
+                throw new ServerCommunicationException("Vas soket je ugasen");
             }
         }
         public Response Receive()
         {
             Response resp = (Response)_receiver.Receive();
             if (resp.IsSuccessful) return resp;
-            else throw new Exception("Ovde baciti new SystemOperationException!!!");
+            else
+            {
+                Debug.WriteLine("Receive>>>>>>>>>>>");
+                throw new SystemOperationException(resp.ErrorMessage);
+            }
         }
 
         public void Close() {

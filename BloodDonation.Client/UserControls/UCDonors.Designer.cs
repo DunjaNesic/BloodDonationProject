@@ -32,8 +32,6 @@ namespace BloodDonation.Client.UserControls
         {
             this.dgvDonors = new System.Windows.Forms.DataGridView();
             this.btnAddNewDonor = new System.Windows.Forms.Button();
-            this.btnUpdateDonorInfo = new System.Windows.Forms.Button();
-            this.btnDeleteDonor = new System.Windows.Forms.Button();
             this.btnFindDonor = new System.Windows.Forms.Button();
             this.txtFindDonor = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDonors)).BeginInit();
@@ -56,37 +54,17 @@ namespace BloodDonation.Client.UserControls
             // btnAddNewDonor
             // 
             this.btnAddNewDonor.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.btnAddNewDonor.Location = new System.Drawing.Point(674, 428);
+            this.btnAddNewDonor.Location = new System.Drawing.Point(674, 430);
             this.btnAddNewDonor.Name = "btnAddNewDonor";
             this.btnAddNewDonor.Size = new System.Drawing.Size(322, 64);
             this.btnAddNewDonor.TabIndex = 2;
             this.btnAddNewDonor.Text = "DODAJ NOVOG DAVAOCA";
             this.btnAddNewDonor.UseVisualStyleBackColor = true;
             // 
-            // btnUpdateDonorInfo
-            // 
-            this.btnUpdateDonorInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.btnUpdateDonorInfo.Location = new System.Drawing.Point(37, 428);
-            this.btnUpdateDonorInfo.Name = "btnUpdateDonorInfo";
-            this.btnUpdateDonorInfo.Size = new System.Drawing.Size(322, 64);
-            this.btnUpdateDonorInfo.TabIndex = 3;
-            this.btnUpdateDonorInfo.Text = "IZMENI IZABRANOG DAVAOCA";
-            this.btnUpdateDonorInfo.UseVisualStyleBackColor = true;
-            // 
-            // btnDeleteDonor
-            // 
-            this.btnDeleteDonor.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.btnDeleteDonor.Location = new System.Drawing.Point(37, 338);
-            this.btnDeleteDonor.Name = "btnDeleteDonor";
-            this.btnDeleteDonor.Size = new System.Drawing.Size(322, 64);
-            this.btnDeleteDonor.TabIndex = 4;
-            this.btnDeleteDonor.Text = "IZBRIŠI IZABRANOG DAVAOCA";
-            this.btnDeleteDonor.UseVisualStyleBackColor = true;
-            // 
             // btnFindDonor
             // 
             this.btnFindDonor.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.btnFindDonor.Location = new System.Drawing.Point(674, 338);
+            this.btnFindDonor.Location = new System.Drawing.Point(333, 338);
             this.btnFindDonor.Name = "btnFindDonor";
             this.btnFindDonor.Size = new System.Drawing.Size(322, 64);
             this.btnFindDonor.TabIndex = 6;
@@ -96,11 +74,10 @@ namespace BloodDonation.Client.UserControls
             // txtFindDonor
             // 
             this.txtFindDonor.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.txtFindDonor.Location = new System.Drawing.Point(396, 350);
+            this.txtFindDonor.Location = new System.Drawing.Point(47, 350);
             this.txtFindDonor.Name = "txtFindDonor";
             this.txtFindDonor.Size = new System.Drawing.Size(249, 37);
             this.txtFindDonor.TabIndex = 5;
-            this.txtFindDonor.Text = "Nađi davaoca...";
             // 
             // UCDonors
             // 
@@ -108,8 +85,6 @@ namespace BloodDonation.Client.UserControls
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.btnFindDonor);
             this.Controls.Add(this.txtFindDonor);
-            this.Controls.Add(this.btnDeleteDonor);
-            this.Controls.Add(this.btnUpdateDonorInfo);
             this.Controls.Add(this.btnAddNewDonor);
             this.Controls.Add(this.dgvDonors);
             this.Name = "UCDonors";
@@ -123,15 +98,11 @@ namespace BloodDonation.Client.UserControls
         #endregion
         private System.Windows.Forms.DataGridView dgvDonors;
         private System.Windows.Forms.Button btnAddNewDonor;
-        private System.Windows.Forms.Button btnUpdateDonorInfo;
-        private System.Windows.Forms.Button btnDeleteDonor;
         private Button btnFindDonor;
         private TextBox txtFindDonor;
 
         public DataGridView DgvDonors { get => dgvDonors; set => dgvDonors = value; }
         public Button BtnAddNewDonor { get => btnAddNewDonor; set => btnAddNewDonor = value; }
-        public Button BtnUpdateDonorInfo { get => btnUpdateDonorInfo; set => btnUpdateDonorInfo = value; }
-        public Button BtnDeleteDonor { get => btnDeleteDonor; set => btnDeleteDonor = value; }
         public Button BtnFindDonor { get => btnFindDonor; set => btnFindDonor = value; }
         public TextBox TxtFindDonor { get => txtFindDonor; set => txtFindDonor = value; }
     }

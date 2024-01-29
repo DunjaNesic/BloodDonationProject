@@ -1,4 +1,5 @@
-﻿using BloodDonation.Common.Communication;
+﻿using BloodDonation.Client.Exceptions;
+using BloodDonation.Common.Communication;
 using BloodDonation.Common.Domain;
 using BusinessLogic;
 using System;
@@ -53,98 +54,147 @@ namespace BloodDonation.Server
         public Response ProcessRequest(Request req)
         {
             Response resp = new Response();
-            switch (req.Operation)
+            try
             {
-                case Operation.Login:
-                    TransfusionCenterCoordinator loggedCoord = Controller.Instance.Login((TransfusionCenterCoordinator)req.Argument);
-                    if (loggedCoord != null)
-                    {
-                        this._coordinator = loggedCoord;
-                        resp.Result = loggedCoord;
-                        LoggedInClient?.Invoke(this, EventArgs.Empty);
-                    }
-                    else
-                    {
-                        resp.IsSuccessful = false;
-                    }
-                    break;
-                case Operation.CreateVolunteer:
-                    Volunteer newVolunteer = Controller.Instance.CreateNewVolunteer((Volunteer)req.Argument);
-                    resp.Result = newVolunteer;
-                    break;
-                case Operation.FindVolunteers:
-                    List<Volunteer> filteredVolunteers = Controller.Instance.GetFilteredVolunteers(new Volunteer()
-                    {
-                        FilterQuery = (string)req.Argument
-                    });
-                    resp.Result = filteredVolunteers;
-                    break;
-                case Operation.UpdateDonor:
-                    bool updatedDonor = Controller.Instance.UpdateDonor((Donor)req.Argument);
-                   resp.Result = updatedDonor;
-                    break;
-                case Operation.DeleteVolunteer:
-                    Volunteer volToDelete = (Volunteer)req.Argument;
-                    bool deletedVol = Controller.Instance.DeleteVolunteer(volToDelete);
-                    resp.Result = deletedVol;
-                    break;
-                case Operation.GetAllVolunteers:
-                    List<Volunteer> volunteers = Controller.Instance.GetAllVolunteers(new Volunteer());
-                    resp.Result = volunteers;
-                    break;
-                case Operation.CreateDonor:
-                    Donor newDonor = Controller.Instance.CreateNewDonor((Donor)req.Argument);
-                    resp.Result = newDonor;
-                    break;
-                case Operation.FindDonor:
-                    Donor foundDonor = Controller.Instance.FindDonor(new Donor()
-                    {
-                        FilterQuery = (string)req.Argument
-                    });
-                    resp.Result = foundDonor;
-                    break;
-                case Operation.DeleteDonor:
-                    Donor donorToDelete = (Donor)req.Argument;
-                    bool deletedDonor = Controller.Instance.DeleteDonor(donorToDelete);
-                    resp.Result = deletedDonor;
-                    break;
-                case Operation.GetAllDonors:
-                    List<Donor> donors = Controller.Instance.GetAllDonors(new Donor());
-                    resp.Result = donors;
-                    break;
-                case Operation.CreateCallToAction:
-                    break;
-                case Operation.UpdateCallToAction:
-                    break;
-                case Operation.FindCallToAction:
-                    break;
-                case Operation.LoadAction:
-                    //ovde vracam izabranu akciju za brisanje, a to takodje treba 
-                    //da odradim i za volontera i davaoca i pretragu treba
-                    //lepo da odradim i nove kontrole da napravim :(
-                    break;
-                case Operation.GetAllCallsToAction:
-                    break;
-                case Operation.GetAllActions:
-                    List<BloodTransfAction> actions = Controller.Instance.GetAllActions(new BloodTransfAction());
-                    resp.Result = actions;
-                    break;
-                case Operation.GetAllPlaces:
-                    List<Place> places = Controller.Instance.GetAllPlaces(new Place());
-                    resp.Result = places;
-                    break;
-                case Operation.GetAllQuestionnaires:
-                    Donor d = (Donor)req.Argument;
-                    List<Questionnaire> questionnaires = Controller.Instance.GetAllQuestionnaires(new Questionnaire()
-                    {
-                        FilterQuery = $"JMBG = {d.JMBG}"
-                    });
-                    resp.Result = questionnaires;
-                    break;
-                default:
-                    break;
+                switch (req.Operation)
+                {
+                    case Operation.Login:
+                        TransfusionCenterCoordinator loggedCoord = Controller.Instance.Login((TransfusionCenterCoordinator)req.Argument);
+                        if (loggedCoord != null)
+                        {
+                            _coordinator = loggedCoord;
+                            resp.Result = loggedCoord;
+                            resp.Message = "Uspešno prijavljivanje";
+                            LoggedInClient?.Invoke(this, EventArgs.Empty);
+                        }
+                        else
+                        {
+                            resp.IsSuccessful = false;
+                            resp.ErrorMessage = "Neuspešno prijavljivanje na sistem";
+                        }
+                        break;
+                    case Operation.CreateVolunteer:
+                        Volunteer newVolunteer = Controller.Instance.CreateNewVolunteer((Volunteer)req.Argument);
+                        if (newVolunteer != null)
+                        {
+                            resp.Result = newVolunteer;
+                            resp.Message = "Sistem je kreirao volontera";
+                        }
+                        else
+                        {
+                            resp.IsSuccessful = false;
+                            resp.ErrorMessage = "Sistem ne može da kreira volontera";
+                        }
+                        break;
+                    case Operation.FindVolunteers:
+                        List<Volunteer> filteredVolunteers = Controller.Instance.GetFilteredVolunteers(new Volunteer()
+                        {
+                            FilterQuery = (string)req.Argument
+                        });
+                        resp.Result = filteredVolunteers;
+                        break;
+                    case Operation.UpdateDonor:
+                        Controller.Instance.UpdateDonor((Donor)req.Argument);
+                        resp.Message = "Sistem je zapamtio davaoca";
+                        break;
+                    case Operation.DeleteVolunteer:
+                        Volunteer volToDelete = (Volunteer)req.Argument;
+                        Controller.Instance.DeleteVolunteer(volToDelete);
+                        resp.Message = "Sistem je obrisao volontera";
+                        break;
+                    case Operation.GetAllVolunteers:
+                        List<Volunteer> volunteers = Controller.Instance.GetAllVolunteers(new Volunteer());
+                        resp.Result = volunteers;
+                        break;
+                    case Operation.CreateDonor:                  
+                        Donor newDonor = Controller.Instance.CreateNewDonor((Donor)req.Argument);
+                        if (newDonor != null)
+                        {
+                            resp.Result = newDonor;
+                            resp.Message = ("Sistem je kreirao davaoca");
+                        }
+                        else {
+                            resp.IsSuccessful = false;
+                            resp.ErrorMessage = "Sistem ne može da kreira davaoca";
+                        }
+                        break;
+                    case Operation.FindDonor:
+                        Donor foundDonor = Controller.Instance.FindDonor(new Donor()
+                        {
+                            FilterQuery = (string)req.Argument
+                        });
+                        if (foundDonor != null)
+                        {
+                            resp.Result = foundDonor;
+                            resp.Message = "Sistem je našao davaoca po zadatoj vrednosti";
+                        }
+                        else {
+                            resp.IsSuccessful = false;
+                            resp.ErrorMessage = "Sistem ne može da pronađe davaoca po zadatoj vrednosti";
+                        }
+                        break;
+                    case Operation.DeleteDonor:
+                        Donor donorToDelete = (Donor)req.Argument;
+                        Controller.Instance.DeleteDonor(donorToDelete);
+                        resp.Message = "Sistem je obrisao davaoca";
+                        break;
+                    case Operation.GetAllDonors:
+                        List<Donor> donors = Controller.Instance.GetAllDonors(new Donor());
+                        resp.Result = donors;
+                        break;
+                    case Operation.CreateCallToAction:
+                        break;
+                    case Operation.UpdateCallToAction:
+                        break;
+                    case Operation.FindCallToAction:
+                        break;
+                    case Operation.LoadAction:
+                        //ovde vracam izabranu akciju za brisanje, a to takodje treba 
+                        //da odradim i za volontera i davaoca i pretragu treba
+                        //lepo da odradim i nove kontrole da napravim :(
+                        break;
+                    case Operation.GetAllCallsToAction:
+                        break;
+                    case Operation.GetAllActions:
+                        List<BloodTransfAction> actions = Controller.Instance.GetAllActions(new BloodTransfAction());
+                        resp.Result = actions;
+                        break;
+                    case Operation.GetAllPlaces:
+                        List<Place> places = Controller.Instance.GetAllPlaces(new Place());
+                        resp.Result = places;
+                        break;
+                    case Operation.GetAllQuestionnaires:
+                        Donor d = (Donor)req.Argument;
+                        List<Questionnaire> questionnaires = Controller.Instance.GetAllQuestionnaires(new Questionnaire()
+                        {
+                            FilterQuery = $"JMBG = {d.JMBG}"
+                        });
+                        resp.Result = questionnaires;
+                        break;
+                    case Operation.LoadVolunteer:
+                        Volunteer loadedVol = Controller.Instance.LoadVolunteer(new Volunteer() { 
+                        FilterQuery = $"v.VolunteerID = {(int)req.Argument}"
+                        });
+                        if (loadedVol != null)
+                        {
+                            resp.Message = "Sistem je učitao volontera";
+                            resp.Result = loadedVol;
+                        }
+                        else {
+                            resp.IsSuccessful = false;
+                            resp.ErrorMessage = "Sistem ne može da učita volontera";
+                        }
+                        break;
+                    default:
+                        break;
+                }
             }
-            return resp;
+            catch (Exception ex)
+            {
+                resp.IsSuccessful = false;
+                resp.ErrorMessage = ex.Message;
+            }
+                return resp;
         }
 
         private object lockobj = new object();

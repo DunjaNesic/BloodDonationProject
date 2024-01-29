@@ -39,6 +39,7 @@ namespace BloodDonation.Client.UserControls
             this.lblPlace = new System.Windows.Forms.Label();
             this.cmbPlaces = new System.Windows.Forms.ComboBox();
             this.btnCreateVolunteer = new System.Windows.Forms.Button();
+            this.btnGoBack = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // txtVolunteerNameSurname
@@ -122,10 +123,20 @@ namespace BloodDonation.Client.UserControls
             this.btnCreateVolunteer.Text = "KREIRAJ VOLONTERA";
             this.btnCreateVolunteer.UseVisualStyleBackColor = true;
             // 
-            // UCVolunteers
+            // btnGoBack
+            // 
+            this.btnGoBack.Location = new System.Drawing.Point(966, 18);
+            this.btnGoBack.Name = "btnGoBack";
+            this.btnGoBack.Size = new System.Drawing.Size(50, 44);
+            this.btnGoBack.TabIndex = 9;
+            this.btnGoBack.Text = "<=";
+            this.btnGoBack.UseVisualStyleBackColor = true;
+            // 
+            // UCCreateVolunteer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.btnGoBack);
             this.Controls.Add(this.btnCreateVolunteer);
             this.Controls.Add(this.cmbPlaces);
             this.Controls.Add(this.lblPlace);
@@ -135,7 +146,7 @@ namespace BloodDonation.Client.UserControls
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtVolunteerNameSurname);
-            this.Name = "UCVolunteers";
+            this.Name = "UCCreateVolunteer";
             this.Size = new System.Drawing.Size(1047, 626);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -153,11 +164,13 @@ namespace BloodDonation.Client.UserControls
         private System.Windows.Forms.Label lblPlace;
         private System.Windows.Forms.ComboBox cmbPlaces;
         private System.Windows.Forms.Button btnCreateVolunteer;
+        private Button btnGoBack;
 
         public Button BtnCreateVolunteer { get => btnCreateVolunteer; set => btnCreateVolunteer = value; }
         public MonthCalendar MonthCalendar1 { get => monthCalendar1; set => monthCalendar1 = value; }
         public MonthCalendar MonthCalendar2 { get => monthCalendar2; set => monthCalendar2 = value; }
         public ComboBox CmbPlaces { get => cmbPlaces; set => cmbPlaces = value; }
         public TextBox TxtVolunteerNameSurname { get => txtVolunteerNameSurname; set => txtVolunteerNameSurname = value; }
+        public Button BtnGoBack { get => btnGoBack; set => btnGoBack = value; }
     }
 }

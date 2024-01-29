@@ -1,4 +1,5 @@
-﻿using BloodDonation.Client.Forms;
+﻿using BloodDonation.Client.ClientCommunication;
+using BloodDonation.Client.Forms;
 using BloodDonation.Common.Domain;
 using System;
 using System.Collections.Generic;
@@ -11,14 +12,33 @@ namespace BloodDonation.Client.GUIController
 {
     public class MainCoordinator
     {
+        private static readonly object lockobj = new object();
+
         private static MainCoordinator _instance;
-        public static MainCoordinator Instance { get { if (_instance == null) _instance = new MainCoordinator(); return _instance; } }
+        public static MainCoordinator Instance
+        {
+            get
+            {
+                if (_instance == null)
+                {
+                    lock (lockobj)
+                    {
+                        if (_instance == null)
+                        {
+                            _instance = new MainCoordinator();
+                        }
+                    }
+                }
+                return _instance;
+            }
+        }
 
         private MainCoordinator()
         {
             _volunteerGuiController = new VolunteerGuiController();
             _donorGuiController = new DonorGuiController();
             _actionGuiController = new ActionGuiController();
+            _loginGuiController = new LoginGuiController();
         }
 
         public TransfusionCenterCoordinator coord;
@@ -26,34 +46,38 @@ namespace BloodDonation.Client.GUIController
         private VolunteerGuiController _volunteerGuiController;
         private DonorGuiController _donorGuiController;
         private ActionGuiController _actionGuiController;
+        private LoginGuiController _loginGuiController;
 
-        FrmMainScreen frmMain;
+        FrmMainScreen _frmMain;
 
         internal void ShowLoginScreen()
         {
-            LoginGuiController.Instance.ShowFrmLogin();
+            _loginGuiController.ShowFrmLogin();
         }
 
+       
         internal void ShowMainScreen()
         {
-            frmMain = new FrmMainScreen();
-            frmMain.LblCoordinator.Text = coord.CoordinatorName + " " + coord.CoordinatorLastName;
-            frmMain.Show();
-            //Application.Run(frmMain);
+            _frmMain = new FrmMainScreen();
+            _frmMain.LblCoordinator.Text = coord.CoordinatorName + " " + coord.CoordinatorLastName;
+            _frmMain.Show();          
         }
         internal void ShowVolunteerScreen(FormMode mode)
         {
-            VolunteerGuiController.Instance.ShowUCVolunteer(frmMain, mode);
+            _frmMain.ChangePanel(_volunteerGuiController.ShowUCVolunteer(mode));
+
+            //znaci boze gospode
+            //VolunteerGuiController.Instance.ShowUCVolunteer(frmMain, mode);
         }
 
         internal void ShowDonorScreen(FormMode mode)
         {
-            DonorGuiController.Instance.ShowUCDonor(frmMain, mode);
+            _frmMain.ChangePanel(_donorGuiController.ShowUCDonor(mode));
         }
 
         internal void ShowActionScreen(FormMode mode)
         {
-            ActionGuiController.Instance.ShowUCCallToAction(frmMain, mode);
+            ActionGuiController.Instance.ShowUCCallToAction(_frmMain, mode);
         }
 
       

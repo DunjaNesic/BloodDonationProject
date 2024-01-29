@@ -60,6 +60,7 @@
     <Compile Include="ActionSO\UpdateCallToActionSO.cs" />
     <Compile Include="SystemOperationBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="VolunteerSO\LoadVolunteerSO.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BloodDonation.Common\BloodDonation.Common.csproj">

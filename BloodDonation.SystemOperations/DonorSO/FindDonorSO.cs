@@ -12,8 +12,15 @@ namespace BloodDonation.SystemOperations
     {
         protected override void ExecuteConcreteOperation(IEntity entity)
         {
-            Donor d = (Donor)entity;
-            Result = genericRepository.Get(d, d.FilterQuery);
+            try
+            {
+                Donor d = (Donor)entity;
+                Result = genericRepository.Get(d, d.FilterQuery);
+            }
+            catch (Exception)
+            {
+                throw new Exception("Sistem ne može da pronađe davaoca po zadatoj vrednosti");
+            }
         }
     }
 }

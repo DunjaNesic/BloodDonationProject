@@ -2,25 +2,24 @@
 using BloodDonation.Repository.Interfaces;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BloodDonation.SystemOperations
+namespace BloodDonation.SystemOperations.VolunteerSO
 {
-    public class DeleteVolunteerSO : SystemOperationBase
+    public class LoadVolunteerSO : SystemOperationBase
     {
         protected override void ExecuteConcreteOperation(IEntity entity)
         {
             try
             {
-                Volunteer volunteer = (Volunteer)entity;
-                genericRepository.Delete(volunteer, volunteer.DeleteQuery);               
+                Volunteer v = (Volunteer)entity;
+                Result = genericRepository.Get(v, v.FilterQuery);
             }
             catch (Exception)
-            {             
-                throw new Exception("Sistem ne može da obriše volontera");
+            {
+                throw new Exception("Sistem ne može da učita volontera");
             }
         }
     }

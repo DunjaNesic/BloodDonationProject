@@ -4,6 +4,7 @@ using BloodDonation.Repository.Interfaces;
 using BloodDonation.SystemOperations;
 using BloodDonation.SystemOperations.DonorSO;
 using BloodDonation.SystemOperations.TransfusionCoordinator;
+using BloodDonation.SystemOperations.VolunteerSO;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -32,18 +33,17 @@ namespace BusinessLogic
             return (Volunteer)so.Result;
         }
 
-        public bool DeleteDonor(Donor donor)
+        public void DeleteDonor(Donor donor)
         {
             SystemOperationBase so = new DeleteDonorSO();
-            so.ExecuteTemplate(donor);
-            return (bool)so.Result;
+            so.ExecuteTemplate(donor);          
         }
 
-        public bool DeleteVolunteer(Volunteer volunteer)
+        public void DeleteVolunteer(Volunteer volunteer)
         {
             SystemOperationBase so = new DeleteVolunteerSO();
             so.ExecuteTemplate(volunteer);
-            return (bool)so.Result;
+           
         }
 
         public Donor FindDonor(Donor donor)
@@ -95,6 +95,13 @@ namespace BusinessLogic
             return (List<Volunteer>)so.Result;
         }
 
+        public Volunteer LoadVolunteer(Volunteer volunteer)
+        {
+            SystemOperationBase so = new LoadVolunteerSO();
+            so.ExecuteTemplate(volunteer);
+            return (Volunteer)so.Result;
+        }
+
         public TransfusionCenterCoordinator Login(TransfusionCenterCoordinator coord)
         {           
             SystemOperationBase so = new LoginSO();
@@ -102,11 +109,10 @@ namespace BusinessLogic
             return (TransfusionCenterCoordinator)so.Result;
         }
 
-        public bool UpdateDonor(Donor donor)
+        public void UpdateDonor(Donor donor)
         {
             SystemOperationBase so = new UpdateDonorSO();
-            so.ExecuteTemplate(donor);
-            return (bool)so.Result; 
+            so.ExecuteTemplate(donor);           
         }
     }
 }

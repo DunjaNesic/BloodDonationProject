@@ -12,9 +12,17 @@ namespace BloodDonation.SystemOperations
     {
         protected override void ExecuteConcreteOperation(IEntity entity)
         {
-            TransfusionCenterCoordinator c = (TransfusionCenterCoordinator)entity;
-            Result = genericRepository.Get(c, $" COORDINATORCODE = '{c.CoordinatorCode}' AND PASSWORD = '{c.Password}'");
-            //if (Result == null) throw new Exception("U centru za transfuziju ne postoji koordinator sa ovim kredencijalima");          
+            try
+            {
+                TransfusionCenterCoordinator c = (TransfusionCenterCoordinator)entity;
+                Result = genericRepository.Get(c, $" COORDINATORCODE = '{c.CoordinatorCode}' AND PASSWORD = '{c.Password}'");
+            }
+            catch (Exception)
+            {
+
+                throw new Exception("Neuspešno prijavljivanje na sistem");
+            }
+                    
         }
     }
 }

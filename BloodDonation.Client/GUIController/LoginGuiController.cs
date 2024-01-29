@@ -1,4 +1,5 @@
 ﻿using BloodDonation.Client.ClientCommunication;
+using BloodDonation.Client.Exceptions;
 using BloodDonation.Client.Forms;
 using BloodDonation.Common.Communication;
 using BloodDonation.Common.Domain;
@@ -12,40 +13,38 @@ using System.Windows.Forms;
 namespace BloodDonation.Client.GUIController
 {
     public class LoginGuiController
-    {
-        private static LoginGuiController _instance;
-        public static LoginGuiController Instance { get { if (_instance == null) _instance = new LoginGuiController(); return _instance; } }
+    {      
         private TransfusionCenterCoordinator _coordinator = new TransfusionCenterCoordinator();
         FrmLogin _frmLogin;
         internal void ShowFrmLogin()
         {
-            _frmLogin = new FrmLogin();
+            _frmLogin = new FrmLogin(this);
             Application.Run(_frmLogin);
         }
-
         public void Login(object sender, EventArgs e)
         {
-            if (Communication.Instance.Connect())
+            try
             {
-                string coordinatorCode = _frmLogin.TxtCoordinatorCode.Text;
-                string password = _frmLogin.TxtPassword.Text;
+                    Communication.Instance.Connect();
+                
+                    string coordinatorCode = _frmLogin.TxtCoordinatorCode.Text;
+                    string password = _frmLogin.TxtPassword.Text;
 
-                _coordinator = Communication.Instance.LoginCoord(coordinatorCode, password);
-                if (_coordinator != null)
-                {
+                    _coordinator = Communication.Instance.LoginCoord(coordinatorCode, password);                  
+              
                     MainCoordinator.Instance.coord = _coordinator;
                     MainCoordinator.Instance.ShowMainScreen();
-                }
-                else
-                {
-                    MessageBox.Show("Ne postoji koordinator akcije sa unetim kredencijalima");
-                }
+                
             }
-            else
+            catch (SystemOperationException ex)
             {
-                MessageBox.Show("Povezivanje na server je neuspešno");
+                MessageBox.Show(ex.ErrorMessage);
             }
-        
+            catch (ServerCommunicationException ex)
+            { 
+                MessageBox.Show(ex.Message);
+            }
+
         }
 
     }

@@ -19,10 +19,9 @@ namespace BloodDonation.SystemOperations.DonorSO
                 genericRepository.Update(d, $"JMBG='{d.JMBG}'");
                 Result = true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                Result = false;
-                Debug.WriteLine(">>>" + ex.Message);
+                throw new Exception("Sistem ne može da zapamti davaoca");
             }
         }
     }

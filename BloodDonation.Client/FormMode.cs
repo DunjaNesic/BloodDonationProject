@@ -9,8 +9,9 @@ namespace BloodDonation.Client
     public enum FormMode
     {
         View,
+        Details,
         Add,
         Update,
-        Delete,
+        Delete
     }
 }

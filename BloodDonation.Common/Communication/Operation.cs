@@ -11,6 +11,7 @@ namespace BloodDonation.Common.Communication
         Login, 
         CreateVolunteer,
         FindVolunteers,
+        LoadVolunteer,
         DeleteVolunteer,
         GetAllVolunteers,
         CreateDonor,

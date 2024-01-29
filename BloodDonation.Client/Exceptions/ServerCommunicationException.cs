@@ -7,7 +7,12 @@ using System.Threading.Tasks;
 
 namespace BloodDonation.Client.Exceptions
 {
-    public class ServerCommunicationException
+    public class ServerCommunicationException : Exception
     {
+        string ErrorMessage;
+        public ServerCommunicationException(string message) : base(message) 
+        {
+            ErrorMessage = message;
+        }
     }
 }
