@@ -1,4 +1,5 @@
-﻿using BloodDonation.Repository.Interfaces;
+﻿using BloodDonation.Common.Domain;
+using BloodDonation.Repository.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,15 @@ namespace BloodDonation.SystemOperations
     {
         protected override void ExecuteConcreteOperation(IEntity entity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                BloodTransfAction a = (BloodTransfAction)entity;
+                Result = genericRepository.Get(a, a.FilterQuery);
+            }
+            catch (Exception)
+            {
+                throw new Exception("Sistem ne može da učita volontera");
+            }
         }
     }
 }

@@ -43,8 +43,13 @@ namespace BloodDonation.Common.Domain
         public string JoinTable => "JOIN PLACE p";
         [Browsable(false)]
         public string JoinCondition => "ON(v.PlaceID = p.PlaceID)";
+
         [Browsable(false)]
         public string UpdateValues => "";
+
+        [Browsable(false)]
+        public CrudStatus CrudStatus { get; set; }
+
         [Browsable(false)]
         public string IDName => "VolunteerID";
         public override string ToString()

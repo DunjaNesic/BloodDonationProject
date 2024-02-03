@@ -72,17 +72,17 @@
     <Compile Include="GUIController\VolunteerGuiController.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserControls\UCDetailsCallToAction.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\UCDetailsCallToAction.Designer.cs">
+      <DependentUpon>UCDetailsCallToAction.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\UCCallToAction.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="UserControls\UCCallToAction.Designer.cs">
       <DependentUpon>UCCallToAction.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UserControls\UCUpdateCallToAction.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UserControls\UCUpdateCallToAction.Designer.cs">
-      <DependentUpon>UCUpdateCallToAction.cs</DependentUpon>
     </Compile>
     <Compile Include="UserControls\UCDetailsDonor.cs">
       <SubType>UserControl</SubType>
@@ -123,11 +123,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="UserControls\UCDetailsCallToAction.resx">
+      <DependentUpon>UCDetailsCallToAction.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UserControls\UCCallToAction.resx">
       <DependentUpon>UCCallToAction.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UserControls\UCUpdateCallToAction.resx">
-      <DependentUpon>UCUpdateCallToAction.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\UCDetailsDonor.resx">
       <DependentUpon>UCDetailsDonor.cs</DependentUpon>

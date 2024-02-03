@@ -29,7 +29,7 @@ namespace BloodDonation.Common.Domain
 
         public string UpdateValues => throw new NotImplementedException();
 
-        public string IDName => throw new NotImplementedException();
+        public string IDName => "PlaceID";
 
         public List<IEntity> GetReaderList(SqlDataReader reader)
         {
@@ -47,6 +47,23 @@ namespace BloodDonation.Common.Domain
         public override string ToString()
         {
             return this.PlaceName; 
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null || GetType() != obj.GetType())
+            {
+                return false;
+            }
+
+            Place otherPlace = (Place)obj;
+
+            return PlaceID == otherPlace.PlaceID;
+        }
+
+        public override int GetHashCode()
+        {
+            return PlaceID.GetHashCode();
         }
     }
 }

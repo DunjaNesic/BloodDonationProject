@@ -35,7 +35,7 @@ namespace BloodDonation.Client.ClientCommunication
                 throw new ServerCommunicationException("Konekcija sa serverom je prekinuta");
             }
             catch (SocketException ex)
-            { 
+            {
                 Debug.WriteLine("Send2>>>>>>>>" + ex.Message);
                 throw new ServerCommunicationException("Vas soket je ugasen");
             }

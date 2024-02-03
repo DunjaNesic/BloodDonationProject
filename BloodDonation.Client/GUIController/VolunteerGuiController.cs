@@ -32,7 +32,7 @@ namespace BloodDonation.Client.GUIController
                 uCVolunteers.BtnChooseVolunteer.Click += BtnFilter_Click;
                 uCVolunteers.TxtFilterVolunteers.TextChanged += TxtFilterVolunteers_TextChanged;
 
-                uCVolunteers.ToolStripActions1.Click += (s, a) => MainCoordinator.Instance.ShowActionScreen(FormMode.Add);
+                uCVolunteers.ToolStripActions1.Click += (s, a) => MainCoordinator.Instance.ShowActionScreen(FormMode.View);
                 uCVolunteers.ToolStripDonors1.Click += (s, a) => MainCoordinator.Instance.ShowDonorScreen(FormMode.View);
 
                 GetAllVolunteers();
@@ -76,6 +76,7 @@ namespace BloodDonation.Client.GUIController
 
         private void BtnCreateVolunteer_Click(object sender, EventArgs e)
         {
+            bool serverException = false;
             try
             {
                 string[] fullName = uCCreateVolunteer.TxtVolunteerNameSurname.Text.Split(' ');
@@ -124,6 +125,7 @@ namespace BloodDonation.Client.GUIController
             catch (ServerCommunicationException ex)
             {
                 MessageBox.Show(ex.Message);
+                serverException = true;
             }
             catch (Exception ex)
             {
@@ -131,11 +133,14 @@ namespace BloodDonation.Client.GUIController
             }
             finally
             {
-                DialogResult result = MessageBox.Show("Želite li da nastavite sa dodavanjem volontera?", "Nastavi?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-                if (result == DialogResult.No)
+                if (!serverException)
                 {
-                    MainCoordinator.Instance.ShowVolunteerScreen(FormMode.View);
+                    DialogResult result = MessageBox.Show("Želite li da nastavite sa dodavanjem volontera?", "Nastavi?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                    if (result == DialogResult.No)
+                    {
+                        MainCoordinator.Instance.ShowVolunteerScreen(FormMode.View);
+                    }
                 }
             }
         }

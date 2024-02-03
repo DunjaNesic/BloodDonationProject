@@ -49,6 +49,7 @@
     <Compile Include="Domain\BloodTransfAction.cs" />
     <Compile Include="Domain\CallToDonor.cs" />
     <Compile Include="Domain\CallToVolunteer.cs" />
+    <Compile Include="Domain\CrudStatus.cs" />
     <Compile Include="Domain\Donor.cs" />
     <Compile Include="Domain\Place.cs" />
     <Compile Include="Domain\Questionnaire.cs" />

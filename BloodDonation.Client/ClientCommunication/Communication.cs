@@ -213,5 +213,59 @@ namespace BloodDonation.Client.ClientCommunication
             return resp.ParseResponse<Volunteer>();
         }
 
+        internal void CallToAction(BloodTransfAction bloodTransfAction)
+        {
+            _clientController.Send(new Request() { 
+            Operation = Operation.CreateCallToAction,
+            Argument = bloodTransfAction
+            });
+            Response resp = _clientController.Receive();
+            MessageBox.Show(resp.Message);
+        }
+
+        internal void UpdateCallToAction(BloodTransfAction action)
+        {
+            _clientController.Send(new Request()
+            {
+                Operation = Operation.UpdateCallToAction,
+                Argument = action
+            });
+            Response resp = _clientController.Receive();
+            MessageBox.Show(resp.Message);
+        }
+
+        internal BloodTransfAction GetAction(int actionID)
+        {
+            _clientController.Send(new Request()
+            {
+                Operation = Operation.LoadAction,
+                Argument = actionID
+            });
+            Response resp = _clientController.Receive();
+            MessageBox.Show(resp.Message);
+            return resp.ParseResponse<BloodTransfAction>();
+        }
+
+        internal List<CallToVolunteer> FindVolunteerCalls(BloodTransfAction loadedAction)
+        {
+            _clientController.Send(new Request()
+            {
+                Operation = Operation.FindVolunteerCalls,
+                Argument = loadedAction
+            });
+            Response resp = _clientController.Receive();
+            return resp.ParseResponse<List<CallToVolunteer>>();
+        }
+
+        internal List<CallToDonor> FindDonorCalls(BloodTransfAction loadedAction)
+        {
+            _clientController.Send(new Request()
+            {
+                Operation = Operation.FindDonorCalls,
+                Argument = loadedAction
+            });
+            Response resp = _clientController.Receive();
+            return resp.ParseResponse<List<CallToDonor>>();
+        }
     }
 }

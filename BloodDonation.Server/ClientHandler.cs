@@ -106,14 +106,15 @@ namespace BloodDonation.Server
                         List<Volunteer> volunteers = Controller.Instance.GetAllVolunteers(new Volunteer());
                         resp.Result = volunteers;
                         break;
-                    case Operation.CreateDonor:                  
+                    case Operation.CreateDonor:
                         Donor newDonor = Controller.Instance.CreateNewDonor((Donor)req.Argument);
                         if (newDonor != null)
                         {
                             resp.Result = newDonor;
                             resp.Message = ("Sistem je kreirao davaoca");
                         }
-                        else {
+                        else
+                        {
                             resp.IsSuccessful = false;
                             resp.ErrorMessage = "Sistem ne može da kreira davaoca";
                         }
@@ -128,7 +129,8 @@ namespace BloodDonation.Server
                             resp.Result = foundDonor;
                             resp.Message = "Sistem je našao davaoca po zadatoj vrednosti";
                         }
-                        else {
+                        else
+                        {
                             resp.IsSuccessful = false;
                             resp.ErrorMessage = "Sistem ne može da pronađe davaoca po zadatoj vrednosti";
                         }
@@ -143,15 +145,28 @@ namespace BloodDonation.Server
                         resp.Result = donors;
                         break;
                     case Operation.CreateCallToAction:
+                        Controller.Instance.CreateNewCallToAction((BloodTransfAction)req.Argument);
+                        resp.Message = "Sistem je kreirao poziv na akciju";
                         break;
                     case Operation.UpdateCallToAction:
-                        break;
-                    case Operation.FindCallToAction:
-                        break;
+                        Controller.Instance.UpdateCallToAction((BloodTransfAction)req.Argument);
+                        resp.Message = "Sistem je ažurirao pozive na akciju";
+                        break;         
                     case Operation.LoadAction:
-                        //ovde vracam izabranu akciju za brisanje, a to takodje treba 
-                        //da odradim i za volontera i davaoca i pretragu treba
-                        //lepo da odradim i nove kontrole da napravim :(
+                        BloodTransfAction loadedAction = Controller.Instance.LoadAction(new BloodTransfAction()
+                        {
+                            FilterQuery = $"a.actionID = {(int)req.Argument}"
+                        });
+                        if (loadedAction != null)
+                        {
+                            resp.Message = "Sistem je učitao akciju";
+                            resp.Result = loadedAction;
+                        }
+                        else
+                        {
+                            resp.IsSuccessful = false;
+                            resp.ErrorMessage = "Sistem ne može da učita akciju";
+                        }
                         break;
                     case Operation.GetAllCallsToAction:
                         break;
@@ -172,18 +187,28 @@ namespace BloodDonation.Server
                         resp.Result = questionnaires;
                         break;
                     case Operation.LoadVolunteer:
-                        Volunteer loadedVol = Controller.Instance.LoadVolunteer(new Volunteer() { 
-                        FilterQuery = $"v.VolunteerID = {(int)req.Argument}"
+                        Volunteer loadedVol = Controller.Instance.LoadVolunteer(new Volunteer()
+                        {
+                            FilterQuery = $"v.VolunteerID = {(int)req.Argument}"
                         });
                         if (loadedVol != null)
                         {
                             resp.Message = "Sistem je učitao volontera";
                             resp.Result = loadedVol;
                         }
-                        else {
+                        else
+                        {
                             resp.IsSuccessful = false;
                             resp.ErrorMessage = "Sistem ne može da učita volontera";
                         }
+                        break;
+                    case Operation.FindVolunteerCalls:
+                        List<CallToVolunteer> volunteerCalls = Controller.Instance.GetVolunteerCalls((BloodTransfAction)req.Argument);
+                        resp.Result = volunteerCalls;                   
+                        break;
+                    case Operation.FindDonorCalls:
+                        List<CallToDonor> donorCalls = Controller.Instance.GetDonorCalls((BloodTransfAction)req.Argument);
+                        resp.Result = donorCalls;
                         break;
                     default:
                         break;

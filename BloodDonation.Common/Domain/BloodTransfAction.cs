@@ -19,16 +19,20 @@ namespace BloodDonation.Common.Domain
         public DateTime ActionDate { get; set; }
         public string ActionTimeFromTo { get; set; }
         public Place Place { get; set; }
+        public List<Volunteer> ListOfVolunteers { get; set; }
+        public List<Donor> ListOfDonors { get; set; }
 
         [Browsable(false)]
         public int PlaceID { get; set; }
+
+        [Browsable(false)]
         public string TableName => "Action";
 
         [Browsable(false)]
         public string TableAlias => "a";
 
         [Browsable(false)]
-        public string InsertValues => "";
+        public string InsertValues => $"'{ActionName}', '{ActionDate:yyyy - MM - dd HH:mm:ss}', '{ActionTimeFromTo}', {PlaceID}";
 
         [Browsable(false)]
         public string SelectValues => "*";
@@ -39,13 +43,17 @@ namespace BloodDonation.Common.Domain
         [Browsable(false)]
         public string JoinCondition => "ON (p.PlaceID = a.PlaceID)";
 
-        //public string JoinCondition => $"JOIN CALLTODONOR ctd ON (ctd.ActionID = a.ActionID) JOIN CALLTOVOLUNTEER ctv ON (ctv.ActionID = a.ActionID) JOIN PLACE p ON (a.PlaceID = p.PlaceID)";
+        [Browsable(false)]
+        public string FilterQuery { get; set; }
 
         [Browsable(false)]
-        public string UpdateValues => "";
+        public string UpdateValues => $" ActionName = '{ActionName}', ActionDate = '{ActionDate:yyyy-MM-dd HH:mm:ss}', ActionTimeFromTo = '{ActionTimeFromTo}', PlaceID = {Place.PlaceID}";
 
         [Browsable(false)]
         public string IDName => "ActionID";
+
+        [Browsable(false)]
+        public CrudStatus CrudStatus { get; set; }
         public override string ToString()
         {
             return this.ActionName; 

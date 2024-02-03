@@ -72,6 +72,9 @@ namespace BloodDonation.Common.Domain
 
         [Browsable(false)]
         public string IDName => "JMBG";
+
+        [Browsable(false)]
+        public CrudStatus CrudStatus { get; set; }
         public override string ToString()
         {
             return this.DonorName + " " + this.DonorLastName;

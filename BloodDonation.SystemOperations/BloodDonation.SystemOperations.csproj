@@ -42,18 +42,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DonorSO\AddDonorSO.cs" />
+    <Compile Include="DonorSO\GetAllDonorCallsSO.cs" />
     <Compile Include="DonorSO\UpdateDonorSO.cs" />
     <Compile Include="TransfusionCoordinator\GetAllQuestionnairesSO.cs" />
     <Compile Include="VolunteerSO\AddVolunteerSO.cs" />
     <Compile Include="ActionSO\CreateCallToActionSO.cs" />
     <Compile Include="DonorSO\DeleteDonorSO.cs" />
     <Compile Include="VolunteerSO\DeleteVolunteerSO.cs" />
-    <Compile Include="ActionSO\FindCallToActionSO.cs" />
     <Compile Include="DonorSO\FindDonorSO.cs" />
     <Compile Include="VolunteerSO\FindVolunteersSO.cs" />
     <Compile Include="ActionSO\GetAllActionsSO.cs" />
     <Compile Include="DonorSO\GetAllDonorsSO.cs" />
     <Compile Include="PlaceSO\GetAllPlacesSO.cs" />
+    <Compile Include="VolunteerSO\GetAllVolunteerCallsSO.cs" />
     <Compile Include="VolunteerSO\GetAllVolunteersSO.cs" />
     <Compile Include="ActionSO\LoadActionSO.cs" />
     <Compile Include="TransfusionCoordinator\LoginSO.cs" />

@@ -10,11 +10,13 @@ using System.Windows.Forms;
 
 namespace BloodDonation.Client.UserControls
 {
-    public partial class UCUpdateCallToAction : UserControl
+    public partial class UCDetailsCallToAction : UserControl
     {
-        public UCUpdateCallToAction()
+        public UCDetailsCallToAction()
         {
             InitializeComponent();
         }
+
+        
     }
 }

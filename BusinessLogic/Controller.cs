@@ -11,6 +11,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Collections.Specialized.BitVector32;
 
 namespace BusinessLogic
 {
@@ -18,6 +19,12 @@ namespace BusinessLogic
     {
         private static Controller _instance;
         public static Controller Instance { get { if (_instance == null) _instance = new Controller(); return _instance; } }
+
+        public void CreateNewCallToAction(BloodTransfAction act)
+        {
+            SystemOperationBase so = new CreateCallToActionSO();
+            so.ExecuteTemplate(act);
+        }
 
         public Donor CreateNewDonor(Donor donor)
         {
@@ -88,11 +95,32 @@ namespace BusinessLogic
             return (List<Volunteer>)so.Result;
         }
 
+        public List<CallToDonor> GetDonorCalls(BloodTransfAction action)
+        {
+            SystemOperationBase so = new GetAllDonorCallsSO();
+            so.ExecuteTemplate(action);
+            return (List<CallToDonor>)so.Result;
+        }
+
         public List<Volunteer> GetFilteredVolunteers(Volunteer volunteer)
         {
             SystemOperationBase so = new FindVolunteersSO();
             so.ExecuteTemplate(volunteer);
             return (List<Volunteer>)so.Result;
+        }
+
+        public List<CallToVolunteer> GetVolunteerCalls(BloodTransfAction action)
+        {
+            SystemOperationBase so = new GetAllVolunteerCallsSO();
+            so.ExecuteTemplate(action);
+            return (List<CallToVolunteer>)so.Result;
+        }
+
+        public BloodTransfAction LoadAction(BloodTransfAction bloodTransfAction)
+        {
+            SystemOperationBase so = new LoadActionSO();
+            so.ExecuteTemplate(bloodTransfAction);
+            return (BloodTransfAction)so.Result;
         }
 
         public Volunteer LoadVolunteer(Volunteer volunteer)
@@ -107,6 +135,12 @@ namespace BusinessLogic
             SystemOperationBase so = new LoginSO();
             so.ExecuteTemplate(coord);
             return (TransfusionCenterCoordinator)so.Result;
+        }
+
+        public void UpdateCallToAction(BloodTransfAction action)
+        {
+            SystemOperationBase so = new UpdateCallToActionSO();
+            so.ExecuteTemplate(action);
         }
 
         public void UpdateDonor(Donor donor)

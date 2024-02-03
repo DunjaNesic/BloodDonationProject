@@ -19,11 +19,34 @@ namespace BloodDonation.Repository.Implementation
         }
         public void Add(IEntity entity)
         {
-            using (SqlCommand cmd = CreateSqlCommand($"INSERT INTO {entity.TableName} VALUES ({entity.InsertValues})"))
+            if (string.IsNullOrEmpty(entity.IDName))
             {
-                if (cmd.ExecuteNonQuery() != 1) throw new Exception("Greška pri ubacivanju u bazu");
+                int newID = GetNewID(entity);
+                entity.GetType().GetProperty(entity.IDName).SetValue(entity, newID);
+            }
+
+            string commandText = $"INSERT INTO {entity.TableName}";
+            if (!string.IsNullOrEmpty(entity.IDName))
+            {
+                commandText += $" OUTPUT inserted.{entity.IDName} ";
+            }
+            commandText += $" VALUES ({entity.InsertValues})";
+
+            using (SqlCommand cmd = CreateSqlCommand(commandText))
+            {
+                if (!string.IsNullOrEmpty(entity.IDName))
+                {
+                    object primaryKeyValue = cmd.ExecuteScalar();
+                    entity.GetType().GetProperty(entity.IDName).SetValue(entity, primaryKeyValue);
+                }
+                else
+                {
+                    int affectedRows = cmd.ExecuteNonQuery();
+                    Console.WriteLine("Affected rows insert: " + affectedRows);
+                }
             }
         }
+
         public void Update(IEntity entity, string condition)
         {
             using (SqlCommand cmd = CreateSqlCommand($"UPDATE {entity.TableName} SET {entity.UpdateValues} WHERE {condition}"))

@@ -18,8 +18,7 @@ namespace BloodDonation.Client.GUIController
     {       
         UCDonors uCDonors;
         UCDetailsDonor uCDetailsDonor;
-
-        FrmMainScreen _frmMain;
+    
         public List<Place> listOfPlaces = new List<Place>();
 
         public List<Donor> donors = new List<Donor>();
@@ -35,7 +34,7 @@ namespace BloodDonation.Client.GUIController
                 uCDonors = new UCDonors();
 
                 uCDonors.ToolStripVolunteers1.Click += (s, a) => MainCoordinator.Instance.ShowVolunteerScreen(FormMode.View);
-                uCDonors.ToolStripActions1.Click += (s, a) => MainCoordinator.Instance.ShowActionScreen(FormMode.Add);
+                uCDonors.ToolStripActions1.Click += (s, a) => MainCoordinator.Instance.ShowActionScreen(FormMode.View);
 
                 uCDonors.BtnAddNewDonor.Click += BtnAddNewDonor_Click;
                 uCDonors.BtnFindDonor.Click += BtnFindDonor_Click;
@@ -104,7 +103,6 @@ namespace BloodDonation.Client.GUIController
                 {
                     string filterCondition = $"lower(d.JMBG) = '{filter.ToLower()}'";
                     loadedDonor = Communication.Instance.FilterDonor(filterCondition);
-
                    
 
                     if (loadedDonor != null)
@@ -144,7 +142,8 @@ namespace BloodDonation.Client.GUIController
         }
         private void BtnCreateDonor_Click(object sender, EventArgs e)
         {
-                bool successful = true;
+            bool successful = true;
+            bool serverException = false;
             try
             {
                 string JMBG = uCDetailsDonor.TxtJMBG.Text;
@@ -199,7 +198,7 @@ namespace BloodDonation.Client.GUIController
                     LastDonationDate = lastDonation,
                     IsActive = (IsActive)1,
                     PlaceID = place.PlaceID
-                });     
+                });
             }
             catch (SystemOperationException ex)
             {
@@ -210,6 +209,7 @@ namespace BloodDonation.Client.GUIController
             {
                 MessageBox.Show(ex.Message);
                 successful = false;
+                serverException = true;
             }
             catch (Exception ex)
             {
@@ -218,7 +218,8 @@ namespace BloodDonation.Client.GUIController
             }
             finally
             {
-                DialogResult finallyResult = MessageBox.Show("Da li želite nastaviti sa dodavanjem donora?", "Nastavi dodavanje", MessageBoxButtons.YesNo);
+                if (!serverException) { 
+                    DialogResult finallyResult = MessageBox.Show("Da li želite nastaviti sa dodavanjem donora?", "Nastavi dodavanje", MessageBoxButtons.YesNo);
 
                 if (finallyResult == DialogResult.No)
                 {
@@ -226,18 +227,18 @@ namespace BloodDonation.Client.GUIController
                 }
                 else
                 {
-                    if (successful)
+                    if (successful) 
                     {
                         uCDetailsDonor.TxtJMBG.Text = string.Empty;
                         uCDetailsDonor.TxtDonorNameSurname.Text = string.Empty;
                         uCDetailsDonor.TxtContact.Text = string.Empty;
                         uCDetailsDonor.MonthCalendar1.SelectionStart = DateTime.Now;
                         uCDetailsDonor.CmbPlaces.SelectedIndex = -1;
-                        uCDetailsDonor.CmbBloodType.SelectedIndex = -1; 
+                        uCDetailsDonor.CmbBloodType.SelectedIndex = -1;
                     }
-                   
+
                 }
-               
+            }
             }
         }
         private bool IsNumeric(string str)
@@ -260,6 +261,12 @@ namespace BloodDonation.Client.GUIController
                 if (fullName.Length != 2)
                 {
                     MessageBox.Show("Ime i prezime davaoca mora biti uneto u formatu Ime Prezime");
+                    DialogResult result = MessageBox.Show("Želite li da nastavite sa ažuriranjem davaoca?", "Nastavi?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                    if (result == DialogResult.No)
+                    {
+                        MainCoordinator.Instance.ShowDonorScreen(FormMode.View);
+                    }
                     return;
                 }
 
@@ -269,6 +276,12 @@ namespace BloodDonation.Client.GUIController
                 if (string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(surname))
                 {
                     MessageBox.Show("Polje za ime i prezime ne sme biti prazno");
+                    DialogResult result = MessageBox.Show("Želite li da nastavite sa ažuriranjem davaoca?", "Nastavi?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                    if (result == DialogResult.No)
+                    {
+                        MainCoordinator.Instance.ShowDonorScreen(FormMode.View);
+                    }
                     return;
                 }
 
@@ -277,6 +290,12 @@ namespace BloodDonation.Client.GUIController
                 if (string.IsNullOrWhiteSpace(contact))
                 {
                     MessageBox.Show("Morate upisati kontakt davaoca");
+                    DialogResult result = MessageBox.Show("Želite li da nastavite sa ažuriranjem davaoca?", "Nastavi?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                    if (result == DialogResult.No)
+                    {
+                        MainCoordinator.Instance.ShowDonorScreen(FormMode.View);
+                    }
                     return;
                 }
 
@@ -285,6 +304,12 @@ namespace BloodDonation.Client.GUIController
                 if (lastDonation > DateTime.Now)
                 {
                     MessageBox.Show("Datum poslednjeg davanja krvi ne može biti u budućnosti");
+                    DialogResult result = MessageBox.Show("Želite li da nastavite sa ažuriranjem davaoca?", "Nastavi?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                    if (result == DialogResult.No)
+                    {
+                        MainCoordinator.Instance.ShowDonorScreen(FormMode.View);
+                    }
                     return;
                 }
 
@@ -297,6 +322,7 @@ namespace BloodDonation.Client.GUIController
                 loadedDonor.IsActive = isActive;
 
                 Communication.Instance.UpdateDonor(loadedDonor);
+                MainCoordinator.Instance.ShowDonorScreen(FormMode.View);
             }
             catch (SystemOperationException ex)
             {
@@ -310,15 +336,7 @@ namespace BloodDonation.Client.GUIController
             {
                 MessageBox.Show(ex.Message);
             }
-            finally
-            {
-                DialogResult result = MessageBox.Show("Želite li da nastavite sa ažuriranjem davaoca?", "Nastavi?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-                if (result == DialogResult.No)
-                {
-                    MainCoordinator.Instance.ShowDonorScreen(FormMode.View);
-                }
-            }
+           
         }
 
 

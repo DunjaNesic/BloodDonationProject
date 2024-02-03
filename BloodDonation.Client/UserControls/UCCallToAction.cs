@@ -16,7 +16,5 @@ namespace BloodDonation.Client.UserControls
         {
             InitializeComponent();
         }
-
-        
     }
 }

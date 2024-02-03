@@ -39,7 +39,7 @@ namespace BloodDonation.Common.Domain
         public string TableName => "Questionnaire";
 
         [Browsable(false)]
-        public string IDName => "";
+        public string IDName => "QuestionnaireID";
 
         [Browsable(false)]
         public string TableAlias => "q";

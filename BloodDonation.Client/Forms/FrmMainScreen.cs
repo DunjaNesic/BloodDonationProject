@@ -21,7 +21,7 @@ namespace BloodDonation.Client.Forms
             InitializeComponent();
             toolStripVolunteers.Click += (s, a) => MainCoordinator.Instance.ShowVolunteerScreen(FormMode.View);
             toolStripDonors.Click += (s, a) => MainCoordinator.Instance.ShowDonorScreen(FormMode.View);
-            toolStripActions.Click += (s, a) => MainCoordinator.Instance.ShowActionScreen(FormMode.Add);          
+            toolStripActions.Click += (s, a) => MainCoordinator.Instance.ShowActionScreen(FormMode.View);          
         }
 
         public void ChangePanel(UserControl control)
