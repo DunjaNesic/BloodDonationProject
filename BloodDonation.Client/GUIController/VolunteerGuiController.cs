@@ -47,7 +47,14 @@ namespace BloodDonation.Client.GUIController
 
         private void BtnGoBack_Click(object sender, EventArgs e)
         {
-            MainCoordinator.Instance.ShowVolunteerScreen(FormMode.View);
+            try
+            {
+                MainCoordinator.Instance.ShowVolunteerScreen(FormMode.View);
+            }
+            catch (ServerCommunicationException ex)
+            {
+                MessageBox.Show(ex.ErrorMessage);
+            }
         }
         private void TxtFilterVolunteers_TextChanged(object sender, EventArgs e)
         {
@@ -67,9 +74,16 @@ namespace BloodDonation.Client.GUIController
                     GetAllVolunteers();
                 }
             }
+            catch (SystemOperationException ex)
+            {
+                MessageBox.Show(ex.ErrorMessage);
+            }
+            catch (ServerCommunicationException ex)
+            {
+                MessageBox.Show(ex.ErrorMessage);
+            }
             catch (Exception ex)
             {
-
                 MessageBox.Show(ex.Message);
             }
         }
@@ -124,7 +138,7 @@ namespace BloodDonation.Client.GUIController
             }
             catch (ServerCommunicationException ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.ErrorMessage);
                 serverException = true;
             }
             catch (Exception ex)
@@ -169,7 +183,6 @@ namespace BloodDonation.Client.GUIController
                 {
                 Volunteer selectedVol = (Volunteer)uCVolunteers.DgvVolunteers.SelectedRows[0].DataBoundItem;
                     loadedVol = Communication.Instance.GetVolunteer(selectedVol.VolunteerID);
-                    //MainCoordinator.Instance.ShowVolunteerScreen(FormMode.Details);
                 }
                 else
                 {
@@ -183,7 +196,7 @@ namespace BloodDonation.Client.GUIController
             }
             catch (ServerCommunicationException ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.ErrorMessage);
             }
             catch (Exception ex) {
                 MessageBox.Show(ex.Message);
@@ -212,7 +225,7 @@ namespace BloodDonation.Client.GUIController
             }
             catch (ServerCommunicationException ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.ErrorMessage);
             }
             catch (Exception ex)
             {

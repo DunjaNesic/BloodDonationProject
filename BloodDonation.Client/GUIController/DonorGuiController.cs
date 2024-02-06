@@ -91,7 +91,14 @@ namespace BloodDonation.Client.GUIController
 
         private void BtnGoBack_Click(object sender, EventArgs e)
         {
-            MainCoordinator.Instance.ShowDonorScreen(FormMode.View);
+            try
+            {
+                MainCoordinator.Instance.ShowDonorScreen(FormMode.View);
+            }
+            catch (ServerCommunicationException ex)
+            {
+                MessageBox.Show(ex.ErrorMessage);
+            }
         }
 
         private void BtnFindDonor_Click(object sender, EventArgs e)
@@ -125,7 +132,7 @@ namespace BloodDonation.Client.GUIController
             }
             catch (ServerCommunicationException ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.ErrorMessage);
             }
             catch (Exception ex)
             {
@@ -150,7 +157,7 @@ namespace BloodDonation.Client.GUIController
 
                 if (JMBG.Length != 13 || !IsNumeric(JMBG))
                 {
-                    MessageBox.Show("JMBG mora sadržavati tačno 13 numeričkih karaktera.");
+                    MessageBox.Show("JMBG mora sadržati tačno 13 brojeva");
                     successful = false;
                     return;
                 }
@@ -159,7 +166,7 @@ namespace BloodDonation.Client.GUIController
 
                 if (fullName.Length != 2)
                 {
-                    MessageBox.Show("Molimo vas da unesete i ime i prezime odvojene razmakom.");
+                    MessageBox.Show("Molimo vas da unesete i ime i prezime odvojene razmakom");
                     successful = false;
                     return;
                 }
@@ -172,7 +179,7 @@ namespace BloodDonation.Client.GUIController
 
                 if (lastDonation > DateTime.Now)
                 {
-                    MessageBox.Show("Datum poslednjeg davanja krvi ne može biti u budućnosti.");
+                    MessageBox.Show("Datum poslednjeg davanja krvi ne može biti u budućnosti");
                     successful = false;
                     return;
                 }
@@ -181,7 +188,7 @@ namespace BloodDonation.Client.GUIController
 
                 if (place == null)
                 {
-                    MessageBox.Show("Molimo vas da izaberete mesto.");
+                    MessageBox.Show("Molimo vas da izaberete mesto");
                     successful = false;
                     return;
                 }
@@ -207,7 +214,7 @@ namespace BloodDonation.Client.GUIController
             }
             catch (ServerCommunicationException ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.ErrorMessage);
                 successful = false;
                 serverException = true;
             }
@@ -330,7 +337,7 @@ namespace BloodDonation.Client.GUIController
             }
             catch (ServerCommunicationException ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.ErrorMessage);
             }
             catch (Exception ex)
             {
@@ -356,7 +363,7 @@ namespace BloodDonation.Client.GUIController
             }
             catch (ServerCommunicationException ex)
             {
-                MessageBox.Show(ex.Message);            
+                MessageBox.Show(ex.ErrorMessage);            
             }
             catch (Exception ex)
             {
@@ -366,7 +373,14 @@ namespace BloodDonation.Client.GUIController
         }
         private void BtnAddNewDonor_Click(object sender, EventArgs e)
         {
-            MainCoordinator.Instance.ShowDonorScreen(FormMode.Add);
+            try
+            {
+                MainCoordinator.Instance.ShowDonorScreen(FormMode.Add);
+            }
+            catch (ServerCommunicationException ex)
+            {
+                MessageBox.Show(ex.ErrorMessage);
+            }
         }
     }
 }

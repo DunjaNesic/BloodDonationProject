@@ -150,7 +150,7 @@ namespace BloodDonation.Client.UserControls
             this.dgvQuestionnaires.Name = "dgvQuestionnaires";
             this.dgvQuestionnaires.RowHeadersWidth = 62;
             this.dgvQuestionnaires.RowTemplate.Height = 28;
-            this.dgvQuestionnaires.Size = new System.Drawing.Size(560, 171);
+            this.dgvQuestionnaires.Size = new System.Drawing.Size(656, 171);
             this.dgvQuestionnaires.TabIndex = 23;
             // 
             // lblJMBG

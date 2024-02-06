@@ -53,13 +53,13 @@ namespace BloodDonation.Client.UserControls
             this.dgvVolunteers.ReadOnly = true;
             this.dgvVolunteers.RowHeadersWidth = 62;
             this.dgvVolunteers.RowTemplate.Height = 28;
-            this.dgvVolunteers.Size = new System.Drawing.Size(857, 163);
+            this.dgvVolunteers.Size = new System.Drawing.Size(857, 268);
             this.dgvVolunteers.TabIndex = 0;
             // 
             // btnAddNewVolunteer
             // 
             this.btnAddNewVolunteer.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.btnAddNewVolunteer.Location = new System.Drawing.Point(470, 391);
+            this.btnAddNewVolunteer.Location = new System.Drawing.Point(470, 450);
             this.btnAddNewVolunteer.Name = "btnAddNewVolunteer";
             this.btnAddNewVolunteer.Size = new System.Drawing.Size(322, 64);
             this.btnAddNewVolunteer.TabIndex = 1;
@@ -69,7 +69,7 @@ namespace BloodDonation.Client.UserControls
             // txtFilterVolunteers
             // 
             this.txtFilterVolunteers.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.txtFilterVolunteers.Location = new System.Drawing.Point(77, 311);
+            this.txtFilterVolunteers.Location = new System.Drawing.Point(77, 370);
             this.txtFilterVolunteers.Name = "txtFilterVolunteers";
             this.txtFilterVolunteers.Size = new System.Drawing.Size(322, 37);
             this.txtFilterVolunteers.TabIndex = 2;
@@ -77,7 +77,7 @@ namespace BloodDonation.Client.UserControls
             // btnDeleteVolunteer
             // 
             this.btnDeleteVolunteer.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.btnDeleteVolunteer.Location = new System.Drawing.Point(77, 391);
+            this.btnDeleteVolunteer.Location = new System.Drawing.Point(77, 450);
             this.btnDeleteVolunteer.Name = "btnDeleteVolunteer";
             this.btnDeleteVolunteer.Size = new System.Drawing.Size(322, 64);
             this.btnDeleteVolunteer.TabIndex = 3;
@@ -87,7 +87,7 @@ namespace BloodDonation.Client.UserControls
             // btnChooseVolunteer
             // 
             this.btnChooseVolunteer.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.btnChooseVolunteer.Location = new System.Drawing.Point(470, 294);
+            this.btnChooseVolunteer.Location = new System.Drawing.Point(470, 353);
             this.btnChooseVolunteer.Name = "btnChooseVolunteer";
             this.btnChooseVolunteer.Size = new System.Drawing.Size(322, 64);
             this.btnChooseVolunteer.TabIndex = 4;

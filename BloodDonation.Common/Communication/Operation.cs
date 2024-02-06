@@ -16,6 +16,7 @@ namespace BloodDonation.Common.Communication
         GetAllVolunteers,
         CreateDonor,
         FindDonor,
+        FindDonors,
         DeleteDonor,
         GetAllDonors,
         UpdateDonor,

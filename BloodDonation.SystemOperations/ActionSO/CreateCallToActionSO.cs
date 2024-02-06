@@ -1,5 +1,6 @@
 ﻿using BloodDonation.Common.Domain;
 using BloodDonation.Repository.Interfaces;
+using BloodDonation.SystemOperations.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +18,7 @@ namespace BloodDonation.SystemOperations
                 BloodTransfAction action = (BloodTransfAction)entity;
                 if (action.ActionID == 0)
                 {
+                    action.ValidateAction();
                     genericRepository.Add(action);
                 }
 
@@ -44,6 +46,9 @@ namespace BloodDonation.SystemOperations
                     };
                     genericRepository.Add(ctd);
                 }
+            }
+            catch (ActionException ex) {
+                throw new Exception(ex.ErrorMessage);
             }
             catch (Exception)
             {

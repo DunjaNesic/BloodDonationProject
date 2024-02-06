@@ -42,7 +42,7 @@ namespace BloodDonation.Client.GUIController
             }
             catch (ServerCommunicationException ex)
             { 
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.ErrorMessage);
             }
 
         }

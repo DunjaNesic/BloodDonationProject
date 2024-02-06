@@ -42,9 +42,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DonorSO\AddDonorSO.cs" />
+    <Compile Include="DonorSO\FindDonorsSO.cs" />
     <Compile Include="DonorSO\GetAllDonorCallsSO.cs" />
     <Compile Include="DonorSO\UpdateDonorSO.cs" />
+    <Compile Include="Exceptions\ActionException.cs" />
+    <Compile Include="Exceptions\DonorException.cs" />
+    <Compile Include="Exceptions\VolunteerException.cs" />
     <Compile Include="TransfusionCoordinator\GetAllQuestionnairesSO.cs" />
+    <Compile Include="Validation.cs" />
     <Compile Include="VolunteerSO\AddVolunteerSO.cs" />
     <Compile Include="ActionSO\CreateCallToActionSO.cs" />
     <Compile Include="DonorSO\DeleteDonorSO.cs" />

@@ -1,5 +1,6 @@
 ﻿using BloodDonation.Common.Domain;
 using BloodDonation.Repository.Interfaces;
+using BloodDonation.SystemOperations.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,8 +16,12 @@ namespace BloodDonation.SystemOperations
             try
             {
                 Volunteer volunteer = (Volunteer)entity;
+                volunteer.ValidateVolunteer();
                 genericRepository.Add(volunteer);
                 Result = volunteer;
+            }
+            catch (VolunteerException ex) {
+                throw new Exception(ex.ErrorMessage);
             }
             catch (Exception)
             {

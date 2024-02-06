@@ -28,6 +28,9 @@ namespace BloodDonation.Client.GUIController
         List<CallToDonor> calledDonors;
         List<Volunteer> currentVolunteers = new List<Volunteer>();
         List<Donor> currentDonors = new List<Donor>();
+        List<Volunteer> filteredVolsByPlace;
+        List<Donor> filteredDonorsByPlace;
+
         internal UserControl ShowUCCallToAction(FormMode mode)
         {
             if (mode == FormMode.View)
@@ -80,7 +83,6 @@ namespace BloodDonation.Client.GUIController
                     uCDetailsCallToAction.BtnDeleteVolunteer.Click += BtnDeleteVolunteer_Click;
                     uCDetailsCallToAction.BtnDeleteDonor.Click += BtnDeleteDonor_Click;
                     uCDetailsCallToAction.BtnCallToAction.Click += BtnCallToActionUpdate_Click;
-
                 }
 
                 return uCDetailsCallToAction;
@@ -113,74 +115,96 @@ namespace BloodDonation.Client.GUIController
 
         private void BtnDeleteVolunteer_Click(object sender, EventArgs e)
         {
-            if (uCDetailsCallToAction.DgvCalledVolunteers.SelectedRows.Count == 1)
+            try
             {
-                CallToVolunteer ctv = (CallToVolunteer)uCDetailsCallToAction.DgvCalledVolunteers.SelectedRows[0].DataBoundItem;
+                if (uCDetailsCallToAction.DgvCalledVolunteers.SelectedRows.Count == 1)
+                {
+                    CallToVolunteer ctv = (CallToVolunteer)uCDetailsCallToAction.DgvCalledVolunteers.SelectedRows[0].DataBoundItem;
 
-                Volunteer matchingVolunteer = currentVolunteers.Find(volunteer => volunteer.VolunteerID == ctv.Volunteer.VolunteerID);
+                    Volunteer matchingVolunteer = currentVolunteers.Find(volunteer => volunteer.VolunteerID == ctv.Volunteer.VolunteerID);
 
-                if (matchingVolunteer != null)
-                {                  
-                    matchingVolunteer.CrudStatus = CrudStatus.Delete;
+                    if (matchingVolunteer != null)
+                    {
+                        matchingVolunteer.CrudStatus = CrudStatus.Delete;
+                    }
+
+                    calledVolunteers.Remove(ctv);
+                    uCDetailsCallToAction.DgvCalledVolunteers.DataSource = null;
+                    uCDetailsCallToAction.DgvCalledVolunteers.DataSource = calledVolunteers;
                 }
-
-                calledVolunteers.Remove(ctv);
-                uCDetailsCallToAction.DgvCalledVolunteers.DataSource = null;
-                uCDetailsCallToAction.DgvCalledVolunteers.DataSource = calledVolunteers;
+                else
+                {
+                    MessageBox.Show("Morate odabrati volontera za brisanje");
+                    return;
+                }
             }
-            else {
-                MessageBox.Show("Morate odabrati volontera za brisanje");
-                return;
+            catch (ServerCommunicationException ex)
+            {
+                MessageBox.Show(ex.ErrorMessage);
             }
         }
 
         private void BtnAddDonors_Click(object sender, EventArgs e)
         {
-            List<Donor> selectedDonors = uCDetailsCallToAction.CheckedListBoxDonors.CheckedItems.Cast<Donor>().ToList();
-
-            foreach (Donor donor in selectedDonors)
+            try
             {
-                if (!calledDonors.Any(cd => cd.Donor.JMBG == donor.JMBG) &&
-                    !currentDonors.Any(cd => cd.JMBG == donor.JMBG))
-                {
-                    CallToDonor callToDonor = new CallToDonor
-                {
-                    JMBG = donor.JMBG,
-                    ActionID = loadedAction.ActionID,
-                    Donor = donor,
-                    CrudStatus = CrudStatus.Create
-                };
+                List<Donor> selectedDonors = uCDetailsCallToAction.CheckedListBoxDonors.CheckedItems.Cast<Donor>().ToList();
 
-                calledDonors.Add(callToDonor);
+                foreach (Donor donor in selectedDonors)
+                {
+                    if (!calledDonors.Any(cd => cd.Donor.JMBG == donor.JMBG) &&
+                        !currentDonors.Any(cd => cd.JMBG == donor.JMBG))
+                    {
+                        CallToDonor callToDonor = new CallToDonor
+                        {
+                            JMBG = donor.JMBG,
+                            ActionID = loadedAction.ActionID,
+                            Donor = donor,
+                            CrudStatus = CrudStatus.Create
+                        };
+
+                        calledDonors.Add(callToDonor);
+                    }
+                }
+                uCDetailsCallToAction.DgvCalledDonors.DataSource = null;
+                uCDetailsCallToAction.DgvCalledDonors.DataSource = calledDonors;
             }
-        }
-            uCDetailsCallToAction.DgvCalledDonors.DataSource = null;
-            uCDetailsCallToAction.DgvCalledDonors.DataSource = calledDonors;
+            catch (ServerCommunicationException ex)
+            {
+                MessageBox.Show(ex.ErrorMessage);
+            }
         }
 
         private void BtnAddVolunteers_Click(object sender, EventArgs e)
         {
-            List<Volunteer> selectedVolunteers = uCDetailsCallToAction.CheckedListBoxVolunteers.CheckedItems.Cast<Volunteer>().ToList();
-
-            foreach (Volunteer volunteer in selectedVolunteers)
+            try
             {
-                if (!calledVolunteers.Any(cv => cv.Volunteer.VolunteerID == volunteer.VolunteerID) &&
-                    !currentVolunteers.Any(cv => cv.VolunteerID == volunteer.VolunteerID && volunteer.CrudStatus == CrudStatus.Delete))
+                List<Volunteer> selectedVolunteers = uCDetailsCallToAction.CheckedListBoxVolunteers.CheckedItems.Cast<Volunteer>().ToList();
+
+                foreach (Volunteer volunteer in selectedVolunteers)
                 {
-
-                    CallToVolunteer callToVolunteer = new CallToVolunteer
+                    if (!calledVolunteers.Any(cv => cv.Volunteer.VolunteerID == volunteer.VolunteerID) &&
+                        !currentVolunteers.Any(cv => cv.VolunteerID == volunteer.VolunteerID && volunteer.CrudStatus == CrudStatus.Delete))
                     {
-                        VolunteerID = volunteer.VolunteerID,
-                        ActionID = loadedAction.ActionID,
-                        Volunteer = volunteer,
-                        CrudStatus = CrudStatus.Create
-                    };
-                    calledVolunteers.Add(callToVolunteer);
-                }
-            }
 
-            uCDetailsCallToAction.DgvCalledVolunteers.DataSource = null;
-            uCDetailsCallToAction.DgvCalledVolunteers.DataSource = calledVolunteers;
+                        CallToVolunteer callToVolunteer = new CallToVolunteer
+                        {
+                            VolunteerID = volunteer.VolunteerID,
+                            ActionID = loadedAction.ActionID,
+                            Volunteer = volunteer,
+                            CrudStatus = CrudStatus.Create
+                        };
+                        calledVolunteers.Add(callToVolunteer);
+                    }
+                }
+
+                uCDetailsCallToAction.DgvCalledVolunteers.DataSource = null;
+                uCDetailsCallToAction.DgvCalledVolunteers.DataSource = calledVolunteers;
+            }
+            catch (ServerCommunicationException ex)
+            {
+                MessageBox.Show(ex.ErrorMessage);
+            }
         }
 
 
@@ -191,8 +215,49 @@ namespace BloodDonation.Client.GUIController
             listOfPlaces = Communication.Instance.GetAllPlaces();
 
             uCDetailsCallToAction.CmbPlaces.DataSource = listOfPlaces;
+            uCDetailsCallToAction.CmbPlaces.SelectedIndex = -1;
             uCDetailsCallToAction.BtnGoBack.Click += BtnGoBack_Click;
-            
+            uCDetailsCallToAction.CmbPlaces.SelectedIndexChanged += CmbPlaces_SelectedIndexChanged;
+        }
+
+        private void CmbPlaces_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (uCDetailsCallToAction.CmbPlaces.SelectedIndex <= 0)
+                {
+                    uCDetailsCallToAction.CheckedListBoxVolunteers.Items.AddRange(volunteers.ToArray());
+                    uCDetailsCallToAction.CheckedListBoxDonors.Items.AddRange(donors.ToArray());
+                    return;
+                }
+                Place p = (Place)uCDetailsCallToAction.CmbPlaces.SelectedItem;
+
+                filteredVolsByPlace = new List<Volunteer>();
+                string filterConditionForVol = $" v.PLACEID = {p.PlaceID}";
+                filteredVolsByPlace = Communication.Instance.FilterVolunteers(filterConditionForVol);
+
+                filteredDonorsByPlace = new List<Donor>();
+                string filterConditionForDonor = $" d.PLACEID = {p.PlaceID}";
+                filteredDonorsByPlace = Communication.Instance.FilterDonors(filterConditionForDonor);
+
+                uCDetailsCallToAction.CheckedListBoxVolunteers.Items.Clear();
+                uCDetailsCallToAction.CheckedListBoxVolunteers.Items.AddRange(filteredVolsByPlace.ToArray());
+
+                uCDetailsCallToAction.CheckedListBoxDonors.Items.Clear();
+                uCDetailsCallToAction.CheckedListBoxDonors.Items.AddRange(filteredDonorsByPlace.ToArray());
+            }
+            catch (SystemOperationException ex)
+            {
+                MessageBox.Show(ex.ErrorMessage);
+            }
+            catch (ServerCommunicationException ex)
+            {
+                MessageBox.Show(ex.ErrorMessage);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void BtnCallToActionUpdate_Click(object sender, EventArgs e)
@@ -203,7 +268,24 @@ namespace BloodDonation.Client.GUIController
                 loadedAction.ActionTimeFromTo = uCDetailsCallToAction.TxtActionTime.Text;
                 loadedAction.ActionDate = uCDetailsCallToAction.MonthCalendar1.SelectionStart;
                 loadedAction.Place = (Place)uCDetailsCallToAction.CmbPlaces.SelectedItem;
+
                 loadedAction.PlaceID = uCDetailsCallToAction.CmbPlaces.SelectedIndex;
+
+                if (loadedAction.ActionName == null || loadedAction.ActionName == "")
+                {
+                    MessageBox.Show("Morate uneti ime akcije");
+                    return;
+                }
+                else if (loadedAction.ActionTimeFromTo == null || loadedAction.ActionTimeFromTo == "")
+                {
+                    MessageBox.Show("Morate uneti vreme odrzavanja akcije");
+                    return;
+                }
+                else if (loadedAction.ActionDate < DateTime.Now)
+                {
+                    MessageBox.Show("Akcija mora biti u buducnosti");
+                    return;
+                }
 
                 List<Volunteer> volsToUpdate = new List<Volunteer>();
                 volsToUpdate.AddRange(currentVolunteers);
@@ -219,6 +301,7 @@ namespace BloodDonation.Client.GUIController
                 loadedAction.ListOfDonors = donorsToUpdate;
 
                 Communication.Instance.UpdateCallToAction(loadedAction);
+                MainCoordinator.Instance.ShowActionScreen(FormMode.View);
             }
             catch (SystemOperationException ex)
             {
@@ -226,64 +309,98 @@ namespace BloodDonation.Client.GUIController
             }
             catch (ServerCommunicationException ex)
             {
-                MessageBox.Show(ex.Message);      
+                MessageBox.Show(ex.Message);
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-            }
+            }          
         }
 
         private void BtnGoBack_Click(object sender, EventArgs e)
         {
-            MainCoordinator.Instance.ShowActionScreen(FormMode.View);
+            try
+            {
+                MainCoordinator.Instance.ShowActionScreen(FormMode.View);
+            }         
+            catch (ServerCommunicationException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }          
         }
 
         private void BtnUpdateAction_Click(object sender, EventArgs e)
         {
-            if (uCCallToAction.DgvActions.SelectedRows.Count == 1)
+            try
             {
-                action = (BloodTransfAction)uCCallToAction.DgvActions.SelectedRows[0].DataBoundItem;
-                action.ListOfVolunteers = volunteers;
-                action.ListOfDonors = donors;
+                if (uCCallToAction.DgvActions.SelectedRows.Count == 1)
+                {
+                    action = (BloodTransfAction)uCCallToAction.DgvActions.SelectedRows[0].DataBoundItem;
+                    action.ListOfVolunteers = volunteers;
+                    action.ListOfDonors = donors;
 
-                loadedAction = Communication.Instance.GetAction(action.ActionID);
+                    loadedAction = Communication.Instance.GetAction(action.ActionID);
 
-                MainCoordinator.Instance.ShowActionScreen(FormMode.Update);
+                    MainCoordinator.Instance.ShowActionScreen(FormMode.Update);
 
-                uCDetailsCallToAction.TxtActionName.Text = loadedAction.ActionName;
-                uCDetailsCallToAction.TxtActionTime.Text = loadedAction.ActionTimeFromTo;
-                uCDetailsCallToAction.CmbPlaces.SelectedItem = loadedAction.Place;
-                uCDetailsCallToAction.MonthCalendar1.SelectionStart = loadedAction.ActionDate;
+                    uCDetailsCallToAction.TxtActionName.Text = loadedAction.ActionName;
+                    uCDetailsCallToAction.TxtActionTime.Text = loadedAction.ActionTimeFromTo;
+                    uCDetailsCallToAction.MonthCalendar1.SelectionStart = loadedAction.ActionDate;
+                    uCDetailsCallToAction.CmbPlaces.SelectedItem = loadedAction.Place;
 
-                calledVolunteers = Communication.Instance.FindVolunteerCalls(loadedAction);
-                uCDetailsCallToAction.DgvCalledVolunteers.DataSource = calledVolunteers;
-                currentVolunteers = calledVolunteers.Select(vc => vc.Volunteer).ToList();
-                currentVolunteers.ForEach(volunteer => volunteer.CrudStatus = CrudStatus.Update);
+                    filteredVolsByPlace = new List<Volunteer>();
+                    string filterConditionForVol = $" v.PLACEID = {loadedAction.Place.PlaceID}";
+                    filteredVolsByPlace = Communication.Instance.FilterVolunteers(filterConditionForVol);
+
+                    filteredDonorsByPlace = new List<Donor>();
+                    string filterConditionForDonor = $" d.PLACEID = {loadedAction.Place.PlaceID}";
+                    filteredDonorsByPlace = Communication.Instance.FilterDonors(filterConditionForDonor);
+
+                    uCDetailsCallToAction.CheckedListBoxVolunteers.Items.Clear();
+                    uCDetailsCallToAction.CheckedListBoxVolunteers.Items.AddRange(filteredVolsByPlace.ToArray());
+
+                    uCDetailsCallToAction.CheckedListBoxDonors.Items.Clear();
+                    uCDetailsCallToAction.CheckedListBoxDonors.Items.AddRange(filteredDonorsByPlace.ToArray());
+
+                    calledVolunteers = Communication.Instance.FindVolunteerCalls(loadedAction);
+                    uCDetailsCallToAction.DgvCalledVolunteers.DataSource = calledVolunteers;
+                    currentVolunteers = calledVolunteers.Select(vc => vc.Volunteer).ToList();
+                    currentVolunteers.ForEach(volunteer => volunteer.CrudStatus = CrudStatus.Update);
 
 
-                calledDonors = Communication.Instance.FindDonorCalls(loadedAction);
-                uCDetailsCallToAction.DgvCalledDonors.DataSource = calledDonors;
-                currentDonors = calledDonors.Select(dc => dc.Donor).ToList();
-                currentDonors.ForEach(donor => donor.CrudStatus = CrudStatus.Update);
-
-                uCDetailsCallToAction.CheckedListBoxVolunteers.Items.AddRange(volunteers.ToArray());
-                uCDetailsCallToAction.CheckedListBoxDonors.Items.AddRange(donors.ToArray());
+                    calledDonors = Communication.Instance.FindDonorCalls(loadedAction);
+                    uCDetailsCallToAction.DgvCalledDonors.DataSource = calledDonors;
+                    currentDonors = calledDonors.Select(dc => dc.Donor).ToList();
+                    currentDonors.ForEach(donor => donor.CrudStatus = CrudStatus.Update);
+                }
+                else
+                {
+                    MessageBox.Show("Morate izabrati jednu akciju da biste je azurirali");
+                    return;
+                }
             }
-            else
+            catch (ServerCommunicationException ex)
             {
-                MessageBox.Show("Morate izabrati jednu akciju da biste je azurirali");
-                return;
+                MessageBox.Show(ex.ErrorMessage);
             }
         }
 
         private void BtnCreateAction_Click(object sender, EventArgs e)
         {
-            MainCoordinator.Instance.ShowActionScreen(FormMode.Add);
+            try
+            {
+                MainCoordinator.Instance.ShowActionScreen(FormMode.Add);
+            }
+            catch (ServerCommunicationException ex)
+            {
+                MessageBox.Show(ex.ErrorMessage);
+            }
         }
 
         private void BtnCallToActionAdd_Click(object sender, EventArgs e)
         {
+            bool successful = true;
+            bool serverException = false;
             try
             {
                 List<Volunteer> volunteers = uCDetailsCallToAction.CheckedListBoxVolunteers.CheckedItems.Cast<Volunteer>().ToList();
@@ -293,6 +410,24 @@ namespace BloodDonation.Client.GUIController
                 string actionTime = uCDetailsCallToAction.TxtActionTime.Text;
                 Place actionPlace = (Place)uCDetailsCallToAction.CmbPlaces.SelectedItem;
                 DateTime actionDate = uCDetailsCallToAction.MonthCalendar1.SelectionStart;
+
+                if (actionName == null || actionName == "")
+                {
+                    MessageBox.Show("Morate uneti ime akcije");
+                    successful = false;
+                    return;
+                }
+                else if (actionTime == null || actionTime == "")
+                {
+                    MessageBox.Show("Morate uneti vreme odrzavanja akcije");
+                    successful = false;
+                    return;
+                }
+                else if (actionDate < DateTime.Now) {
+                    MessageBox.Show("Akcija mora biti u buducnosti");
+                    successful = false;
+                    return;
+                }
 
                 action = new BloodTransfAction()
                 {
@@ -313,22 +448,41 @@ namespace BloodDonation.Client.GUIController
             catch (SystemOperationException ex)
             {
                 MessageBox.Show(ex.ErrorMessage);
+                successful = false;
             }
             catch (ServerCommunicationException ex)
             {
                 MessageBox.Show(ex.Message);
+                successful = false;
+                serverException = true;
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+                successful = false;
             }
             finally
             {
-                DialogResult finallyResult = MessageBox.Show("Da li želite nastavite da dodajete akcije?", "Nastavi dodavanje", MessageBoxButtons.YesNo);
-
-                if (finallyResult == DialogResult.No)
+                if (!serverException)
                 {
-                    MainCoordinator.Instance.ShowActionScreen(FormMode.View);
+                    DialogResult finallyResult = MessageBox.Show("Da li želite nastavite da dodajete akcije?", "Nastavi dodavanje", MessageBoxButtons.YesNo);
+
+                    if (finallyResult == DialogResult.No)
+                    {
+                        MainCoordinator.Instance.ShowActionScreen(FormMode.View);
+                    }
+
+                    else
+                    {
+                        if (successful)
+                        {
+                            uCDetailsCallToAction.TxtActionName.Text = "";
+                            uCDetailsCallToAction.TxtActionTime.Text = "";
+                            uCDetailsCallToAction.CmbPlaces.SelectedIndex = -1;
+                            uCDetailsCallToAction.MonthCalendar1.SelectionStart = DateTime.Now;
+                        }
+
+                    }
                 }
             }
         }

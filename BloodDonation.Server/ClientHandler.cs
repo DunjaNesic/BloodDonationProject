@@ -151,7 +151,7 @@ namespace BloodDonation.Server
                     case Operation.UpdateCallToAction:
                         Controller.Instance.UpdateCallToAction((BloodTransfAction)req.Argument);
                         resp.Message = "Sistem je ažurirao pozive na akciju";
-                        break;         
+                        break;
                     case Operation.LoadAction:
                         BloodTransfAction loadedAction = Controller.Instance.LoadAction(new BloodTransfAction()
                         {
@@ -204,11 +204,18 @@ namespace BloodDonation.Server
                         break;
                     case Operation.FindVolunteerCalls:
                         List<CallToVolunteer> volunteerCalls = Controller.Instance.GetVolunteerCalls((BloodTransfAction)req.Argument);
-                        resp.Result = volunteerCalls;                   
+                        resp.Result = volunteerCalls;
                         break;
                     case Operation.FindDonorCalls:
                         List<CallToDonor> donorCalls = Controller.Instance.GetDonorCalls((BloodTransfAction)req.Argument);
                         resp.Result = donorCalls;
+                        break;
+                    case Operation.FindDonors:
+                        List<Donor> filteredDonors = Controller.Instance.GetFilteredDonors(new Donor()
+                        {
+                            FilterQuery = (string)req.Argument
+                        });
+                        resp.Result = filteredDonors;
                         break;
                     default:
                         break;

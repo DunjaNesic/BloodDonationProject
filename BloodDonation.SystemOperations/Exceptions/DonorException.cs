@@ -1,16 +1,15 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BloodDonation.Client.Exceptions
+namespace BloodDonation.SystemOperations.Exceptions
 {
-    public class ServerCommunicationException : Exception
+    internal class DonorException : Exception
     {
         public string ErrorMessage;
-        public ServerCommunicationException(string message) : base(message) 
+        public DonorException(string message) : base (message)
         {
             ErrorMessage = message;
         }

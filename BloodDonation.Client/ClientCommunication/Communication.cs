@@ -267,5 +267,15 @@ namespace BloodDonation.Client.ClientCommunication
             Response resp = _clientController.Receive();
             return resp.ParseResponse<List<CallToDonor>>();
         }
+
+        internal List<Donor> FilterDonors(string filterDonorsByPlace)
+        {
+            _clientController.Send(new Request() { 
+                Operation = Operation.FindDonors,
+                Argument = filterDonorsByPlace
+            });
+            Response resp = _clientController.Receive();
+            return resp.ParseResponse<List<Donor>>();
+        }
     }
 }
