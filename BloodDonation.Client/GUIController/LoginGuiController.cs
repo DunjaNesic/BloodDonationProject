@@ -16,36 +16,36 @@ namespace BloodDonation.Client.GUIController
     {      
         private TransfusionCenterCoordinator _coordinator = new TransfusionCenterCoordinator();
         FrmLogin _frmLogin;
-        internal void ShowFrmLogin()
+        public void CreateLogin(FrmLogin frmLogin)
         {
-            _frmLogin = new FrmLogin(this);
-            Application.Run(_frmLogin);
+            _frmLogin = frmLogin;
+            _frmLogin.BtnLogin.Click += BtnLogin_Click;
         }
-        public void Login(object sender, EventArgs e)
+
+        private void BtnLogin_Click(object sender, EventArgs e)
         {
             try
             {
-                    Communication.Instance.Connect();
-                
-                    string coordinatorCode = _frmLogin.TxtCoordinatorCode.Text;
-                    string password = _frmLogin.TxtPassword.Text;
+                Communication.Instance.Connect();
 
-                    _coordinator = Communication.Instance.LoginCoord(coordinatorCode, password);                  
-              
-                    MainCoordinator.Instance.coord = _coordinator;
-                    MainCoordinator.Instance.ShowMainScreen();
-                
+                string coordinatorCode = _frmLogin.TxtCoordinatorCode.Text;
+                string password = _frmLogin.TxtPassword.Text;
+
+                _coordinator = Communication.Instance.LoginCoord(coordinatorCode, password);
+           
+                MainCoordinator.Instance.coord = _coordinator;
+                MainCoordinator.Instance.ShowMainScreen();
+
             }
             catch (SystemOperationException ex)
             {
                 MessageBox.Show(ex.ErrorMessage);
             }
             catch (ServerCommunicationException ex)
-            { 
+            {
                 MessageBox.Show(ex.ErrorMessage);
             }
-
         }
-
+       
     }
 }

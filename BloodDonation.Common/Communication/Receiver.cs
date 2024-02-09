@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net.Sockets;
+using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,8 +23,8 @@ namespace BloodDonation.Common.Communication
             _formatter = new BinaryFormatter();
         }
         public object Receive()
-        {
-            return _formatter.Deserialize(_stream);
+        {         
+            return _formatter.Deserialize(_stream);         
         }
         public void Close()
         {

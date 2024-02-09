@@ -44,7 +44,7 @@
             this.btnStartServer.TabIndex = 0;
             this.btnStartServer.Text = "POKRENI SERVER";
             this.btnStartServer.UseVisualStyleBackColor = true;
-            this.btnStartServer.Click += new System.EventHandler(this.btnStartServer_Click);
+            this.btnStartServer.Click += new System.EventHandler(this.BtnStartServer_Click);
             // 
             // btnStopServer
             // 
@@ -55,7 +55,7 @@
             this.btnStopServer.TabIndex = 1;
             this.btnStopServer.Text = "ZAUSTAVI SERVER";
             this.btnStopServer.UseVisualStyleBackColor = true;
-            this.btnStopServer.Click += new System.EventHandler(this.btnStopServer_Click);
+            this.btnStopServer.Click += new System.EventHandler(this.BtnStopServer_Click);
             // 
             // dgvCoordinators
             // 

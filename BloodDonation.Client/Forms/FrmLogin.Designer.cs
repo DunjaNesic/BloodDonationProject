@@ -81,5 +81,6 @@ namespace BloodDonation.Client.Forms
 
         public TextBox TxtCoordinatorCode { get => txtCoordinatorCode; set => txtCoordinatorCode = value; }
         public TextBox TxtPassword { get => txtPassword; set => txtPassword = value; }
+        public Button BtnLogin { get => btnLogin; set => btnLogin = value; }
     }
 }

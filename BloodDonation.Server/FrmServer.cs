@@ -52,7 +52,7 @@ namespace BloodDonation.Server
             dgvCoordinators.DataSource = null;
             dgvCoordinators.DataSource = clientInfoList;
         }
-        private void btnStartServer_Click(object sender, EventArgs e)
+        private void BtnStartServer_Click(object sender, EventArgs e)
         {
             server.Start();
             Thread thread = new Thread(new ThreadStart(server.Listen));
@@ -60,7 +60,7 @@ namespace BloodDonation.Server
             btnStartServer.Enabled = false;
             btnStopServer.Enabled = true;
         }
-        private void btnStopServer_Click(object sender, EventArgs e)
+        private void BtnStopServer_Click(object sender, EventArgs e)
         {
             server.Stop();
             btnStartServer.Enabled = true;

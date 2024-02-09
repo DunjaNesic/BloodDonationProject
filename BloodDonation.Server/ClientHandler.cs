@@ -17,11 +17,12 @@ namespace BloodDonation.Server
     {
 
         private Socket _socket;
-        private Sender _sender;
-        private Receiver _receiver;
+        private readonly Sender _sender;
+        private readonly Receiver _receiver;
         public EventHandler LoggedOutClient;
         public EventHandler LoggedInClient;
         public TransfusionCenterCoordinator _coordinator;
+        private static List<TransfusionCenterCoordinator> currentlyLoggedCoords = new List<TransfusionCenterCoordinator>();
         bool kraj = false;
        
         public ClientHandler(Socket clientSocket)
@@ -62,10 +63,19 @@ namespace BloodDonation.Server
                         TransfusionCenterCoordinator loggedCoord = Controller.Instance.Login((TransfusionCenterCoordinator)req.Argument);
                         if (loggedCoord != null)
                         {
-                            _coordinator = loggedCoord;
-                            resp.Result = loggedCoord;
-                            resp.Message = "Uspešno prijavljivanje";
-                            LoggedInClient?.Invoke(this, EventArgs.Empty);
+                            if (!currentlyLoggedCoords.Contains(loggedCoord))
+                            {
+                                _coordinator = loggedCoord;
+                                resp.Result = loggedCoord;
+                                resp.Message = "Uspešno prijavljivanje";
+                                LoggedInClient?.Invoke(this, EventArgs.Empty);
+                                currentlyLoggedCoords.Add(loggedCoord);
+                            }
+                            else
+                            {
+                                resp.IsSuccessful = false;
+                                resp.ErrorMessage = "Koordinator je već ulogovan";
+                            }
                         }
                         else
                         {
@@ -217,6 +227,10 @@ namespace BloodDonation.Server
                         });
                         resp.Result = filteredDonors;
                         break;
+                    case Operation.Close:
+                        kraj = true;
+                        currentlyLoggedCoords.Remove(_coordinator);
+                        break;
                     default:
                         break;
                 }
@@ -229,7 +243,7 @@ namespace BloodDonation.Server
                 return resp;
         }
 
-        private object lockobj = new object();
+        private readonly object lockobj = new object();
         public void Stop()
         {
             lock (lockobj)

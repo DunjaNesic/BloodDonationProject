@@ -58,9 +58,13 @@ namespace BloodDonation.Client.ClientCommunication
         }
         public void Close()
         {
+            _clientController.Send(new Request()
+            {
+                Operation = Operation.Close
+            });
+            _clientController.Close();
             _socket.Close();
             _socket = null;
-            _clientController.Close();
         }      
 
         internal TransfusionCenterCoordinator LoginCoord(string coordinatorCode, string password)

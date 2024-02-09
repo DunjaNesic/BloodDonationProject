@@ -18,7 +18,13 @@ namespace BloodDonation.Client
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            MainCoordinator.Instance.ShowLoginScreen();
+
+            MainCoordinator.Instance._frmLogin = new FrmLogin();
+            MainCoordinator.Instance.FirstLogin();
+
+            Application.Run(MainCoordinator.Instance._frmLogin);
+
+            //MainCoordinator.Instance.ShowLoginScreen();
 
         }
     }

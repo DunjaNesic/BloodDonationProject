@@ -28,7 +28,7 @@ namespace BloodDonation.Common.Communication
         GetAllActions,
         GetAllCallsToAction,
         GetAllPlaces,
-        GetAllQuestionnaires
-
+        GetAllQuestionnaires,
+        Close
     }
 }

@@ -33,6 +33,19 @@ namespace BloodDonation.Common.Domain
 
         public string IDName => "CoordinatorCode";
 
+        public override bool Equals(object obj)
+        {
+            return obj is TransfusionCenterCoordinator coordinator &&
+                   CoordinatorCode == coordinator.CoordinatorCode &&
+                   Password == coordinator.Password;
+        }
+        public override int GetHashCode()
+        {
+            int hashCode = 1736740912;
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(CoordinatorCode);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Password);
+            return hashCode;
+        }
         public List<IEntity> GetReaderList(SqlDataReader reader)
         {
             List<IEntity> entityList = new List<IEntity>();

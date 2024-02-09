@@ -21,8 +21,8 @@ namespace BloodDonation.Server
         public static Server Instance
         {
             get
-            {                            
-                        if (_instance == null)
+            {
+                if (_instance == null)
                         {
                             _instance = new Server();
                         }                                  
@@ -84,7 +84,6 @@ namespace BloodDonation.Server
             {
                 client.Stop();
             }
-            //clients.Clear();
         }
 
 

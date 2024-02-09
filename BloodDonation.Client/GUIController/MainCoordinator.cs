@@ -1,8 +1,10 @@
 ﻿using BloodDonation.Client.ClientCommunication;
+using BloodDonation.Client.Exceptions;
 using BloodDonation.Client.Forms;
 using BloodDonation.Common.Domain;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -48,23 +50,52 @@ namespace BloodDonation.Client.GUIController
         private ActionGuiController _actionGuiController;
         private LoginGuiController _loginGuiController;
 
-        FrmMainScreen _frmMain;
-
-        internal void ShowLoginScreen()
-        {
-            _loginGuiController.ShowFrmLogin();
-        }
-
-       
+        public FrmMainScreen _frmMain;
+        public FrmLogin _frmLogin;     
         internal void ShowMainScreen()
         {
             _frmMain = new FrmMainScreen();
             _frmMain.LblCoordinator.Text = coord.CoordinatorName + " " + coord.CoordinatorLastName;
-            _frmMain.Show();          
+
+            _frmLogin.Visible = false;
+            _frmMain.ShowDialog();
+            _frmLogin.Visible = true;
         }
+        public void FirstLogin()
+        {
+            try
+            {
+                _loginGuiController.CreateLogin(_frmLogin);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(">>>" + ex.Message);
+            }
+        }
+
+        public void CloseMainForm() {
+            try
+            {
+                coord = null;
+                _frmMain.Dispose();
+                Communication.Instance.Close();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(">>>>>>>" + ex.Message + "closing main form");
+            }
+        }
+
         internal void ShowVolunteerScreen(FormMode mode)
         {
-            _frmMain.ChangePanel(_volunteerGuiController.ShowUCVolunteer(mode));
+            try
+            {
+                _frmMain.ChangePanel(_volunteerGuiController.ShowUCVolunteer(mode));
+            }
+            catch (ServerCommunicationException ex)
+            {
+                MessageBox.Show(ex.ErrorMessage);
+            }
 
             //znaci boze gospode
             //VolunteerGuiController.Instance.ShowUCVolunteer(frmMain, mode);
@@ -72,14 +103,28 @@ namespace BloodDonation.Client.GUIController
 
         internal void ShowDonorScreen(FormMode mode)
         {
-            _frmMain.ChangePanel(_donorGuiController.ShowUCDonor(mode));
+            try
+            {
+                _frmMain.ChangePanel(_donorGuiController.ShowUCDonor(mode));
+            }
+            catch (ServerCommunicationException ex)
+            {
+                MessageBox.Show(ex.ErrorMessage);
+            }
         }
 
         internal void ShowActionScreen(FormMode mode)
         {
-            _frmMain.ChangePanel(_actionGuiController.ShowUCCallToAction(mode));
+            try
+            {
+                _frmMain.ChangePanel(_actionGuiController.ShowUCCallToAction(mode));
+            }
+            catch (ServerCommunicationException ex)
+            {
+                MessageBox.Show(ex.ErrorMessage);
+            }
         }
 
-      
+       
     }
 }

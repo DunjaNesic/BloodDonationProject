@@ -19,6 +19,7 @@ namespace BloodDonation.Client.Forms
         public FrmMainScreen()
         {
             InitializeComponent();
+            this.FormClosed += FrmMainScreen_FormClosed;
             toolStripVolunteers.Click += (s, a) => MainCoordinator.Instance.ShowVolunteerScreen(FormMode.View);
             toolStripDonors.Click += (s, a) => MainCoordinator.Instance.ShowDonorScreen(FormMode.View);
             toolStripActions.Click += (s, a) => MainCoordinator.Instance.ShowActionScreen(FormMode.View);          
@@ -32,5 +33,11 @@ namespace BloodDonation.Client.Forms
             pnlMain.AutoSize = true;
             pnlMain.AutoSizeMode = AutoSizeMode.GrowAndShrink;
         }
+
+        private void FrmMainScreen_FormClosed(Object sender, FormClosedEventArgs e)
+        {
+            MainCoordinator.Instance.CloseMainForm();
+        }
+
     }
 }

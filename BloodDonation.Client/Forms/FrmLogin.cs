@@ -14,18 +14,9 @@ namespace BloodDonation.Client.Forms
 {
     public partial class FrmLogin : Form
     {
-      
-        private LoginGuiController _loginGuiController;
-
         public FrmLogin()
         {
             InitializeComponent();           
-        }
-        public FrmLogin(LoginGuiController loginGuiController)
-        {
-            InitializeComponent();
-            _loginGuiController = loginGuiController;
-            btnLogin.Click += _loginGuiController.Login;
         }
     }
 }
