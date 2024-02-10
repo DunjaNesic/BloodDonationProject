@@ -9,6 +9,7 @@ using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -75,7 +76,11 @@ namespace BloodDonation.Client.GUIController
                 uCDetailsDonor.TxtJMBG.Text = loadedDonor.JMBG;
                 uCDetailsDonor.BtnCreateDonor.Visible = false;
                 uCDetailsDonor.BtnGoBack.Click += BtnGoBack_Click;
-
+                uCDetailsDonor.CmbBloodType.SelectedItem = loadedDonor.BloodType;
+                uCDetailsDonor.CmbIsActive.SelectedItem = loadedDonor.IsActive;
+                uCDetailsDonor.TxtDonorNameSurname.Text = loadedDonor.DonorName + " " + loadedDonor.DonorLastName;
+                uCDetailsDonor.TxtContact.Text = loadedDonor.DonorContact;
+                uCDetailsDonor.CmbPlaces.SelectedItem = loadedDonor.Place;
 
                 listOfQuestionnaires = Communication.Instance.GetAllQuestionnaires(loadedDonor);
                 uCDetailsDonor.DgvQuestionnaires.DataSource = listOfQuestionnaires;
@@ -175,6 +180,14 @@ namespace BloodDonation.Client.GUIController
                 string surname = fullName[1];
 
                 string contact = uCDetailsDonor.TxtContact.Text;
+
+                if (!IsValidContact(contact))
+                {
+                    MessageBox.Show("Kontakt mora biti ili broj telefona ili gmail adresa");
+                    successful = false;
+                    return;
+                }
+
                 DateTime lastDonation = uCDetailsDonor.MonthCalendar1.SelectionStart;
 
                 if (lastDonation > DateTime.Now)
@@ -245,7 +258,7 @@ namespace BloodDonation.Client.GUIController
                     }
 
                 }
-            }
+              }
             }
         }
         private bool IsNumeric(string str)
@@ -258,6 +271,14 @@ namespace BloodDonation.Client.GUIController
                 }
             }
             return true;
+        }
+        private bool IsValidContact(string contact)
+        {
+            string phoneRegex = @"^\d{6,13}$";
+
+            string gmailRegex = @"^[a-zA-Z0-9_.+-]+@gmail\.com$";
+
+            return Regex.IsMatch(contact, phoneRegex) || Regex.IsMatch(contact, gmailRegex);
         }
         private void BtnUpdateDonor_Click(object sender, EventArgs e)
         {
@@ -292,7 +313,23 @@ namespace BloodDonation.Client.GUIController
                     return;
                 }
 
+                BloodType bloodType = (BloodType)uCDetailsDonor.CmbBloodType.SelectedItem;
+
+                Place place = (Place)uCDetailsDonor.CmbPlaces.SelectedItem;
+
+                if (place == null)
+                {
+                    MessageBox.Show("Molimo vas da izaberete mesto");
+                    return;
+                }
+
                 string contact = uCDetailsDonor.TxtContact.Text;
+
+                if (!IsValidContact(contact))
+                {
+                    MessageBox.Show("Kontakt mora biti ili broj telefona ili gmail adresa");
+                    return;
+                }
 
                 if (string.IsNullOrWhiteSpace(contact))
                 {
@@ -327,6 +364,8 @@ namespace BloodDonation.Client.GUIController
                 loadedDonor.DonorContact = contact;
                 loadedDonor.LastDonationDate = lastDonation;
                 loadedDonor.IsActive = isActive;
+                loadedDonor.PlaceID = place.PlaceID;
+                loadedDonor.BloodType = bloodType;
 
                 Communication.Instance.UpdateDonor(loadedDonor);
                 MainCoordinator.Instance.ShowDonorScreen(FormMode.View);

@@ -9,7 +9,7 @@ namespace BloodDonation.Repository.DBConnection
     public class DbConnectionFactory
     {
         private static DbConnectionFactory _instance;
-        private DbConnection _connection; 
+        private readonly DbConnection _connection;
         public static DbConnectionFactory Instance { get { if (_instance == null) _instance = new DbConnectionFactory(); return _instance; } }
         private DbConnectionFactory()
         {

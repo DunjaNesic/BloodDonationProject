@@ -25,6 +25,7 @@ namespace BloodDonation.Common.Communication
         FindVolunteerCalls,
         FindDonorCalls,
         LoadAction,
+        DeleteAction,
         GetAllActions,
         GetAllCallsToAction,
         GetAllPlaces,

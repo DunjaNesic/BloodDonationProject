@@ -31,7 +31,6 @@ namespace BloodDonation.SystemOperations
                 genericRepository.Rollback();
                 Debug.WriteLine(">>>" + ex.Message);
                 throw;
-                //mogla bih i ovde jedan throw new SystemOperationException
             }
             finally { 
                 genericRepository.CloseConnection();

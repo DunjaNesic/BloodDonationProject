@@ -30,6 +30,7 @@ namespace BloodDonation.SystemOperations
 
                 foreach (Volunteer v in volunteers)
                 {
+                    v.ValidateVolunteer(action);
                     ctv = new CallToVolunteer()
                     {
                         ActionID = action.ActionID,
@@ -39,6 +40,7 @@ namespace BloodDonation.SystemOperations
                 }
                 foreach (Donor d in donors)
                 {
+                    d.ValidateDonor(action);
                     ctd = new CallToDonor()
                     {
                         ActionID = action.ActionID,
@@ -47,7 +49,16 @@ namespace BloodDonation.SystemOperations
                     genericRepository.Add(ctd);
                 }
             }
-            catch (ActionException ex) {
+            catch (VolunteerException ex)
+            {
+                throw new Exception(ex.ErrorMessage);
+            }
+            catch (DonorException ex)
+            {
+                throw new Exception(ex.ErrorMessage);
+            }
+            catch (ActionException ex)
+            {
                 throw new Exception(ex.ErrorMessage);
             }
             catch (Exception)

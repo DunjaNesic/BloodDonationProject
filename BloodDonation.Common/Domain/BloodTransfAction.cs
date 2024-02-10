@@ -58,6 +58,9 @@ namespace BloodDonation.Common.Domain
         {
             return this.ActionName; 
         }
+
+        [Browsable(false)]
+        public string DeleteQuery => $"ActionID = {ActionID}";
         public List<IEntity> GetReaderList(SqlDataReader reader)
         {
            List<IEntity> actions = new List<IEntity>();

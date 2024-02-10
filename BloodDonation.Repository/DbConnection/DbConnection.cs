@@ -25,7 +25,7 @@ namespace BloodDonation.Repository.DBConnection
 
         public void CloseConnection()
         {
-            _connection?.Close();
+            if (_connection.State != ConnectionState.Closed) _connection?.Close();
         }
 
         public void BeginTransaction()

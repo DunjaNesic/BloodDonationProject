@@ -22,7 +22,6 @@ namespace BloodDonation.Server
         public EventHandler LoggedOutClient;
         public EventHandler LoggedInClient;
         public TransfusionCenterCoordinator _coordinator;
-        private static List<TransfusionCenterCoordinator> currentlyLoggedCoords = new List<TransfusionCenterCoordinator>();
         bool kraj = false;
        
         public ClientHandler(Socket clientSocket)
@@ -63,13 +62,13 @@ namespace BloodDonation.Server
                         TransfusionCenterCoordinator loggedCoord = Controller.Instance.Login((TransfusionCenterCoordinator)req.Argument);
                         if (loggedCoord != null)
                         {
-                            if (!currentlyLoggedCoords.Contains(loggedCoord))
+                            if (!Session.currentlyLoggedCoords.Contains(loggedCoord))
                             {
                                 _coordinator = loggedCoord;
                                 resp.Result = loggedCoord;
                                 resp.Message = "Uspešno prijavljivanje";
                                 LoggedInClient?.Invoke(this, EventArgs.Empty);
-                                currentlyLoggedCoords.Add(loggedCoord);
+                                Session.currentlyLoggedCoords.Add(loggedCoord);
                             }
                             else
                             {
@@ -229,7 +228,12 @@ namespace BloodDonation.Server
                         break;
                     case Operation.Close:
                         kraj = true;
-                        currentlyLoggedCoords.Remove(_coordinator);
+                        Session.currentlyLoggedCoords.Remove(_coordinator);
+                        break;
+                    case Operation.DeleteAction:
+                        BloodTransfAction actionToDelete = (BloodTransfAction)req.Argument;
+                        Controller.Instance.DeleteAction(actionToDelete);
+                        resp.Message = "Sistem je obrisao akciju";
                         break;
                     default:
                         break;

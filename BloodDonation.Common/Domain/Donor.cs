@@ -34,8 +34,6 @@ namespace BloodDonation.Common.Domain
         public string DonorLastName { get; set; }
         public string DonorContact { get; set; }
         public BloodType BloodType { get; set; }
-
-        [Browsable(false)]
         public IsActive IsActive { get; set; }
         public Place Place { get; set; }
         public DateTime LastDonationDate { get; set; }
@@ -68,7 +66,7 @@ namespace BloodDonation.Common.Domain
         public string JoinCondition => "ON(d.PlaceID = p.PlaceID)";
 
         [Browsable(false)]
-        public string UpdateValues => $"DonorName = '{DonorName}', DonorLastName = '{DonorLastName}', DonorContact = '{DonorContact}', LastDonationDate = '{LastDonationDate: yyyy-MM-dd HH:mm:ss}', IsActive = {(int)IsActive}";
+        public string UpdateValues => $"DonorName = '{DonorName}', DonorLastName = '{DonorLastName}', BloodType = {(int)BloodType}, DonorContact = '{DonorContact}', LastDonationDate = '{LastDonationDate: yyyy-MM-dd HH:mm:ss}', IsActive = {(int)IsActive}, PlaceID = {PlaceID}";
 
         [Browsable(false)]
         public string IDName => "JMBG";

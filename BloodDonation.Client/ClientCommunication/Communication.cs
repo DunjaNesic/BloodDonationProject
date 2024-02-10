@@ -111,6 +111,17 @@ namespace BloodDonation.Client.ClientCommunication
             MessageBox.Show(resp.Message);
         }
 
+        internal void DeleteAction(BloodTransfAction selectedAction)
+        {
+            _clientController.Send(new Request()
+            {
+                Operation = Operation.DeleteAction,
+                Argument = selectedAction
+            });
+            Response resp = _clientController.Receive();
+            MessageBox.Show(resp.Message);
+        }
+
         internal List<Place> GetAllPlaces()
         {
             _clientController.Send(new Request() { 

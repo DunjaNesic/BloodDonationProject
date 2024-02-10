@@ -18,7 +18,6 @@ namespace BloodDonation.SystemOperations
 
                 genericRepository.Update(action, $"ActionID = {action.ActionID}");
 
-
                 foreach (Volunteer volunteer in action.ListOfVolunteers)
                 {
                     CallToVolunteer ctv = new CallToVolunteer()
@@ -29,14 +28,14 @@ namespace BloodDonation.SystemOperations
 
                     if (volunteer.CrudStatus == CrudStatus.Create)
                     {
+                        volunteer.ValidateVolunteer(action);
                         genericRepository.Add(ctv);
-
                     }
                     else if (volunteer.CrudStatus == CrudStatus.Delete)
                     {
-
                         genericRepository.Delete(ctv, $"ActionID = {ctv.ActionID} AND VolunteerID = {ctv.VolunteerID}");
-                    }                   
+                    }
+                    else if (volunteer.CrudStatus == CrudStatus.Update) volunteer.ValidateVolunteer(action);
                 }
                 foreach (Donor donor in action.ListOfDonors)
                 {
@@ -48,14 +47,24 @@ namespace BloodDonation.SystemOperations
 
                     if (donor.CrudStatus == CrudStatus.Create)
                     {
+                        donor.ValidateDonor(action);
                         genericRepository.Add(ctd);
 
                     }
                     else if (donor.CrudStatus == CrudStatus.Delete)
                     {
                         genericRepository.Delete(ctd, $"ActionID = {ctd.ActionID} AND JMBG = '{ctd.JMBG}'");
-                    } 
+                    }
+                    else if (donor.CrudStatus == CrudStatus.Update) donor.ValidateDonor(action);
                 }
+            }
+            catch (VolunteerException ex)
+            {
+                throw new Exception(ex.ErrorMessage);
+            }
+            catch (DonorException ex)
+            { 
+                throw new Exception(ex.ErrorMessage);
             }
             catch (ActionException ex)
             {

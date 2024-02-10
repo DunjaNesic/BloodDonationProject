@@ -2,6 +2,7 @@
 using BloodDonation.Repository.Implementation;
 using BloodDonation.Repository.Interfaces;
 using BloodDonation.SystemOperations;
+using BloodDonation.SystemOperations.ActionSO;
 using BloodDonation.SystemOperations.DonorSO;
 using BloodDonation.SystemOperations.TransfusionCoordinator;
 using BloodDonation.SystemOperations.VolunteerSO;
@@ -38,6 +39,12 @@ namespace BusinessLogic
             SystemOperationBase so = new AddVolunteerSO();
             so.ExecuteTemplate(volunteer);
             return (Volunteer)so.Result;
+        }
+
+        public void DeleteAction(BloodTransfAction action)
+        {
+            SystemOperationBase so = new DeleteActionSO();
+            so.ExecuteTemplate(action);
         }
 
         public void DeleteDonor(Donor donor)
