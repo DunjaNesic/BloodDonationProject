@@ -16,11 +16,9 @@ namespace BloodDonation.SystemOperations
             try
             {
                 BloodTransfAction action = (BloodTransfAction)entity;
-                if (action.ActionID == 0)
-                {
+               
                     action.ValidateAction();
-                    genericRepository.Add(action);
-                }
+                    genericRepository.Add(action);               
 
                 List<Volunteer> volunteers = action.ListOfVolunteers;
                 List<Donor> donors = action.ListOfDonors;

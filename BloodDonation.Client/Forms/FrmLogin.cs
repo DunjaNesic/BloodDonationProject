@@ -16,7 +16,22 @@ namespace BloodDonation.Client.Forms
     {
         public FrmLogin()
         {
-            InitializeComponent();           
+            this.ControlBox = false;
+            this.FormBorderStyle = FormBorderStyle.None;
+            InitializeComponent();
+
+            this.ucTopBar.LeaveApp += UcTopBar_LeaveApp;
+            this.ucTopBar.Minimize += UcTopBar_Minimize;
+        }
+
+        private void UcTopBar_Minimize(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;           
+        }
+
+        private void UcTopBar_LeaveApp(object sender, EventArgs e)
+        {
+            MainCoordinator.Instance.CloseLoginForm(this);
         }
     }
 }

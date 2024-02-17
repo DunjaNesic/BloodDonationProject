@@ -258,6 +258,7 @@ namespace BloodDonation.Server
                     _socket.Close();
                     _socket = null;
                     LoggedOutClient?.Invoke(this, EventArgs.Empty);
+                    Session.currentlyLoggedCoords.Remove(_coordinator);
                 }
             }
         }

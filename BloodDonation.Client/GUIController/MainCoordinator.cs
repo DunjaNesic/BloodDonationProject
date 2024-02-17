@@ -55,7 +55,7 @@ namespace BloodDonation.Client.GUIController
         internal void ShowMainScreen()
         {
             _frmMain = new FrmMainScreen();
-            _frmMain.LblCoordinator.Text = coord.CoordinatorName + " " + coord.CoordinatorLastName;
+            _frmMain.LblCoordinator.Text = "Trenutno ulogovan koordinator: " + coord.CoordinatorName + " " + coord.CoordinatorLastName;
 
             _frmLogin.Visible = false;
             _frmMain.ShowDialog();
@@ -73,6 +73,15 @@ namespace BloodDonation.Client.GUIController
             }
         }
 
+        public void CloseLoginForm(Form parentForm) {
+            if (parentForm != null && parentForm is FrmMainScreen)
+            {
+                CloseMainForm();
+            }
+            else {
+                Application.Exit();
+            }
+        }
         public void CloseMainForm() {
             try
             {

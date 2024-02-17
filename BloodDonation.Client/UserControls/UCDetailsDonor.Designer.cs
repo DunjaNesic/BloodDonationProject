@@ -30,6 +30,8 @@ namespace BloodDonation.Client.UserControls
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UCDetailsDonor));
             this.lblNameSurname = new System.Windows.Forms.Label();
             this.txtDonorNameSurname = new System.Windows.Forms.TextBox();
             this.lblContact = new System.Windows.Forms.Label();
@@ -50,193 +52,239 @@ namespace BloodDonation.Client.UserControls
             this.btnCreateDonor = new System.Windows.Forms.Button();
             this.btnDeleteDonor = new System.Windows.Forms.Button();
             this.btnGoBack = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvQuestionnaires)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // lblNameSurname
             // 
             this.lblNameSurname.AutoSize = true;
-            this.lblNameSurname.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.lblNameSurname.Location = new System.Drawing.Point(38, 96);
+            this.lblNameSurname.BackColor = System.Drawing.Color.White;
+            this.lblNameSurname.Font = new System.Drawing.Font("Jost ExtraBold", 13F, System.Drawing.FontStyle.Bold);
+            this.lblNameSurname.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(32)))), ((int)(((byte)(36)))));
+            this.lblNameSurname.Location = new System.Drawing.Point(38, 137);
             this.lblNameSurname.Name = "lblNameSurname";
-            this.lblNameSurname.Size = new System.Drawing.Size(132, 22);
+            this.lblNameSurname.Size = new System.Drawing.Size(207, 38);
             this.lblNameSurname.TabIndex = 5;
             this.lblNameSurname.Text = "IME I PREZIME";
             // 
             // txtDonorNameSurname
             // 
-            this.txtDonorNameSurname.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.txtDonorNameSurname.Location = new System.Drawing.Point(192, 90);
+            this.txtDonorNameSurname.Font = new System.Drawing.Font("Jost Medium", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtDonorNameSurname.Location = new System.Drawing.Point(296, 137);
             this.txtDonorNameSurname.Name = "txtDonorNameSurname";
-            this.txtDonorNameSurname.Size = new System.Drawing.Size(225, 30);
+            this.txtDonorNameSurname.Size = new System.Drawing.Size(225, 45);
             this.txtDonorNameSurname.TabIndex = 4;
             // 
             // lblContact
             // 
             this.lblContact.AutoSize = true;
-            this.lblContact.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.lblContact.Location = new System.Drawing.Point(38, 166);
+            this.lblContact.BackColor = System.Drawing.Color.White;
+            this.lblContact.Font = new System.Drawing.Font("Jost ExtraBold", 13F, System.Drawing.FontStyle.Bold);
+            this.lblContact.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(32)))), ((int)(((byte)(36)))));
+            this.lblContact.Location = new System.Drawing.Point(38, 241);
             this.lblContact.Name = "lblContact";
-            this.lblContact.Size = new System.Drawing.Size(97, 22);
+            this.lblContact.Size = new System.Drawing.Size(145, 38);
             this.lblContact.TabIndex = 9;
             this.lblContact.Text = "KONTAKT";
             // 
             // txtContact
             // 
-            this.txtContact.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.txtContact.Location = new System.Drawing.Point(192, 160);
+            this.txtContact.Font = new System.Drawing.Font("Jost Medium", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtContact.Location = new System.Drawing.Point(296, 241);
             this.txtContact.Name = "txtContact";
-            this.txtContact.Size = new System.Drawing.Size(225, 30);
+            this.txtContact.Size = new System.Drawing.Size(225, 45);
             this.txtContact.TabIndex = 8;
             // 
             // monthCalendar1
             // 
-            this.monthCalendar1.Location = new System.Drawing.Point(467, 85);
+            this.monthCalendar1.Location = new System.Drawing.Point(650, 134);
             this.monthCalendar1.Name = "monthCalendar1";
             this.monthCalendar1.TabIndex = 18;
             // 
             // lblDate
             // 
             this.lblDate.AutoSize = true;
-            this.lblDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.lblDate.Location = new System.Drawing.Point(487, 22);
+            this.lblDate.BackColor = System.Drawing.Color.White;
+            this.lblDate.Font = new System.Drawing.Font("Jost ExtraBold", 13F, System.Drawing.FontStyle.Bold);
+            this.lblDate.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(32)))), ((int)(((byte)(36)))));
+            this.lblDate.Location = new System.Drawing.Point(622, 58);
             this.lblDate.Name = "lblDate";
-            this.lblDate.Size = new System.Drawing.Size(253, 22);
+            this.lblDate.Size = new System.Drawing.Size(368, 38);
             this.lblDate.TabIndex = 17;
             this.lblDate.Text = "DATUM POSLEDNJE AKCIJE";
             // 
             // btnUpdateDonor
             // 
-            this.btnUpdateDonor.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.btnUpdateDonor.Location = new System.Drawing.Point(725, 535);
+            this.btnUpdateDonor.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(32)))), ((int)(((byte)(36)))));
+            this.btnUpdateDonor.Font = new System.Drawing.Font("Jost", 21F, System.Drawing.FontStyle.Bold);
+            this.btnUpdateDonor.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(227)))), ((int)(((byte)(236)))));
+            this.btnUpdateDonor.Location = new System.Drawing.Point(1134, 271);
             this.btnUpdateDonor.Name = "btnUpdateDonor";
-            this.btnUpdateDonor.Size = new System.Drawing.Size(268, 57);
+            this.btnUpdateDonor.Size = new System.Drawing.Size(467, 67);
             this.btnUpdateDonor.TabIndex = 19;
             this.btnUpdateDonor.Text = "SAČUVAJ IZMENE";
-            this.btnUpdateDonor.UseVisualStyleBackColor = true;
+            this.btnUpdateDonor.UseVisualStyleBackColor = false;
             // 
             // lblQuest
             // 
             this.lblQuest.AutoSize = true;
-            this.lblQuest.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.lblQuest.Location = new System.Drawing.Point(38, 370);
+            this.lblQuest.BackColor = System.Drawing.Color.White;
+            this.lblQuest.Font = new System.Drawing.Font("Jost ExtraBold", 13F, System.Drawing.FontStyle.Bold);
+            this.lblQuest.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(32)))), ((int)(((byte)(36)))));
+            this.lblQuest.Location = new System.Drawing.Point(38, 536);
             this.lblQuest.Name = "lblQuest";
-            this.lblQuest.Size = new System.Drawing.Size(118, 22);
+            this.lblQuest.Size = new System.Drawing.Size(188, 38);
             this.lblQuest.TabIndex = 20;
             this.lblQuest.Text = "SVI UPITNICI";
             // 
             // lblIsActive
             // 
             this.lblIsActive.AutoSize = true;
-            this.lblIsActive.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.lblIsActive.Location = new System.Drawing.Point(785, 22);
+            this.lblIsActive.BackColor = System.Drawing.Color.White;
+            this.lblIsActive.Font = new System.Drawing.Font("Jost ExtraBold", 13F, System.Drawing.FontStyle.Bold);
+            this.lblIsActive.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(32)))), ((int)(((byte)(36)))));
+            this.lblIsActive.Location = new System.Drawing.Point(664, 446);
             this.lblIsActive.Name = "lblIsActive";
-            this.lblIsActive.Size = new System.Drawing.Size(103, 22);
+            this.lblIsActive.Size = new System.Drawing.Size(161, 38);
             this.lblIsActive.TabIndex = 21;
             this.lblIsActive.Text = "AKTIVAN - ";
             // 
             // cmbIsActive
             // 
+            this.cmbIsActive.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.cmbIsActive.FormattingEnabled = true;
-            this.cmbIsActive.Location = new System.Drawing.Point(894, 22);
+            this.cmbIsActive.Location = new System.Drawing.Point(841, 446);
             this.cmbIsActive.Name = "cmbIsActive";
-            this.cmbIsActive.Size = new System.Drawing.Size(121, 28);
+            this.cmbIsActive.Size = new System.Drawing.Size(121, 45);
             this.cmbIsActive.TabIndex = 22;
             // 
             // dgvQuestionnaires
             // 
+            this.dgvQuestionnaires.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvQuestionnaires.BackgroundColor = System.Drawing.Color.White;
             this.dgvQuestionnaires.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvQuestionnaires.Location = new System.Drawing.Point(42, 421);
+            this.dgvQuestionnaires.GridColor = System.Drawing.Color.RosyBrown;
+            this.dgvQuestionnaires.Location = new System.Drawing.Point(45, 590);
             this.dgvQuestionnaires.Name = "dgvQuestionnaires";
             this.dgvQuestionnaires.RowHeadersWidth = 62;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Jost", 17F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.RosyBrown;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White;
+            this.dgvQuestionnaires.RowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvQuestionnaires.RowTemplate.Height = 28;
-            this.dgvQuestionnaires.Size = new System.Drawing.Size(656, 171);
+            this.dgvQuestionnaires.Size = new System.Drawing.Size(1789, 322);
             this.dgvQuestionnaires.TabIndex = 23;
             // 
             // lblJMBG
             // 
             this.lblJMBG.AutoSize = true;
-            this.lblJMBG.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.lblJMBG.Location = new System.Drawing.Point(38, 28);
+            this.lblJMBG.BackColor = System.Drawing.Color.White;
+            this.lblJMBG.Font = new System.Drawing.Font("Jost ExtraBold", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.lblJMBG.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(32)))), ((int)(((byte)(36)))));
+            this.lblJMBG.Location = new System.Drawing.Point(38, 38);
             this.lblJMBG.Name = "lblJMBG";
-            this.lblJMBG.Size = new System.Drawing.Size(59, 22);
+            this.lblJMBG.Size = new System.Drawing.Size(89, 38);
             this.lblJMBG.TabIndex = 25;
             this.lblJMBG.Text = "JMBG";
             // 
             // txtJMBG
             // 
-            this.txtJMBG.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.txtJMBG.Location = new System.Drawing.Point(192, 22);
+            this.txtJMBG.Font = new System.Drawing.Font("Jost Medium", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtJMBG.Location = new System.Drawing.Point(296, 34);
             this.txtJMBG.Name = "txtJMBG";
-            this.txtJMBG.Size = new System.Drawing.Size(225, 30);
+            this.txtJMBG.Size = new System.Drawing.Size(225, 45);
             this.txtJMBG.TabIndex = 24;
             // 
             // cmbBloodType
             // 
-            this.cmbBloodType.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.cmbBloodType.Font = new System.Drawing.Font("Jost Medium", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbBloodType.FormattingEnabled = true;
-            this.cmbBloodType.Location = new System.Drawing.Point(192, 229);
+            this.cmbBloodType.Location = new System.Drawing.Point(296, 345);
             this.cmbBloodType.Name = "cmbBloodType";
-            this.cmbBloodType.Size = new System.Drawing.Size(225, 33);
+            this.cmbBloodType.Size = new System.Drawing.Size(225, 46);
             this.cmbBloodType.TabIndex = 27;
             // 
             // lblBloodType
             // 
             this.lblBloodType.AutoSize = true;
-            this.lblBloodType.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.lblBloodType.Location = new System.Drawing.Point(38, 239);
+            this.lblBloodType.BackColor = System.Drawing.Color.White;
+            this.lblBloodType.Font = new System.Drawing.Font("Jost ExtraBold", 13F, System.Drawing.FontStyle.Bold);
+            this.lblBloodType.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(32)))), ((int)(((byte)(36)))));
+            this.lblBloodType.Location = new System.Drawing.Point(38, 350);
             this.lblBloodType.Name = "lblBloodType";
-            this.lblBloodType.Size = new System.Drawing.Size(141, 22);
+            this.lblBloodType.Size = new System.Drawing.Size(214, 38);
             this.lblBloodType.TabIndex = 26;
             this.lblBloodType.Text = "KRVNA GRUPA";
             // 
             // cmbPlaces
             // 
-            this.cmbPlaces.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.cmbPlaces.Font = new System.Drawing.Font("Jost Medium", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbPlaces.FormattingEnabled = true;
-            this.cmbPlaces.Location = new System.Drawing.Point(192, 305);
+            this.cmbPlaces.Location = new System.Drawing.Point(296, 446);
             this.cmbPlaces.Name = "cmbPlaces";
-            this.cmbPlaces.Size = new System.Drawing.Size(225, 33);
+            this.cmbPlaces.Size = new System.Drawing.Size(225, 46);
             this.cmbPlaces.TabIndex = 29;
             // 
             // lblPlace
             // 
             this.lblPlace.AutoSize = true;
-            this.lblPlace.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.lblPlace.Location = new System.Drawing.Point(38, 305);
+            this.lblPlace.BackColor = System.Drawing.Color.White;
+            this.lblPlace.Font = new System.Drawing.Font("Jost ExtraBold", 13F, System.Drawing.FontStyle.Bold);
+            this.lblPlace.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(32)))), ((int)(((byte)(36)))));
+            this.lblPlace.Location = new System.Drawing.Point(38, 446);
             this.lblPlace.Name = "lblPlace";
-            this.lblPlace.Size = new System.Drawing.Size(74, 22);
+            this.lblPlace.Size = new System.Drawing.Size(110, 38);
             this.lblPlace.TabIndex = 28;
             this.lblPlace.Text = "MESTO";
             // 
             // btnCreateDonor
             // 
-            this.btnCreateDonor.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.btnCreateDonor.Location = new System.Drawing.Point(725, 370);
+            this.btnCreateDonor.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(32)))), ((int)(((byte)(36)))));
+            this.btnCreateDonor.Font = new System.Drawing.Font("Jost", 21F, System.Drawing.FontStyle.Bold);
+            this.btnCreateDonor.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(227)))), ((int)(((byte)(236)))));
+            this.btnCreateDonor.Location = new System.Drawing.Point(1134, 427);
             this.btnCreateDonor.Name = "btnCreateDonor";
-            this.btnCreateDonor.Size = new System.Drawing.Size(268, 57);
+            this.btnCreateDonor.Size = new System.Drawing.Size(467, 67);
             this.btnCreateDonor.TabIndex = 30;
             this.btnCreateDonor.Text = "KREIRAJ DAVAOCA";
-            this.btnCreateDonor.UseVisualStyleBackColor = true;
+            this.btnCreateDonor.UseVisualStyleBackColor = false;
             // 
             // btnDeleteDonor
             // 
-            this.btnDeleteDonor.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.btnDeleteDonor.Location = new System.Drawing.Point(725, 453);
+            this.btnDeleteDonor.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(32)))), ((int)(((byte)(36)))));
+            this.btnDeleteDonor.Font = new System.Drawing.Font("Jost", 21F, System.Drawing.FontStyle.Bold);
+            this.btnDeleteDonor.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(227)))), ((int)(((byte)(236)))));
+            this.btnDeleteDonor.Location = new System.Drawing.Point(1134, 117);
             this.btnDeleteDonor.Name = "btnDeleteDonor";
-            this.btnDeleteDonor.Size = new System.Drawing.Size(268, 57);
+            this.btnDeleteDonor.Size = new System.Drawing.Size(467, 67);
             this.btnDeleteDonor.TabIndex = 31;
             this.btnDeleteDonor.Text = "IZBRIŠI DAVAOCA";
-            this.btnDeleteDonor.UseVisualStyleBackColor = true;
+            this.btnDeleteDonor.UseVisualStyleBackColor = false;
             // 
             // btnGoBack
             // 
-            this.btnGoBack.Location = new System.Drawing.Point(974, 85);
+            this.btnGoBack.BackColor = System.Drawing.Color.White;
+            this.btnGoBack.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnGoBack.BackgroundImage")));
+            this.btnGoBack.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnGoBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnGoBack.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnGoBack.Location = new System.Drawing.Point(1755, 67);
             this.btnGoBack.Name = "btnGoBack";
-            this.btnGoBack.Size = new System.Drawing.Size(50, 44);
+            this.btnGoBack.Size = new System.Drawing.Size(93, 85);
             this.btnGoBack.TabIndex = 32;
-            this.btnGoBack.Text = "<=";
-            this.btnGoBack.UseVisualStyleBackColor = true;
+            this.btnGoBack.UseVisualStyleBackColor = false;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(1930, 927);
+            this.pictureBox1.TabIndex = 33;
+            this.pictureBox1.TabStop = false;
             // 
             // UCDetailsDonor
             // 
@@ -262,9 +310,11 @@ namespace BloodDonation.Client.UserControls
             this.Controls.Add(this.txtContact);
             this.Controls.Add(this.lblNameSurname);
             this.Controls.Add(this.txtDonorNameSurname);
+            this.Controls.Add(this.pictureBox1);
             this.Name = "UCDetailsDonor";
-            this.Size = new System.Drawing.Size(1046, 681);
+            this.Size = new System.Drawing.Size(1930, 927);
             ((System.ComponentModel.ISupportInitialize)(this.dgvQuestionnaires)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -292,6 +342,7 @@ namespace BloodDonation.Client.UserControls
         private Button btnCreateDonor;
         private Button btnDeleteDonor;
         private Button btnGoBack;
+        private PictureBox pictureBox1;
 
         public DataGridView DgvQuestionnaires { get => dgvQuestionnaires; set => dgvQuestionnaires = value; }
         public ComboBox CmbIsActive { get => cmbIsActive; set => cmbIsActive = value; }

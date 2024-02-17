@@ -11,7 +11,6 @@ namespace BloodDonation.Repository.Interfaces
         void Add(T entity);
         void Update(T entity, string condition);
         void Delete(T entity, string condition);
-        int GetNewID(T entity);
         T Get(T entity, string condition);
         List<T> GetAll(T entity);
         List<T> Find(T entity, string condition);

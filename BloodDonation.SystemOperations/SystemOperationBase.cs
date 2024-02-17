@@ -12,13 +12,13 @@ namespace BloodDonation.SystemOperations
     public abstract class SystemOperationBase
     {
         protected IDbRepository<IEntity> genericRepository;
-        public object Result { get; protected set; }
 
+        //hmm potencijalno bolje preko genericsa
+        public object Result { get; protected set; }
         public SystemOperationBase()
         {
             genericRepository = new GenericDbRepository();
         }
-
         public void ExecuteTemplate(IEntity entity) {
             try
             {

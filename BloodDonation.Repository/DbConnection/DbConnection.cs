@@ -11,7 +11,7 @@ namespace BloodDonation.Repository.DBConnection
 {
     public class DbConnection
     {
-        private SqlConnection _connection;
+        private readonly SqlConnection _connection;
         private SqlTransaction _transaction;
         public DbConnection()
         {

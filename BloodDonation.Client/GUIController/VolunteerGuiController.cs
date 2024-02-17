@@ -29,7 +29,6 @@ namespace BloodDonation.Client.GUIController
 
                 uCVolunteers.BtnAddNewVolunteer.Click += BtnAddNewVolunteer_Click;
                 uCVolunteers.BtnDeleteVolunteer.Click += BtnDeleteVolunteer_Click;
-                uCVolunteers.BtnChooseVolunteer.Click += BtnFilter_Click;
                 uCVolunteers.TxtFilterVolunteers.TextChanged += TxtFilterVolunteers_TextChanged;
 
                 uCVolunteers.ToolStripActions1.Click += (s, a) => MainCoordinator.Instance.ShowActionScreen(FormMode.View);
@@ -174,50 +173,29 @@ namespace BloodDonation.Client.GUIController
             volunteers = Communication.Instance.GetAllVolunteers();
             listOfVolunteers = new BindingList<Volunteer>(volunteers);
             uCVolunteers.DgvVolunteers.DataSource = listOfVolunteers;
-        }
-        private void BtnFilter_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                if (uCVolunteers.DgvVolunteers.SelectedRows.Count == 1)
-                {
-                Volunteer selectedVol = (Volunteer)uCVolunteers.DgvVolunteers.SelectedRows[0].DataBoundItem;
-                    loadedVol = Communication.Instance.GetVolunteer(selectedVol.VolunteerID);
-                }
-                else
-                {
-                    MessageBox.Show("Morate izabrati jednog volontera");
-                    return;
-                }                          
-            }
-            catch (SystemOperationException ex)
-            {
-                MessageBox.Show(ex.ErrorMessage);
-            }
-            catch (ServerCommunicationException ex)
-            {
-                MessageBox.Show(ex.ErrorMessage);
-            }
-            catch (Exception ex) {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
+        }   
         private void BtnDeleteVolunteer_Click(object sender, EventArgs e)
         {            
             try
             {
-                if (loadedVol == null) {
+                if (uCVolunteers.DgvVolunteers.SelectedRows.Count != 1)
+                {
                     MessageBox.Show("Nema izabranog volontera za brisanje");
                     return;
                 }
-                Communication.Instance.DeleteVolunteer(loadedVol);
+                Volunteer selectedVol = (Volunteer)uCVolunteers.DgvVolunteers.SelectedRows[0].DataBoundItem;
+                loadedVol = Communication.Instance.GetVolunteer(selectedVol.VolunteerID);
 
-                volunteers.Remove(volunteers.Find(v => v.VolunteerID == loadedVol.VolunteerID));
+                if (loadedVol != null)
+                {
+                    Communication.Instance.DeleteVolunteer(loadedVol);
 
-                listOfVolunteers.ResetBindings();
-                loadedVol = null;
-                uCVolunteers.DgvVolunteers.DataSource = listOfVolunteers;
+                    volunteers.Remove(volunteers.Find(v => v.VolunteerID == loadedVol.VolunteerID));
+
+                    listOfVolunteers.ResetBindings();
+                    loadedVol = null;
+                    uCVolunteers.DgvVolunteers.DataSource = listOfVolunteers;
+                }
             }
             catch (SystemOperationException ex)
             {
@@ -230,11 +208,7 @@ namespace BloodDonation.Client.GUIController
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-            }
-            finally           
-            {
-                MainCoordinator.Instance.ShowVolunteerScreen(FormMode.View);
-            }
+            }       
 
         }
 

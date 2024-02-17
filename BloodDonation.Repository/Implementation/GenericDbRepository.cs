@@ -18,21 +18,8 @@ namespace BloodDonation.Repository.Implementation
             return cmd;
         }
         public void Add(IEntity entity)
-        {
-            if (string.IsNullOrEmpty(entity.IDName))
-            {
-                int newID = GetNewID(entity);
-                entity.GetType().GetProperty(entity.IDName).SetValue(entity, newID);
-            }
-
-            string commandText = $"INSERT INTO {entity.TableName}";
-            if (!string.IsNullOrEmpty(entity.IDName))
-            {
-                commandText += $" OUTPUT inserted.{entity.IDName} ";
-            }
-            commandText += $" VALUES ({entity.InsertValues})";
-
-            using (SqlCommand cmd = CreateSqlCommand(commandText))
+        {             
+            using (SqlCommand cmd = CreateSqlCommand($"INSERT INTO {entity.TableName} OUTPUT inserted.{entity.IDName} VALUES ({entity.InsertValues})"))
             {
                 if (!string.IsNullOrEmpty(entity.IDName))
                 {
@@ -61,14 +48,7 @@ namespace BloodDonation.Repository.Implementation
                 if (cmd.ExecuteNonQuery() != 1) throw new Exception("Greška pri brisanju iz baze");
             }
         }
-        public int GetNewID(IEntity entity)
-        {
-            using (SqlCommand cmd = CreateSqlCommand($"SELECT MAX({entity.IDName}) FROM {entity.TableName}")) { 
-                object res = cmd.ExecuteScalar();
-                if (res is DBNull) return 1;
-                else return (int)res + 1;
-            }
-        }
+
         private List<IEntity> ExecuteSelectQuery(IEntity entity, string condition)
         {
             using (SqlCommand cmd = CreateSqlCommand($"SELECT {entity.SelectValues} FROM {entity.TableName} {entity.TableAlias} {entity.JoinTable} {entity.JoinCondition} WHERE {condition}"))

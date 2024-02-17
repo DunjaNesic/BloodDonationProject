@@ -67,6 +67,8 @@ namespace BloodDonation.Client.GUIController
                     uCDetailsCallToAction.BtnAddVolunteers.Visible = false;
                     uCDetailsCallToAction.DgvCalledDonors.Visible = false;
                     uCDetailsCallToAction.DgvCalledVolunteers.Visible = false;
+                    uCDetailsCallToAction.Label5.Visible = false;
+                    uCDetailsCallToAction.Label6.Visible = false;
 
                     uCDetailsCallToAction.CheckedListBoxVolunteers.Items.AddRange(volunteers.ToArray());
                     uCDetailsCallToAction.CheckedListBoxDonors.Items.AddRange(donors.ToArray());
@@ -82,18 +84,19 @@ namespace BloodDonation.Client.GUIController
                     uCDetailsCallToAction.BtnAddVolunteers.Visible = true;
                     uCDetailsCallToAction.DgvCalledDonors.Visible = true;
                     uCDetailsCallToAction.DgvCalledVolunteers.Visible = true;
+                    uCDetailsCallToAction.Label5.Visible = true;
+                    uCDetailsCallToAction.Label6.Visible = true;
 
                     uCDetailsCallToAction.BtnAddVolunteers.Click += BtnAddVolunteers_Click;
                     uCDetailsCallToAction.BtnAddDonors.Click += BtnAddDonors_Click;
                     uCDetailsCallToAction.BtnDeleteVolunteer.Click += BtnDeleteVolunteer_Click;
                     uCDetailsCallToAction.BtnDeleteDonor.Click += BtnDeleteDonor_Click;
                     uCDetailsCallToAction.BtnCallToAction.Click += BtnCallToActionUpdate_Click;
-                    uCDetailsCallToAction.CmbPlaces.Enabled = false;
+                    uCDetailsCallToAction.CmbPlaces.Enabled = false;            
                 }
 
                 return uCDetailsCallToAction;
             }
-
             return uCCallToAction;
         }
 

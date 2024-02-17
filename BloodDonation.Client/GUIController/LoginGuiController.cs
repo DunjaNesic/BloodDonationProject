@@ -1,6 +1,7 @@
 ﻿using BloodDonation.Client.ClientCommunication;
 using BloodDonation.Client.Exceptions;
 using BloodDonation.Client.Forms;
+using BloodDonation.Client.UserControls;
 using BloodDonation.Common.Communication;
 using BloodDonation.Common.Domain;
 using System;
@@ -16,6 +17,8 @@ namespace BloodDonation.Client.GUIController
     {      
         private TransfusionCenterCoordinator _coordinator = new TransfusionCenterCoordinator();
         FrmLogin _frmLogin;
+        UCTopBar ucNav = new UCTopBar();
+        
         public void CreateLogin(FrmLogin frmLogin)
         {
             _frmLogin = frmLogin;
