@@ -11,7 +11,6 @@ namespace BloodDonation.Client
         View,
         Details,
         Add,
-        Update,
-        Delete
+        Update
     }
 }

@@ -9,7 +9,6 @@ namespace BloodDonation.Common.Communication
     [Serializable]
     public class Response
     {
-        public Operation Operation { get; set; }
         public object Result { get; set; }
         public bool IsSuccessful { get; set; } = true;
         public string Message { get; set; }

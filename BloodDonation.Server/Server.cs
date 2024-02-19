@@ -23,12 +23,13 @@ namespace BloodDonation.Server
             get
             {
                 if (_instance == null)
-                        {
-                            _instance = new Server();
-                        }                                  
+                {
+                    _instance = new Server();
+                }
                 return _instance;
             }
-        }       
+        }
+
         public void Start()
         {
             try

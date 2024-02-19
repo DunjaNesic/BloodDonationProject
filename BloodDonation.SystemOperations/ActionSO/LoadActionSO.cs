@@ -19,7 +19,7 @@ namespace BloodDonation.SystemOperations
             }
             catch (Exception)
             {
-                throw new Exception("Sistem ne može da učita volontera");
+                throw new Exception("Sistem ne može da učita akciju");
             }
         }
     }

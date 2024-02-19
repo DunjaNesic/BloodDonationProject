@@ -39,8 +39,8 @@ namespace BloodDonation.Client.UserControls
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.ToolStripDonors = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripVolunteers = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnDeleteAction = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.txtFilterActions = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvActions)).BeginInit();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -95,7 +95,7 @@ namespace BloodDonation.Client.UserControls
             this.btnUpdateAction.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(32)))), ((int)(((byte)(36)))));
             this.btnUpdateAction.Font = new System.Drawing.Font("Jost", 21F, System.Drawing.FontStyle.Bold);
             this.btnUpdateAction.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(227)))), ((int)(((byte)(236)))));
-            this.btnUpdateAction.Location = new System.Drawing.Point(64, 543);
+            this.btnUpdateAction.Location = new System.Drawing.Point(429, 593);
             this.btnUpdateAction.Name = "btnUpdateAction";
             this.btnUpdateAction.Size = new System.Drawing.Size(402, 72);
             this.btnUpdateAction.TabIndex = 21;
@@ -133,18 +133,6 @@ namespace BloodDonation.Client.UserControls
             this.ToolStripVolunteers.Size = new System.Drawing.Size(234, 53);
             this.ToolStripVolunteers.Text = "VOLONTERI";
             // 
-            // btnDeleteAction
-            // 
-            this.btnDeleteAction.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(32)))), ((int)(((byte)(36)))));
-            this.btnDeleteAction.Font = new System.Drawing.Font("Jost", 21F, System.Drawing.FontStyle.Bold);
-            this.btnDeleteAction.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(227)))), ((int)(((byte)(236)))));
-            this.btnDeleteAction.Location = new System.Drawing.Point(64, 716);
-            this.btnDeleteAction.Name = "btnDeleteAction";
-            this.btnDeleteAction.Size = new System.Drawing.Size(402, 72);
-            this.btnDeleteAction.TabIndex = 26;
-            this.btnDeleteAction.Text = "IZBRIŠI AKCIJU";
-            this.btnDeleteAction.UseVisualStyleBackColor = false;
-            // 
             // pictureBox1
             // 
             this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -156,12 +144,20 @@ namespace BloodDonation.Client.UserControls
             this.pictureBox1.TabIndex = 27;
             this.pictureBox1.TabStop = false;
             // 
+            // txtFilterActions
+            // 
+            this.txtFilterActions.Font = new System.Drawing.Font("Jost", 21F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.txtFilterActions.Location = new System.Drawing.Point(50, 597);
+            this.txtFilterActions.Name = "txtFilterActions";
+            this.txtFilterActions.Size = new System.Drawing.Size(322, 68);
+            this.txtFilterActions.TabIndex = 28;
+            // 
             // UCCallToAction
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.Controls.Add(this.btnDeleteAction);
+            this.Controls.Add(this.txtFilterActions);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.btnUpdateAction);
             this.Controls.Add(this.btnCreateAction);
@@ -188,8 +184,8 @@ namespace BloodDonation.Client.UserControls
         private MenuStrip menuStrip1;
         private ToolStripMenuItem ToolStripDonors;
         private ToolStripMenuItem ToolStripVolunteers;
-        private Button btnDeleteAction;
         private PictureBox pictureBox1;
+        private TextBox txtFilterActions;
 
         public Button BtnCreateAction { get => btnCreateAction; set => btnCreateAction = value; }
         public Button BtnUpdateAction { get => btnUpdateAction; set => btnUpdateAction = value; }
@@ -197,6 +193,6 @@ namespace BloodDonation.Client.UserControls
         public MenuStrip MenuStrip1 { get => menuStrip1; set => menuStrip1 = value; }
         public ToolStripMenuItem ToolStripDonors1 { get => ToolStripDonors; set => ToolStripDonors = value; }
         public ToolStripMenuItem ToolStripVolunteers1 { get => ToolStripVolunteers; set => ToolStripVolunteers = value; }
-        public Button BtnDeleteAction { get => btnDeleteAction; set => btnDeleteAction = value; }
+        public TextBox TxtFilterActions { get => txtFilterActions; set => txtFilterActions = value; }
     }
 }

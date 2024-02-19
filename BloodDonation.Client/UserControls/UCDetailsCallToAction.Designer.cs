@@ -57,6 +57,7 @@ namespace BloodDonation.Client.UserControls
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
+            this.btnDeleteAction = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCalledVolunteers)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCalledDonors)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -91,9 +92,9 @@ namespace BloodDonation.Client.UserControls
             this.btnCallToAction.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(32)))), ((int)(((byte)(36)))));
             this.btnCallToAction.Font = new System.Drawing.Font("Jost", 21F, System.Drawing.FontStyle.Bold);
             this.btnCallToAction.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(227)))), ((int)(((byte)(236)))));
-            this.btnCallToAction.Location = new System.Drawing.Point(54, 860);
+            this.btnCallToAction.Location = new System.Drawing.Point(54, 816);
             this.btnCallToAction.Name = "btnCallToAction";
-            this.btnCallToAction.Size = new System.Drawing.Size(503, 71);
+            this.btnCallToAction.Size = new System.Drawing.Size(503, 80);
             this.btnCallToAction.TabIndex = 19;
             this.btnCallToAction.Text = "POZOVI NA AKCIJU";
             this.btnCallToAction.UseVisualStyleBackColor = false;
@@ -126,9 +127,9 @@ namespace BloodDonation.Client.UserControls
             this.btnDeleteVolunteer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(32)))), ((int)(((byte)(36)))));
             this.btnDeleteVolunteer.Font = new System.Drawing.Font("Jost", 21F, System.Drawing.FontStyle.Bold);
             this.btnDeleteVolunteer.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(227)))), ((int)(((byte)(236)))));
-            this.btnDeleteVolunteer.Location = new System.Drawing.Point(697, 787);
+            this.btnDeleteVolunteer.Location = new System.Drawing.Point(704, 787);
             this.btnDeleteVolunteer.Name = "btnDeleteVolunteer";
-            this.btnDeleteVolunteer.Size = new System.Drawing.Size(471, 71);
+            this.btnDeleteVolunteer.Size = new System.Drawing.Size(464, 71);
             this.btnDeleteVolunteer.TabIndex = 22;
             this.btnDeleteVolunteer.Text = "IZBRIŠI VOLONTERA";
             this.btnDeleteVolunteer.UseVisualStyleBackColor = false;
@@ -315,9 +316,9 @@ namespace BloodDonation.Client.UserControls
             this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(32)))), ((int)(((byte)(36)))));
             this.label5.Location = new System.Drawing.Point(697, 459);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(296, 38);
+            this.label5.Size = new System.Drawing.Size(444, 38);
             this.label5.TabIndex = 41;
-            this.label5.Text = "Volonteri koji se zovu:";
+            this.label5.Text = "Volonteri kojima se upućuje poziv:";
             // 
             // label6
             // 
@@ -327,14 +328,27 @@ namespace BloodDonation.Client.UserControls
             this.label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(32)))), ((int)(((byte)(36)))));
             this.label6.Location = new System.Drawing.Point(1286, 459);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(279, 38);
+            this.label6.Size = new System.Drawing.Size(427, 38);
             this.label6.TabIndex = 42;
-            this.label6.Text = "Davaoci koji se zovu:";
+            this.label6.Text = "Davaoci kojima se upućuje poziv:";
+            // 
+            // btnDeleteAction
+            // 
+            this.btnDeleteAction.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(32)))), ((int)(((byte)(36)))));
+            this.btnDeleteAction.Font = new System.Drawing.Font("Jost", 21F, System.Drawing.FontStyle.Bold);
+            this.btnDeleteAction.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(227)))), ((int)(((byte)(236)))));
+            this.btnDeleteAction.Location = new System.Drawing.Point(54, 922);
+            this.btnDeleteAction.Name = "btnDeleteAction";
+            this.btnDeleteAction.Size = new System.Drawing.Size(503, 72);
+            this.btnDeleteAction.TabIndex = 43;
+            this.btnDeleteAction.Text = "IZBRIŠI AKCIJU";
+            this.btnDeleteAction.UseVisualStyleBackColor = false;
             // 
             // UCDetailsCallToAction
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.btnDeleteAction);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
@@ -392,6 +406,7 @@ namespace BloodDonation.Client.UserControls
         private PictureBox pictureBox1;
         private Label label5;
         private Label label6;
+        private Button btnDeleteAction;
 
         public Button BtnCallToAction { get => btnCallToAction; set => btnCallToAction = value; }
         public CheckedListBox CheckedListBoxVolunteers { get => checkedListBoxVolunteers; set => checkedListBoxVolunteers = value; }
@@ -409,5 +424,6 @@ namespace BloodDonation.Client.UserControls
         public Button BtnAddVolunteers { get => btnAddVolunteers; set => btnAddVolunteers = value; }
         public Label Label5 { get => label5; set => label5 = value; }
         public Label Label6 { get => label6; set => label6 = value; }
+        public Button BtnDeleteAction { get => btnDeleteAction; set => btnDeleteAction = value; }
     }
 }

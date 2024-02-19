@@ -177,8 +177,6 @@ namespace BloodDonation.Server
                             resp.ErrorMessage = "Sistem ne može da učita akciju";
                         }
                         break;
-                    case Operation.GetAllCallsToAction:
-                        break;
                     case Operation.GetAllActions:
                         List<BloodTransfAction> actions = Controller.Instance.GetAllActions(new BloodTransfAction());
                         resp.Result = actions;
@@ -191,7 +189,7 @@ namespace BloodDonation.Server
                         Donor d = (Donor)req.Argument;
                         List<Questionnaire> questionnaires = Controller.Instance.GetAllQuestionnaires(new Questionnaire()
                         {
-                            FilterQuery = $"JMBG = {d.JMBG}"
+                            FilterQuery = $"JMBG = '{d.JMBG}'"
                         });
                         resp.Result = questionnaires;
                         break;
@@ -234,6 +232,13 @@ namespace BloodDonation.Server
                         BloodTransfAction actionToDelete = (BloodTransfAction)req.Argument;
                         Controller.Instance.DeleteAction(actionToDelete);
                         resp.Message = "Sistem je obrisao akciju";
+                        break;
+                    case Operation.FindActions:
+                        List<BloodTransfAction> filteredActions = Controller.Instance.GetFilteredActions(new BloodTransfAction()
+                        {
+                            FilterQuery = (string)req.Argument
+                        });
+                        resp.Result = filteredActions;
                         break;
                     default:
                         break;

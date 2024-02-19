@@ -30,6 +30,7 @@ namespace BloodDonation.Client.GUIController
                 uCVolunteers.BtnAddNewVolunteer.Click += BtnAddNewVolunteer_Click;
                 uCVolunteers.BtnDeleteVolunteer.Click += BtnDeleteVolunteer_Click;
                 uCVolunteers.TxtFilterVolunteers.TextChanged += TxtFilterVolunteers_TextChanged;
+                uCVolunteers.DgvVolunteers.SelectionChanged += DgvVolunteers_SelectionChanged;
 
                 uCVolunteers.ToolStripActions1.Click += (s, a) => MainCoordinator.Instance.ShowActionScreen(FormMode.View);
                 uCVolunteers.ToolStripDonors1.Click += (s, a) => MainCoordinator.Instance.ShowDonorScreen(FormMode.View);
@@ -42,6 +43,32 @@ namespace BloodDonation.Client.GUIController
                 return uCCreateVolunteer;
             }
             return uCVolunteers;
+        }
+
+        private void DgvVolunteers_SelectionChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                loadedVol = null;
+                if (uCVolunteers.DgvVolunteers.SelectedRows.Count == 1)
+                {
+                    Volunteer selectedVol = (Volunteer)uCVolunteers.DgvVolunteers.SelectedRows[0].DataBoundItem;
+                    loadedVol = Communication.Instance.GetVolunteer(selectedVol.VolunteerID);
+                }
+            }
+            catch (SystemOperationException ex)
+            {
+                MessageBox.Show(ex.ErrorMessage);
+            }
+            catch (ServerCommunicationException ex)
+            {
+                MessageBox.Show(ex.ErrorMessage);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
         }
 
         private void BtnGoBack_Click(object sender, EventArgs e)
@@ -183,9 +210,7 @@ namespace BloodDonation.Client.GUIController
                     MessageBox.Show("Nema izabranog volontera za brisanje");
                     return;
                 }
-                Volunteer selectedVol = (Volunteer)uCVolunteers.DgvVolunteers.SelectedRows[0].DataBoundItem;
-                loadedVol = Communication.Instance.GetVolunteer(selectedVol.VolunteerID);
-
+               
                 if (loadedVol != null)
                 {
                     Communication.Instance.DeleteVolunteer(loadedVol);

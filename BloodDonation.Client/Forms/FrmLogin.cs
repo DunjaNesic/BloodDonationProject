@@ -22,7 +22,9 @@ namespace BloodDonation.Client.Forms
 
             this.ucTopBar.LeaveApp += UcTopBar_LeaveApp;
             this.ucTopBar.Minimize += UcTopBar_Minimize;
-        }
+            txtCoordinatorCode.Text = "13AB42C";
+            txtPassword.Text = "123";
+        } 
 
         private void UcTopBar_Minimize(object sender, EventArgs e)
         {

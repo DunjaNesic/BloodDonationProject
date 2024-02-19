@@ -12,8 +12,15 @@ namespace BloodDonation.SystemOperations.TransfusionCoordinator
     {
         protected override void ExecuteConcreteOperation(IEntity entity)
         {
-            Questionnaire questionnaire = (Questionnaire)entity;
-            Result = genericRepository.Find(questionnaire, questionnaire.FilterQuery).Cast<Questionnaire>().ToList();
+            try
+            {
+                Questionnaire questionnaire = (Questionnaire)entity;
+                Result = genericRepository.Find(questionnaire, questionnaire.FilterQuery).Cast<Questionnaire>().ToList();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
     }
 }

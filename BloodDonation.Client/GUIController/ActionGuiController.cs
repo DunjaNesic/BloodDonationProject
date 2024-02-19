@@ -48,7 +48,7 @@ namespace BloodDonation.Client.GUIController
 
                 uCCallToAction.BtnCreateAction.Click += BtnCreateAction_Click;
                 uCCallToAction.BtnUpdateAction.Click += BtnUpdateAction_Click;
-                uCCallToAction.BtnDeleteAction.Click += BtnDeleteAction_Click;
+                uCCallToAction.TxtFilterActions.TextChanged += TxtFilterActions_TextChanged;
 
                 return uCCallToAction;
             }
@@ -69,6 +69,7 @@ namespace BloodDonation.Client.GUIController
                     uCDetailsCallToAction.DgvCalledVolunteers.Visible = false;
                     uCDetailsCallToAction.Label5.Visible = false;
                     uCDetailsCallToAction.Label6.Visible = false;
+                    uCDetailsCallToAction.BtnDeleteAction.Visible = false;
 
                     uCDetailsCallToAction.CheckedListBoxVolunteers.Items.AddRange(volunteers.ToArray());
                     uCDetailsCallToAction.CheckedListBoxDonors.Items.AddRange(donors.ToArray());
@@ -86,6 +87,7 @@ namespace BloodDonation.Client.GUIController
                     uCDetailsCallToAction.DgvCalledVolunteers.Visible = true;
                     uCDetailsCallToAction.Label5.Visible = true;
                     uCDetailsCallToAction.Label6.Visible = true;
+                    uCDetailsCallToAction.BtnDeleteAction.Visible = true;
 
                     uCDetailsCallToAction.BtnAddVolunteers.Click += BtnAddVolunteers_Click;
                     uCDetailsCallToAction.BtnAddDonors.Click += BtnAddDonors_Click;
@@ -100,21 +102,45 @@ namespace BloodDonation.Client.GUIController
             return uCCallToAction;
         }
 
-        private void BtnDeleteAction_Click(object sender, EventArgs e)
+        private void TxtFilterActions_TextChanged(object sender, EventArgs e)
         {
+
             try
             {
-                if (uCCallToAction.DgvActions.SelectedRows.Count == 1)
+                string filter = uCCallToAction.TxtFilterActions.Text;
+                if (filter.Length > 0)
                 {
-                    action = (BloodTransfAction)uCCallToAction.DgvActions.SelectedRows[0].DataBoundItem;
-                    Communication.Instance.DeleteAction(action);
-                    actionsForDgv.Remove(action);                  
+                    string filterCondition = $" lower(a.ActionName) like '{filter}%' or " +
+                    $"lower(p.PlaceName) like '%{filter}%' ";
+                    List<BloodTransfAction> filteredActions = Communication.Instance.FilterActions(filterCondition);
+                    uCCallToAction.DgvActions.DataSource = filteredActions;
                 }
                 else
                 {
-                    MessageBox.Show("Morate izabrati jednu akciju da biste je izbrisali");
-                    return;
+                    uCCallToAction.DgvActions.DataSource = actionsForDgv;
                 }
+            }
+            catch (SystemOperationException ex)
+            {
+                MessageBox.Show(ex.ErrorMessage);
+            }
+            catch (ServerCommunicationException ex)
+            {
+                MessageBox.Show(ex.ErrorMessage);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void BtnDeleteAction_Click(object sender, EventArgs e)
+        {
+            try
+            {              
+                    Communication.Instance.DeleteAction(loadedAction);
+                    actionsForDgv.Remove(loadedAction);
+                    MainCoordinator.Instance.ShowActionScreen(FormMode.View);
             }
             catch (SystemOperationException ex)
             {
@@ -254,6 +280,8 @@ namespace BloodDonation.Client.GUIController
             uCDetailsCallToAction.CmbPlaces.DataSource = listOfPlaces;
             uCDetailsCallToAction.CmbPlaces.SelectedIndex = -1;
             uCDetailsCallToAction.BtnGoBack.Click += BtnGoBack_Click;
+            uCDetailsCallToAction.BtnDeleteAction.Click += BtnDeleteAction_Click;
+
         }
 
         private void CmbPlaces_SelectedIndexChanged(object sender, EventArgs e)
@@ -429,6 +457,15 @@ namespace BloodDonation.Client.GUIController
             catch (ServerCommunicationException ex)
             {
                 MessageBox.Show(ex.ErrorMessage);
+            }
+            catch (SystemOperationException ex)
+            {
+                MessageBox.Show(ex.ErrorMessage);               
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+               
             }
         }
 

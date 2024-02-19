@@ -12,8 +12,15 @@ namespace BloodDonation.SystemOperations
     {
         protected override void ExecuteConcreteOperation(IEntity entity)
         {
-            Volunteer v = (Volunteer)entity;
-            Result = genericRepository.Find(v, v.FilterQuery).Cast<Volunteer>().ToList();
+            try
+            {
+                Volunteer v = (Volunteer)entity;
+                Result = genericRepository.Find(v, v.FilterQuery).Cast<Volunteer>().ToList();
+            }
+            catch (Exception)
+            {
+                throw new Exception("Sistem ne može da pronađe volontere po zadatoj vrednosti");
+            }
         }
     }
 }

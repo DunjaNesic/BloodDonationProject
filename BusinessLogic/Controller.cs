@@ -109,6 +109,13 @@ namespace BusinessLogic
             return (List<CallToDonor>)so.Result;
         }
 
+        public List<BloodTransfAction> GetFilteredActions(BloodTransfAction action)
+        {
+            SystemOperationBase so = new FindActionsSO();
+            so.ExecuteTemplate(action);
+            return (List<BloodTransfAction>)so.Result;
+        }
+
         public List<Donor> GetFilteredDonors(Donor donor)
         {
             SystemOperationBase so = new FindDonorsSO();

@@ -16,6 +16,8 @@ using System.Threading;
 using BloodDonation.Client.Forms;
 using BloodDonation.Client.Exceptions;
 using System.Windows.Forms;
+using System.Net;
+using System.Configuration;
 
 namespace BloodDonation.Client.ClientCommunication
 {
@@ -47,7 +49,7 @@ namespace BloodDonation.Client.ClientCommunication
             try
             {
                 _socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-                _socket.Connect("127.0.0.1", 9999);
+                _socket.Connect((IPAddress.Parse(ConfigurationManager.AppSettings["ip"])), (int.Parse(ConfigurationManager.AppSettings["port"])));
                 _clientController = new ClientController(_socket);            
             }
             catch (Exception ex)
@@ -291,6 +293,17 @@ namespace BloodDonation.Client.ClientCommunication
             });
             Response resp = _clientController.Receive();
             return resp.ParseResponse<List<Donor>>();
+        }
+
+        internal List<BloodTransfAction> FilterActions(string filterCondition)
+        {
+            _clientController.Send(new Request()
+            {
+                Operation = Operation.FindActions,
+                Argument = filterCondition
+            });
+            Response resp = _clientController.Receive();
+            return resp.ParseResponse<List<BloodTransfAction>>();
         }
     }
 }

@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ActionSO\DeleteActionSO.cs" />
+    <Compile Include="ActionSO\FindActionsSO.cs" />
     <Compile Include="DonorSO\AddDonorSO.cs" />
     <Compile Include="DonorSO\FindDonorsSO.cs" />
     <Compile Include="DonorSO\GetAllDonorCallsSO.cs" />
